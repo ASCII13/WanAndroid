@@ -1,0 +1,35 @@
+/* pages/officialaccount/officialaccount.wxss */
+
+.author-list {
+    height: 80rpx;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    line-height: 80rpx;
+    background: #fff;
+    border-bottom: 1rpx solid #cecece;
+    font-size: 28rpx;
+    white-space: nowrap;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 90;
+}
+
+.author-item {
+    padding: 0 30rpx;
+    display: inline-block;
+}
+
+.author-item.item-selected {
+    color: #fff;
+    background-color: #4675f9;
+}
+
+.article-list-container {
+    margin-top: 80rpx;
+}
+
+.scroll-h {
+    height: 100%;
+}

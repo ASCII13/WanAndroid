@@ -1,0 +1,15 @@
+<!--pages/officialaccount/officialaccount.wxml-->
+
+<view>
+    <scroll-view class="author-list" scroll-x="true" scroll-into-view="{{toView}}">
+        <view class="author-item {{currentTab == index ? 'item-selected' : ''}}" id="id{{item.id}}" data-current= "{{index}}" bindtap="switchNav" wx:for="{{testArray}}">{{item.name}}</view>
+    </scroll-view>
+
+    <swiper class="article-list-container" current="{{currentTab}}" duration="300" bindchange="switchTab" style="height:{{winHeight}}rpx">
+        <swiper-item wx:for="{{testArray.length}}">
+            <scroll-view class="scroll-h">
+                <view>{{choosedTabInformation}}</view>
+            </scroll-view>
+        </swiper-item>
+    </swiper>
+</view>
