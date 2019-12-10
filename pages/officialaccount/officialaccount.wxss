@@ -19,6 +19,7 @@
 .author-item {
     padding: 0 30rpx;
     display: inline-block;
+    font-weight: bold;
 }
 
 .author-item.item-selected {
@@ -33,3 +34,55 @@
 .scroll-h {
     height: 100%;
 }
+
+.article-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 160rpx;
+    border-bottom: 0.5rpx solid #cecece;
+}
+
+.collection-state-container {
+    width: 40rpx;
+    height: 150rpx;
+    margin: 0 20rpx 0 20rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.collection-state {
+    width: 40rpx;
+    height: 40rpx;
+    display: flex;
+
+}
+
+.article-msg {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 20rpx 0 0rpx; 
+    height: 160rpx;    
+}
+
+.article-title {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-weight: bold;
+    font-size: 28rpx; 
+    
+}
+
+.article-time {
+    font-size: 22rpx;
+    color: #9A9A9A;
+    margin-top: 10rpx;
+
+}
+

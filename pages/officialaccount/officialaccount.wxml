@@ -1,14 +1,26 @@
 <!--pages/officialaccount/officialaccount.wxml-->
 
 <view>
-    <scroll-view class="author-list" scroll-x="true" scroll-into-view="{{toView}}">
-        <view class="author-item {{currentTab == index ? 'item-selected' : ''}}" id="id{{item.id}}" data-current= "{{index}}" bindtap="switchNav" wx:for="{{testArray}}">{{item.name}}</view>
+    <scroll-view class="author-list" scroll-x="true" scroll-left="{{scrollLeft}}" scroll-with-animation="true">
+        <view class="author-item {{currentTab == index ? 'item-selected' : ''}}" id="{{item.id}}" data-current= "{{index}}" bindtap="switchNav" wx:for="{{testArray}}">{{item.name}}</view>
     </scroll-view>
 
-    <swiper class="article-list-container" current="{{currentTab}}" duration="300" bindchange="switchTab" style="height:{{winHeight}}rpx">
+    <swiper class="article-list-container" current="{{currentTab}}" duration="300" bindchange="switchTab" style="height:{{windowHeight}}rpx">
         <swiper-item wx:for="{{testArray.length}}">
-            <scroll-view class="scroll-h">
-                <view>{{choosedTabInformation}}</view>
+            <scroll-view class="scroll-h" scroll-y="true">
+                <view style="background-color: #cecece;">{{choosedTabInformation}}</view>
+
+                <view class="article-item" wx:for="{{articleList}}">
+                    <view class="collection-state-container">
+                        <image class="collection-state" src="../../images/uncollection.png"></image>
+                    </view>
+
+                    <view class="article-msg">
+                        <view class="article-title">{{item.title}}</view>
+                        <view class="article-time">时间：2019-12-05</view>
+                    </view>
+                </view>
+                
             </scroll-view>
         </swiper-item>
     </swiper>

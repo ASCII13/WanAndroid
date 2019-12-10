@@ -8,45 +8,102 @@ Page({
      * Page initial data
      */
     data: {
-        winHeight: "",
+        windowHeight: 0,
+        windowWidth: 0,
         currentTab: 0,
+        lastTab: -1,
+        scrollLeft: 0,
         choosedTabInformation: "",
-        toView: "",
-        testArray: []
+        testArray: [],
+        articleList: []
     },
 
+    /**
+     * 滑动 swiper 切换 tab
+     */
     switchTab: function(e) {
-        let current = e.detail.current;
-        let id = "id" + this.data.testArray[current].id.toString();
-        console.log("当前id是：", id);
+        let currentIndex = this.data.currentTab;
+        let nextIndex = e.detail.current;
+
+        console.log(`滑动后下标是：${nextIndex}`);
 
         this.setData({
-            currentTab: current,
-            toView: id
+            currentTab: nextIndex
         });
 
-        console.log("当前选中tab标题", current);
-        this.getInformation(current);
-    },
-
-    switchNav: function(e) {
-        console.log("点击tab标题", e.target.dataset.current);
-
-        let cur = e.target.dataset.current;
-        if (this.data.currentTab == cur) {
-            return false;
-        } else {
+        if (currentIndex != nextIndex) {
             this.setData({
-                currentTab: cur,
+                lastTab: currentIndex
             });
         }
-        console.log("当前选中tab标题", cur);
-        this.getInformation(cur);
+
+        this.scrollTab();
+        this.getInformation(nextIndex);
+
+        // let current = e.detail.current;
+
+        // this.setData({
+        //     currentTab: current,
+        // });
         
+        // this.scrollTab();
+
+        // console.log("当前选中tab标题", current);
+        // this.getInformation(current);
     },
 
-    getWindowHeight: function() {
-        let that = this;
+    scrollTab: function() {
+        let distance  = this.data.windowWidth / 7;
+
+        console.log("distance: ", distance);
+
+        if (this.data.currentTab <= 2 && this.data.scrollLeft >= 0) {
+            this.setData({
+                scrollLeft: 0
+            });
+        } else {
+            let movingDistance = this.data.currentTab > this.data.lastTab ? distance : -distance;
+
+            this.setData({
+                scrollLeft: this.data.scrollLeft + movingDistance
+            });
+        }
+    },
+
+    /**
+     * 点击 tab 切换 swiper
+     */
+    switchNav: function(e) {
+        // console.log("点击tab标题", e.target.dataset.current);
+
+        // let cur = e.target.dataset.current;
+        // if (this.data.currentTab == cur) {
+        //     return false;
+        // } else {
+        //     this.setData({
+        //         currentTab: cur,
+        //     });
+        // }
+        // console.log("当前选中tab标题", cur);
+        // this.getInformation(cur); 
+        
+        console.log(`点击了下标为${e.target.dataset.current}的标题`);
+
+        let nextActivationIndex = e.target.dataset.current;
+        let currentIndex = this.data.currentTab;
+        if (currentIndex != nextActivationIndex) {
+            this.setData({
+                currentTab: nextActivationIndex,
+                lastTab: currentIndex
+            });
+        } else {
+            return false;
+        }
+        this.getInformation(nextActivationIndex);
+    },
+
+    getWindowSize: function() {
+        let _this = this;
 
         wx.getSystemInfo({
             success: function(res) {
@@ -54,15 +111,18 @@ Page({
                 let clientWidth = res.windowWidth;
                 let rpxR = 750 / clientWidth;
 
-                console.log("设备高度：", clientHeight);
-                console.log("设备宽度:", clientWidth);
+                console.log("设备高度: ", clientHeight);
+                console.log("设备宽度: ", clientWidth);
 
-                let calc = clientHeight * rpxR;
+                let height = clientHeight * rpxR;
+                let width = clientWidth * rpxR;
 
-                console.log("calc", calc);
+                console.log("高度: ", height);
+                console.log("宽度: ", width);
 
-                that.setData({
-                    winHeight: calc
+                _this.setData({
+                    windowHeight: height,
+                    windowWidth: width
                 });
             }
         });
@@ -72,8 +132,9 @@ Page({
      * Lifecycle function--Called when page load
      */
     onLoad: function (options) {
-        this.getWindowHeight();
+        this.getWindowSize();
         this.getTabName();
+        this.getArticleList();
         this.getInformation(tabNum);
     },
 
@@ -180,6 +241,93 @@ Page({
                 choosedTabInformation: "14"
             });
         }
+    },
+
+    getArticleList: function() {
+        this.setData({
+            articleList: [
+                {
+                    title: "面试官：今日头条启动很快，你觉得可能是做了哪些优化?面试官：今日头条启动很快，你觉得可能是做了哪些优化?",
+                    publishTime: 1575475200000
+                },
+                {
+                    title: "Android10填坑适配指南，实际经验代码，拒绝翻译",
+                    publishTime: 1575388800000
+                },
+                {
+                    title: "面试官：今日头条启动很快，你觉得可能是做了哪些优化?面试官：今日头条启动很快，你觉得可能是做了哪些优化?",
+                    publishTime: 1575475200000
+                },
+                {
+                    title: "Android10填坑适配指南，实际经验代码，拒绝翻译",
+                    publishTime: 1575388800000
+                },
+                {
+                    title: "面试官：今日头条启动很快，你觉得可能是做了哪些优化?面试官：今日头条启动很快，你觉得可能是做了哪些优化?",
+                    publishTime: 1575475200000
+                },
+                {
+                    title: "Android10填坑适配指南，实际经验代码，拒绝翻译",
+                    publishTime: 1575388800000
+                },
+                {
+                    title: "面试官：今日头条启动很快，你觉得可能是做了哪些优化?面试官：今日头条启动很快，你觉得可能是做了哪些优化?",
+                    publishTime: 1575475200000
+                },
+                {
+                    title: "Android10填坑适配指南，实际经验代码，拒绝翻译",
+                    publishTime: 1575388800000
+                },
+                {
+                    title: "面试官：今日头条启动很快，你觉得可能是做了哪些优化?面试官：今日头条启动很快，你觉得可能是做了哪些优化?",
+                    publishTime: 1575475200000
+                },
+                {
+                    title: "Android10填坑适配指南，实际经验代码，拒绝翻译",
+                    publishTime: 1575388800000
+                },
+                {
+                    title: "面试官：今日头条启动很快，你觉得可能是做了哪些优化?面试官：今日头条启动很快，你觉得可能是做了哪些优化?",
+                    publishTime: 1575475200000
+                },
+                {
+                    title: "Android10填坑适配指南，实际经验代码，拒绝翻译",
+                    publishTime: 1575388800000
+                },
+                {
+                    title: "面试官：今日头条启动很快，你觉得可能是做了哪些优化?面试官：今日头条启动很快，你觉得可能是做了哪些优化?",
+                    publishTime: 1575475200000
+                },
+                {
+                    title: "Android10填坑适配指南，实际经验代码，拒绝翻译",
+                    publishTime: 1575388800000
+                },
+                {
+                    title: "面试官：今日头条启动很快，你觉得可能是做了哪些优化?面试官：今日头条启动很快，你觉得可能是做了哪些优化?",
+                    publishTime: 1575475200000
+                },
+                {
+                    title: "Android10填坑适配指南，实际经验代码，拒绝翻译",
+                    publishTime: 1575388800000
+                },
+                {
+                    title: "面试官：今日头条启动很快，你觉得可能是做了哪些优化?面试官：今日头条启动很快，你觉得可能是做了哪些优化?",
+                    publishTime: 1575475200000
+                },
+                {
+                    title: "Android10填坑适配指南，实际经验代码，拒绝翻译",
+                    publishTime: 1575388800000
+                },
+                {
+                    title: "面试官：今日头条启动很快，你觉得可能是做了哪些优化?面试官：今日头条启动很快，你觉得可能是做了哪些优化?",
+                    publishTime: 1575475200000
+                },
+                {
+                    title: "Android10填坑适配指南，实际经验代码，拒绝翻译",
+                    publishTime: 1575388800000
+                }
+            ]
+        });
     },
 
     /**
