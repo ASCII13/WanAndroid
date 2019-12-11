@@ -12,15 +12,14 @@
 
                 <view class="article-item" wx:for="{{articleList}}">
                     <view class="collection-state-container">
-                        <image class="collection-state" src="../../images/uncollection.png"></image>
+                        <image class="collection-state" src="{{collection}}" bindtap="changeCollectionState"></image>
                     </view>
 
-                    <view class="article-msg">
+                    <view class="article-msg" bindtap="clickArticleItem" data-id="{{item.chapterId}}">
                         <view class="article-title">{{item.title}}</view>
                         <view class="article-time">时间：2019-12-05</view>
                     </view>
-                </view>
-                
+                </view>              
             </scroll-view>
         </swiper-item>
     </swiper>

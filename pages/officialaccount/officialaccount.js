@@ -2,6 +2,9 @@
 
 let tabNum = 0;
 
+const collectionImage = "../../images/collection.png";
+const uncollectionImage = "../../images/uncollection.png";
+
 Page({
 
     /**
@@ -15,7 +18,9 @@ Page({
         scrollLeft: 0,
         choosedTabInformation: "",
         testArray: [],
-        articleList: []
+        articleList: [],
+        collection: uncollectionImage,
+        collectionState: false
     },
 
     /**
@@ -102,6 +107,20 @@ Page({
         this.getInformation(nextActivationIndex);
     },
 
+    changeCollectionState: function() {
+        if (this.data.collectionState === false) {
+            this.setData({
+                collection: collectionImage,
+                collectionState: true
+            });
+        } else {
+            this.setData({
+                collection: uncollectionImage,
+                collectionState: false
+            });
+        }
+    },
+
     getWindowSize: function() {
         let _this = this;
 
@@ -126,6 +145,16 @@ Page({
                 });
             }
         });
+    },
+
+    clickArticleItem: function(e) {
+        let itemIndex = e.currentTarget.dataset.id;
+        let title = `点击了${itemIndex}`;
+        console.log(`itemIndex的值为:${itemIndex}`);
+        wx.showToast({
+            title: title,
+            icon: 'none'
+        })
     },
 
     /**
@@ -248,83 +277,103 @@ Page({
             articleList: [
                 {
                     title: "面试官：今日头条启动很快，你觉得可能是做了哪些优化?面试官：今日头条启动很快，你觉得可能是做了哪些优化?",
-                    publishTime: 1575475200000
+                    publishTime: 1575475200000,
+                    chapterId: 408
                 },
                 {
                     title: "Android10填坑适配指南，实际经验代码，拒绝翻译",
-                    publishTime: 1575388800000
+                    publishTime: 1575388800000,
+                    chapterId: 409
                 },
                 {
                     title: "面试官：今日头条启动很快，你觉得可能是做了哪些优化?面试官：今日头条启动很快，你觉得可能是做了哪些优化?",
-                    publishTime: 1575475200000
+                    publishTime: 1575475200000,
+                    chapterId: 410
                 },
                 {
                     title: "Android10填坑适配指南，实际经验代码，拒绝翻译",
-                    publishTime: 1575388800000
+                    publishTime: 1575388800000,
+                    chapterId: 411
                 },
                 {
                     title: "面试官：今日头条启动很快，你觉得可能是做了哪些优化?面试官：今日头条启动很快，你觉得可能是做了哪些优化?",
-                    publishTime: 1575475200000
+                    publishTime: 1575475200000,
+                    chapterId: 412
                 },
                 {
                     title: "Android10填坑适配指南，实际经验代码，拒绝翻译",
-                    publishTime: 1575388800000
+                    publishTime: 1575388800000,
+                    chapterId: 413
                 },
                 {
                     title: "面试官：今日头条启动很快，你觉得可能是做了哪些优化?面试官：今日头条启动很快，你觉得可能是做了哪些优化?",
-                    publishTime: 1575475200000
+                    publishTime: 1575475200000,
+                    chapterId: 414
                 },
                 {
                     title: "Android10填坑适配指南，实际经验代码，拒绝翻译",
-                    publishTime: 1575388800000
+                    publishTime: 1575388800000,
+                    chapterId: 415
                 },
                 {
                     title: "面试官：今日头条启动很快，你觉得可能是做了哪些优化?面试官：今日头条启动很快，你觉得可能是做了哪些优化?",
-                    publishTime: 1575475200000
+                    publishTime: 1575475200000,
+                    chapterId: 416
                 },
                 {
                     title: "Android10填坑适配指南，实际经验代码，拒绝翻译",
-                    publishTime: 1575388800000
+                    publishTime: 1575388800000,
+                    chapterId: 417
                 },
                 {
                     title: "面试官：今日头条启动很快，你觉得可能是做了哪些优化?面试官：今日头条启动很快，你觉得可能是做了哪些优化?",
-                    publishTime: 1575475200000
+                    publishTime: 1575475200000,
+                    chapterId: 418
                 },
                 {
                     title: "Android10填坑适配指南，实际经验代码，拒绝翻译",
-                    publishTime: 1575388800000
+                    publishTime: 1575388800000,
+                    chapterId: 419
                 },
                 {
                     title: "面试官：今日头条启动很快，你觉得可能是做了哪些优化?面试官：今日头条启动很快，你觉得可能是做了哪些优化?",
-                    publishTime: 1575475200000
+                    publishTime: 1575475200000,
+                    chapterId: 420
                 },
                 {
                     title: "Android10填坑适配指南，实际经验代码，拒绝翻译",
-                    publishTime: 1575388800000
+                    publishTime: 1575388800000,
+                    chapterId: 421
                 },
                 {
                     title: "面试官：今日头条启动很快，你觉得可能是做了哪些优化?面试官：今日头条启动很快，你觉得可能是做了哪些优化?",
-                    publishTime: 1575475200000
+                    publishTime: 1575475200000,
+                    chapterId: 422
                 },
                 {
                     title: "Android10填坑适配指南，实际经验代码，拒绝翻译",
-                    publishTime: 1575388800000
+                    publishTime: 1575388800000,
+                    chapterId: 423
                 },
                 {
                     title: "面试官：今日头条启动很快，你觉得可能是做了哪些优化?面试官：今日头条启动很快，你觉得可能是做了哪些优化?",
-                    publishTime: 1575475200000
+                    publishTime: 1575475200000,
+                    chapterId: 424
                 },
                 {
                     title: "Android10填坑适配指南，实际经验代码，拒绝翻译",
-                    publishTime: 1575388800000
+                    publishTime: 1575388800000,
+                    chapterId: 425
                 },
                 {
                     title: "面试官：今日头条启动很快，你觉得可能是做了哪些优化?面试官：今日头条启动很快，你觉得可能是做了哪些优化?",
-                    publishTime: 1575475200000
+                    publishTime: 1575475200000,
+                    chapterId: 426
                 },
                 {
                     title: "Android10填坑适配指南，实际经验代码，拒绝翻译",
-                    publishTime: 1575388800000
+                    publishTime: 1575388800000,
+                    chapterId: 427
                 }
             ]
         });
