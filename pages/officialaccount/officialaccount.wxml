@@ -8,8 +8,6 @@
     <swiper class="article-list-container" current="{{currentTab}}" duration="300" bindchange="switchTab" style="height:{{windowHeight}}rpx">
         <swiper-item wx:for="{{authorList.length}}">
             <scroll-view class="scroll-h" scroll-y="true">
-                <!-- <view style="background-color: #cecece;">{{choosedTabInformation}}</view> -->
-
                 <view class="article-item" wx:for="{{articleList}}">
                     <view class="collection-state-container" wx:if="{{item.collect === false}}">
                         <image class="collection-state" src="../../images/uncollection.png" bindtap="changeCollectionState"></image>
@@ -18,7 +16,7 @@
                         <image class="collection-state" src="../../images/collection.png" bindtap="changeCollectionState"></image>
                     </view>
 
-                    <view class="article-msg" bindtap="clickArticleItem" data-id="{{item.id}}">
+                    <view class="article-msg" bindtap="showArticleDetail" data-link="{{item.link}}">
                         <view class="article-title">{{item.title}}</view>
                         <view class="article-time">时间：{{item.niceDate}}</view>
                     </view>

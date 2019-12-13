@@ -1,26 +1,21 @@
-// pages/mine/mine.js
+// pages/detail/detail.js
 Page({
 
     /**
      * Page initial data
      */
     data: {
-
-    },
-
-    clickMe: function() {
-        console.log("点击了按钮");
-        let url = "https://mp.weixin.qq.com/s/J7Q263kqSdeyh1tvunKLsA"; 
-        wx.navigateTo({
-            url: '../detail/detail' + '?url=' + url
-        })
+        url: ""
     },
 
     /**
      * Lifecycle function--Called when page load
      */
     onLoad: function (options) {
-
+        let url = options.url;
+        this.setData({
+            url: url
+        });
     },
 
     /**

@@ -1,2 +1,4 @@
 <!--pages/mine/mine.wxml-->
-<text>pages/mine/mine.wxml</text>
+<!-- <text>pages/mine/mine.wxml</text> -->
+
+<button bindtap="clickMe">点击跳转web</button>

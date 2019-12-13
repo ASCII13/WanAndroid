@@ -2,7 +2,8 @@
     "pages": [
         "pages/home/home",
         "pages/officialaccount/officialaccount",
-        "pages/mine/mine"     
+        "pages/mine/mine",
+        "pages/detail/detail"    
     ],
     "window": {
         "backgroundTextStyle": "light",

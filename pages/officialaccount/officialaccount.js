@@ -18,6 +18,7 @@ Page({
         scrollLeft: 0,
         articleList: [],
         authorList: [],
+        pageNum: 1,
         isGetAuthorsSuccess: false
     },
 
@@ -33,7 +34,7 @@ Page({
         this.setData({
             currentTab: nextIndex
         });
-        this.getArticles(this.data.currentTab);
+        this.getArticles(this.data.currentTab, 1);
 
         if (currentIndex != nextIndex) {
             this.setData({
@@ -42,7 +43,6 @@ Page({
         }
 
         this.scrollTab();
-        this.getInformation(nextIndex);
 
         // let current = e.detail.current;
 
@@ -101,12 +101,11 @@ Page({
                 lastTab: currentIndex
             });
 
-            this.getArticles(this.data.currentTab);
+            this.getArticles(this.data.currentTab, 1);
 
         } else {
             return false;
         }
-        this.getInformation(nextActivationIndex);
     },
 
     changeCollectionState: function() {
@@ -139,13 +138,21 @@ Page({
         });
     },
 
-    clickArticleItem: function(e) {
-        let itemIndex = e.currentTarget.dataset.id;
-        let title = `点击了${itemIndex}`;
-        console.log(`itemIndex的值为:${itemIndex}`);
-        wx.showToast({
-            title: title,
-            icon: 'none'
+    // clickArticleItem: function(e) {
+    //     let itemIndex = e.currentTarget.dataset.id;
+    //     let title = `点击了${itemIndex}`;
+    //     console.log(`itemIndex的值为:${itemIndex}`);
+    //     wx.showToast({
+    //         title: title,
+    //         icon: 'none'
+    //     })
+    // },
+
+    showArticleDetail: function(e) {
+        let detailLink = e.currentTarget.dataset.link;
+        console.log(`点击的地址是${detailLink}`);
+        wx.navigateTo({
+            url: '../detail/detail' + '?url=' + detailLink,
         })
     },
 
@@ -157,19 +164,20 @@ Page({
     },
 
     getAuthorList: function() {
+        wx.stopPullDownRefresh();
         console.log(`请求地址为：${AUTHORS}`)
         let _this = this;
         wx.request({
             url: AUTHORS,
             method: 'GET',
             success: function(res) {
-                console.log(`公众号列表返回数据为：${res.data.data}`)
+                console.log(`公众号列表返回数据为：${res.data.data.title}`)
                 _this.setData({
                     authorList: res.data.data,
                     isGetAuthorsSuccess: true
                 });
 
-                _this.getArticles(_this.data.currentTab);
+                _this.getArticles(_this.data.currentTab, 1);
             },
             fail: function() {
                 wx.showToast({
@@ -181,7 +189,7 @@ Page({
         })
     },
 
-    getArticles: function(currentTab) {
+    getArticles: function(currentTab, pageNum) {
         if (this.data.isGetAuthorsSuccess === true) {
             let _this = this;
             let currentId = 0;
@@ -191,9 +199,9 @@ Page({
                     currentId = item.id;
                 }
             });
-            console.log(`当前文章列表请求地址为：${BASE_URL}wxarticle/list/${currentId}/1/json`)
+            console.log(`当前文章列表请求地址为：${BASE_URL}wxarticle/list/${currentId}/${pageNum}/json`)
             wx.request({
-                url: BASE_URL + 'wxarticle/list/' + currentId + '/1/json',
+                url: BASE_URL + 'wxarticle/list/' + currentId + '/' + pageNum + '/json',
                 method: 'GET',
                 success: function(res) {
                     _this.setData({
@@ -241,7 +249,7 @@ Page({
      * Page event handler function--Called when user drop down
      */
     onPullDownRefresh: function () {
-
+        this.getAuthorList();
     },
 
     /**
@@ -255,6 +263,7 @@ Page({
      * Called when user click on the top right corner to share
      */
     onShareAppMessage: function () {
+
 
     }
 })
