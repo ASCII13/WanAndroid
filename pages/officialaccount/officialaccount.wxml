@@ -2,22 +2,25 @@
 
 <view>
     <scroll-view class="author-list" scroll-x="true" scroll-left="{{scrollLeft}}" scroll-with-animation="true">
-        <view class="author-item {{currentTab == index ? 'item-selected' : ''}}" id="{{item.id}}" data-current= "{{index}}" bindtap="switchNav" wx:for="{{testArray}}">{{item.name}}</view>
+        <view class="author-item {{currentTab == index ? 'item-selected' : ''}}" data-current= "{{index}}" bindtap="switchNav" wx:for="{{authorList}}">{{item.name}}</view>
     </scroll-view>
 
     <swiper class="article-list-container" current="{{currentTab}}" duration="300" bindchange="switchTab" style="height:{{windowHeight}}rpx">
-        <swiper-item wx:for="{{testArray.length}}">
+        <swiper-item wx:for="{{authorList.length}}">
             <scroll-view class="scroll-h" scroll-y="true">
-                <view style="background-color: #cecece;">{{choosedTabInformation}}</view>
+                <!-- <view style="background-color: #cecece;">{{choosedTabInformation}}</view> -->
 
                 <view class="article-item" wx:for="{{articleList}}">
-                    <view class="collection-state-container">
-                        <image class="collection-state" src="{{collection}}" bindtap="changeCollectionState"></image>
+                    <view class="collection-state-container" wx:if="{{item.collect === false}}">
+                        <image class="collection-state" src="../../images/uncollection.png" bindtap="changeCollectionState"></image>
+                    </view>
+                    <view wx:else class="collection-state-container">
+                        <image class="collection-state" src="../../images/collection.png" bindtap="changeCollectionState"></image>
                     </view>
 
-                    <view class="article-msg" bindtap="clickArticleItem" data-id="{{item.chapterId}}">
+                    <view class="article-msg" bindtap="clickArticleItem" data-id="{{item.id}}">
                         <view class="article-title">{{item.title}}</view>
-                        <view class="article-time">时间：2019-12-05</view>
+                        <view class="article-time">时间：{{item.niceDate}}</view>
                     </view>
                 </view>              
             </scroll-view>

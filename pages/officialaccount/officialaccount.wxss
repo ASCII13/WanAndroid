@@ -50,14 +50,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 
 .collection-state {
     width: 40rpx;
     height: 40rpx;
     display: flex;
-
 }
 
 .article-msg {
@@ -83,4 +81,3 @@
     color: #9A9A9A;
     margin-top: 10rpx;
 }
-

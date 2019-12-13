@@ -1,9 +1,9 @@
 // pages/officialaccount/officialaccount.js
 
-let tabNum = 0;
+let host = require('../../utils/host.js');
 
-const collectionImage = "../../images/collection.png";
-const uncollectionImage = "../../images/uncollection.png";
+const AUTHORS = host.AUTHORS;
+const BASE_URL = host.BASE_URL;
 
 Page({
 
@@ -16,11 +16,9 @@ Page({
         currentTab: 0,
         lastTab: -1,
         scrollLeft: 0,
-        choosedTabInformation: "",
-        testArray: [],
         articleList: [],
-        collection: uncollectionImage,
-        collectionState: false
+        authorList: [],
+        isGetAuthorsSuccess: false
     },
 
     /**
@@ -35,6 +33,7 @@ Page({
         this.setData({
             currentTab: nextIndex
         });
+        this.getArticles(this.data.currentTab);
 
         if (currentIndex != nextIndex) {
             this.setData({
@@ -101,6 +100,9 @@ Page({
                 currentTab: nextActivationIndex,
                 lastTab: currentIndex
             });
+
+            this.getArticles(this.data.currentTab);
+
         } else {
             return false;
         }
@@ -108,17 +110,7 @@ Page({
     },
 
     changeCollectionState: function() {
-        if (this.data.collectionState === false) {
-            this.setData({
-                collection: collectionImage,
-                collectionState: true
-            });
-        } else {
-            this.setData({
-                collection: uncollectionImage,
-                collectionState: false
-            });
-        }
+        
     },
 
     getWindowSize: function() {
@@ -162,221 +154,59 @@ Page({
      */
     onLoad: function (options) {
         this.getWindowSize();
-        this.getTabName();
-        this.getArticleList();
-        this.getInformation(tabNum);
     },
 
-    getTabName: function() {
-        this.setData({
-            testArray: [
-                { name: '鸿洋', id: 408 },
-                { name: '郭霖', id: 409 },
-                { name: '玉刚说', id: 410 },
-                { name: '承香墨影', id: 411 },
-                { name: 'Android群英传', id: 412 },
-                { name: 'code小生', id: 413 },
-                { name: '谷歌开发者', id: 414 },
-                { name: '奇卓社', id: 415 },
-                { name: '美团技术团队', id: 416 },
-                { name: 'GcsSloop', id: 417 },
-                { name: '互联网侦察', id: 418 },
-                { name: 'susion随心', id: 419 },
-                { name: '程序亦非猿', id: 420 },
-                { name: 'Gityuan', id: 421 }
-            ]
-        });
+    getAuthorList: function() {
+        console.log(`请求地址为：${AUTHORS}`)
+        let _this = this;
+        wx.request({
+            url: AUTHORS,
+            method: 'GET',
+            success: function(res) {
+                console.log(`公众号列表返回数据为：${res.data.data}`)
+                _this.setData({
+                    authorList: res.data.data,
+                    isGetAuthorsSuccess: true
+                });
+
+                _this.getArticles(_this.data.currentTab);
+            },
+            fail: function() {
+                wx.showToast({
+                    title: '数据获取失败',
+                    icon: 'none'
+                });
+                console.log("公众号列表数据请求失败");
+            }
+        })
     },
 
-    getInformation: function(tabNum) {
-        if (tabNum == 0) {
-            console.log("当前选中第一个标题");
-            this.setData({
-                choosedTabInformation: "1"
-            });
-        } else if (tabNum == 1) {
-            console.log("当前选中第二个标题");
-            this.setData({
-                choosedTabInformation: "2"
-            });
-        } else if (tabNum == 2) {
-            console.log("当前选中第三个标题");
-            this.setData({
-                choosedTabInformation: "3"
-            });
-        } else if (tabNum == 3) {
-            console.log("当前选中第四个标题");
-            this.setData({
-                choosedTabInformation: "4"
-            });
+    getArticles: function(currentTab) {
+        if (this.data.isGetAuthorsSuccess === true) {
+            let _this = this;
+            let currentId = 0;
 
-        } else if (tabNum == 4) {
-            console.log("当前选中第五个标题");
-            this.setData({
-                choosedTabInformation: "5"
-            });
-
-        } else if (tabNum == 5) {
-            console.log("当前选中第六个标题");
-            this.setData({
-                choosedTabInformation: "6"
-            });
-
-        } else if (tabNum == 6) {
-            console.log("当前选中第七个标题");
-            this.setData({
-                choosedTabInformation: "7"
-            });
-
-        } else if (tabNum == 7) {
-            console.log("当前选中第八个标题");
-            this.setData({
-                choosedTabInformation: "8"
-            });
-
-        } else if (tabNum == 8) {
-            console.log("当前选中第九个标题");
-            this.setData({
-                choosedTabInformation: "9"
-            });
-
-        } else if (tabNum == 9) {
-            console.log("当前选中第十个标题");
-            this.setData({
-                choosedTabInformation: "10"
-            });
-
-        } else if (tabNum == 10) {
-            console.log("当前选中第十一个标题");
-            this.setData({
-                choosedTabInformation: "11"
-            });
-
-        } else if (tabNum == 11) {
-            console.log("当前选中第十二个标题");
-            this.setData({
-                choosedTabInformation: "12"
-            });
-
-        } else if (tabNum == 12) {
-            console.log("当前选中第十三个标题");
-            this.setData({
-                choosedTabInformation: "13"
-            });
-
-        } else if (tabNum == 13) {
-            console.log("当前选中第十四个标题");
-            this.setData({
-                choosedTabInformation: "14"
-            });
-        }
-    },
-
-    getArticleList: function() {
-        this.setData({
-            articleList: [
-                {
-                    title: "面试官：今日头条启动很快，你觉得可能是做了哪些优化?面试官：今日头条启动很快，你觉得可能是做了哪些优化?",
-                    publishTime: 1575475200000,
-                    chapterId: 408
-                },
-                {
-                    title: "Android10填坑适配指南，实际经验代码，拒绝翻译",
-                    publishTime: 1575388800000,
-                    chapterId: 409
-                },
-                {
-                    title: "面试官：今日头条启动很快，你觉得可能是做了哪些优化?面试官：今日头条启动很快，你觉得可能是做了哪些优化?",
-                    publishTime: 1575475200000,
-                    chapterId: 410
-                },
-                {
-                    title: "Android10填坑适配指南，实际经验代码，拒绝翻译",
-                    publishTime: 1575388800000,
-                    chapterId: 411
-                },
-                {
-                    title: "面试官：今日头条启动很快，你觉得可能是做了哪些优化?面试官：今日头条启动很快，你觉得可能是做了哪些优化?",
-                    publishTime: 1575475200000,
-                    chapterId: 412
-                },
-                {
-                    title: "Android10填坑适配指南，实际经验代码，拒绝翻译",
-                    publishTime: 1575388800000,
-                    chapterId: 413
-                },
-                {
-                    title: "面试官：今日头条启动很快，你觉得可能是做了哪些优化?面试官：今日头条启动很快，你觉得可能是做了哪些优化?",
-                    publishTime: 1575475200000,
-                    chapterId: 414
-                },
-                {
-                    title: "Android10填坑适配指南，实际经验代码，拒绝翻译",
-                    publishTime: 1575388800000,
-                    chapterId: 415
-                },
-                {
-                    title: "面试官：今日头条启动很快，你觉得可能是做了哪些优化?面试官：今日头条启动很快，你觉得可能是做了哪些优化?",
-                    publishTime: 1575475200000,
-                    chapterId: 416
-                },
-                {
-                    title: "Android10填坑适配指南，实际经验代码，拒绝翻译",
-                    publishTime: 1575388800000,
-                    chapterId: 417
-                },
-                {
-                    title: "面试官：今日头条启动很快，你觉得可能是做了哪些优化?面试官：今日头条启动很快，你觉得可能是做了哪些优化?",
-                    publishTime: 1575475200000,
-                    chapterId: 418
-                },
-                {
-                    title: "Android10填坑适配指南，实际经验代码，拒绝翻译",
-                    publishTime: 1575388800000,
-                    chapterId: 419
-                },
-                {
-                    title: "面试官：今日头条启动很快，你觉得可能是做了哪些优化?面试官：今日头条启动很快，你觉得可能是做了哪些优化?",
-                    publishTime: 1575475200000,
-                    chapterId: 420
-                },
-                {
-                    title: "Android10填坑适配指南，实际经验代码，拒绝翻译",
-                    publishTime: 1575388800000,
-                    chapterId: 421
-                },
-                {
-                    title: "面试官：今日头条启动很快，你觉得可能是做了哪些优化?面试官：今日头条启动很快，你觉得可能是做了哪些优化?",
-                    publishTime: 1575475200000,
-                    chapterId: 422
-                },
-                {
-                    title: "Android10填坑适配指南，实际经验代码，拒绝翻译",
-                    publishTime: 1575388800000,
-                    chapterId: 423
-                },
-                {
-                    title: "面试官：今日头条启动很快，你觉得可能是做了哪些优化?面试官：今日头条启动很快，你觉得可能是做了哪些优化?",
-                    publishTime: 1575475200000,
-                    chapterId: 424
-                },
-                {
-                    title: "Android10填坑适配指南，实际经验代码，拒绝翻译",
-                    publishTime: 1575388800000,
-                    chapterId: 425
-                },
-                {
-                    title: "面试官：今日头条启动很快，你觉得可能是做了哪些优化?面试官：今日头条启动很快，你觉得可能是做了哪些优化?",
-                    publishTime: 1575475200000,
-                    chapterId: 426
-                },
-                {
-                    title: "Android10填坑适配指南，实际经验代码，拒绝翻译",
-                    publishTime: 1575388800000,
-                    chapterId: 427
+            _this.data.authorList.forEach(function(item, index, arr) {
+                if (index == currentTab) {
+                    currentId = item.id;
                 }
-            ]
-        });
+            });
+            console.log(`当前文章列表请求地址为：${BASE_URL}wxarticle/list/${currentId}/1/json`)
+            wx.request({
+                url: BASE_URL + 'wxarticle/list/' + currentId + '/1/json',
+                method: 'GET',
+                success: function(res) {
+                    _this.setData({
+                        articleList: res.data.data.datas
+                    });
+                },
+                fail: function() {
+                    console.log('文章列表数据请求失败')
+                }
+            })
+        } else {
+            return false;
+        }
     },
 
     /**
@@ -390,7 +220,7 @@ Page({
      * Lifecycle function--Called when page show
      */
     onShow: function () {
-
+        this.getAuthorList();
     },
 
     /**
