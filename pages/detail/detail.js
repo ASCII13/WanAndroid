@@ -12,10 +12,11 @@ Page({
      * Lifecycle function--Called when page load
      */
     onLoad: function (options) {
-        let url = options.url;
+        let url = decodeURIComponent(options.url);
         this.setData({
             url: url
         });
+        console.log(`接收到的参数是：${url}`);
     },
 
     /**

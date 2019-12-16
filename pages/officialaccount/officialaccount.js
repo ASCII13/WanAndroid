@@ -19,13 +19,16 @@ Page({
         articleList: [],
         authorList: [],
         pageNum: 1,
-        isGetAuthorsSuccess: false
+        isGetAuthorsSuccess: false,
+        total: 0
     },
 
     /**
      * 滑动 swiper 切换 tab
      */
     switchTab: function(e) {
+        this.resetData();
+
         let currentIndex = this.data.currentTab;
         let nextIndex = e.detail.current;
 
@@ -34,7 +37,7 @@ Page({
         this.setData({
             currentTab: nextIndex
         });
-        this.getArticles(this.data.currentTab, 1);
+        this.getArticles(this.data.currentTab, this.data.pageNum);
 
         if (currentIndex != nextIndex) {
             this.setData({
@@ -90,6 +93,8 @@ Page({
         // }
         // console.log("当前选中tab标题", cur);
         // this.getInformation(cur); 
+
+        this.resetData();
         
         console.log(`点击了下标为${e.target.dataset.current}的标题`);
 
@@ -101,7 +106,7 @@ Page({
                 lastTab: currentIndex
             });
 
-            this.getArticles(this.data.currentTab, 1);
+            this.getArticles(this.data.currentTab, this.data.pageNum);
 
         } else {
             return false;
@@ -149,10 +154,10 @@ Page({
     // },
 
     showArticleDetail: function(e) {
-        let detailLink = e.currentTarget.dataset.link;
+        let detailLink = encodeURIComponent(e.currentTarget.dataset.link);
         console.log(`点击的地址是${detailLink}`);
         wx.navigateTo({
-            url: '../detail/detail' + '?url=' + detailLink,
+            url: '../detail/detail' + '?url=' + detailLink
         })
     },
 
@@ -165,6 +170,7 @@ Page({
 
     getAuthorList: function() {
         wx.stopPullDownRefresh();
+
         console.log(`请求地址为：${AUTHORS}`)
         let _this = this;
         wx.request({
@@ -177,7 +183,7 @@ Page({
                     isGetAuthorsSuccess: true
                 });
 
-                _this.getArticles(_this.data.currentTab, 1);
+                _this.getArticles(_this.data.currentTab, _this.data.pageNum);
             },
             fail: function() {
                 wx.showToast({
@@ -204,8 +210,12 @@ Page({
                 url: BASE_URL + 'wxarticle/list/' + currentId + '/' + pageNum + '/json',
                 method: 'GET',
                 success: function(res) {
+                    let oldData = _this.data.articleList;
+                    let newData = res.data.data.datas;
+
                     _this.setData({
-                        articleList: res.data.data.datas
+                        articleList: oldData.concat(newData),
+                        total: res.data.data.total
                     });
                 },
                 fail: function() {
@@ -215,6 +225,16 @@ Page({
         } else {
             return false;
         }
+    },
+
+    /**
+     * 切换tab选项时，将 页码 和 内容 复原
+     */
+    resetData: function() {
+        this.setData({
+            pageNum: 1,
+            articleList: []
+        });
     },
 
     /**
@@ -256,7 +276,13 @@ Page({
      * Called when page reach bottom
      */
     onReachBottom: function () {
+        console.log("触发上拉加载");
+        let pageNum = this.data.pageNum + 1;
+        this.setData({
+            pageNum: pageNum
+        });
 
+        this.getArticles(this.data.currentTab, this.data.pageNum);
     },
 
     /**

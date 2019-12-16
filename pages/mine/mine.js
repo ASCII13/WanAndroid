@@ -10,7 +10,7 @@ Page({
 
     clickMe: function() {
         console.log("点击了按钮");
-        let url = "https://mp.weixin.qq.com/s/J7Q263kqSdeyh1tvunKLsA"; 
+        let url = encodeURIComponent("http://mp.weixin.qq.com/s?__biz=MzAxNzMxNzk5OQ==&mid=2649485865&idx=1&sn=6b464243657959bda265533863a1c495&chksm=83f83b29b48fb23fa05191ef86ead952576ab99c0e1a70e2ac4898cfb82c1964e289425d8f55&scene=38#wechat_redirect"); 
         wx.navigateTo({
             url: '../detail/detail' + '?url=' + url
         })
