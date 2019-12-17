@@ -1,44 +1,18 @@
-// pages/mine/mine.js
+// pages/login/login.js
 Page({
 
     /**
      * Page initial data
      */
     data: {
-        isLogin: false,
-        testArray: []
 
-    },
-
-    login: function() {
-        if (this.data.isLogin === false) {
-            wx.navigateTo({
-                url: '../login/login',
-            });
-        } else {
-            console.log("当前已登录");
-            return false;
-        }
-    },
-
-    getTestList: function() {
-        this.setData({
-            testArray: [
-                { num: 1 },
-                { num: 2 },
-                { num: 3 },
-                { num: 4 },
-                { num: 5 },
-                { num: 6 }
-            ]               
-        });
     },
 
     /**
      * Lifecycle function--Called when page load
      */
     onLoad: function (options) {
-        this.getTestList();
+
     },
 
     /**

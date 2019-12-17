@@ -1,4 +1,23 @@
 <!--pages/mine/mine.wxml-->
-<!-- <text>pages/mine/mine.wxml</text> -->
 
-<button bindtap="clickMe">点击跳转web</button>
+<view class="mine-container">
+    <view class="header-background"></view>
+
+    <view class="personal-msg" bindtap="login">
+        <image class="head-icon" src="../../images/head_icon_login.png"></image>
+
+        <view class="account-info">
+            <view class="account-name">这里是账户名展示的位置</view>
+            <view class="score-info">当前积分：6666</view>
+        </view>
+    </view>
+
+    <view class="personal-feature">
+        <view class="to-do" style="background-color: #BDB76B" wx:for="{{testArray}}">
+            <image class="feature-icon"></image>
+            <view class="feature-description">功能名称</view>
+        </view>
+
+    </view>
+</view>
+

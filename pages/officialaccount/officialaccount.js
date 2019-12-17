@@ -155,7 +155,7 @@ Page({
 
     showArticleDetail: function(e) {
         let detailLink = encodeURIComponent(e.currentTarget.dataset.link);
-        console.log(`点击的地址是${detailLink}`);
+        console.log(`点击的文章地址是：${detailLink}`);
         wx.navigateTo({
             url: '../detail/detail' + '?url=' + detailLink
         })
@@ -277,11 +277,11 @@ Page({
      */
     onReachBottom: function () {
         console.log("触发上拉加载");
+
         let pageNum = this.data.pageNum + 1;
         this.setData({
             pageNum: pageNum
         });
-
         this.getArticles(this.data.currentTab, this.data.pageNum);
     },
 
