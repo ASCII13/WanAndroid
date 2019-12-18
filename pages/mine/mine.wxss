@@ -45,28 +45,34 @@ page {
 
 .personal-feature {
     background-color: white;
-    height: 550rpx;
+    height: 400rpx;
     margin: 90rpx 40rpx 0rpx 40rpx;
     border-radius: 11rpx;
 
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    align-content: space-around;
+    align-content: space-evenly;
 }
 
-.to-do {
-    height: 170rpx;
+.feature-item {
+    height: 150rpx;
     width: 170rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .feature-icon {
-    height: 170rpx;
-    width: 170rpx;
+    height: 64rpx;
+    width: 64rpx;
 }
 
 .feature-description {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 10rpx;
+    font-size: 28rpx;
 }

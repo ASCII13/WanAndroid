@@ -6,7 +6,7 @@ Page({
      */
     data: {
         isLogin: false,
-        testArray: []
+        featureList: []
 
     },
 
@@ -21,16 +21,42 @@ Page({
         }
     },
 
-    getTestList: function() {
+    getFeatureList: function() {
         this.setData({
-            testArray: [
-                { num: 1 },
-                { num: 2 },
-                { num: 3 },
-                { num: 4 },
-                { num: 5 },
-                { num: 6 }
+            featureList: [
+                { 
+                    icon: "../../images/collect_article.png",
+                    name: "收藏文章"
+                },
+                {
+                    icon: "../../images/todo_list.png",
+                    name: "代办清单"
+                },
+                {
+                    icon: "../../images/score_level.png",
+                    name: "积分排行"
+                },
+                {
+                    icon: "../../images/share_article.png",
+                    name: "分享文章"
+                },
+                {
+                    icon: "../../images/share_project.png",
+                    name: "分享项目"
+                },
+                {
+                    icon: "../../images/personal_info.png",
+                    name: "个人信息"
+                },
             ]               
+        });
+    },
+
+    clickFeature: function(e) {
+        let title = `点击了${e.currentTarget.dataset.current}`;
+        wx.showToast({
+            title: title,
+            icon: 'none'
         });
     },
 
@@ -38,7 +64,7 @@ Page({
      * Lifecycle function--Called when page load
      */
     onLoad: function (options) {
-        this.getTestList();
+        this.getFeatureList();
     },
 
     /**

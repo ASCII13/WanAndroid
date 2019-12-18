@@ -5,7 +5,22 @@ Page({
      * Page initial data
      */
     data: {
+        isAllowLogin: false
 
+    },
+
+    register: function() {
+        wx.showToast({
+            title: '点击了注册按钮',
+            icon: 'none'
+        })
+    },
+
+    login: function() {
+        wx.showToast({
+            title: '点击了登录按钮',
+            icon: 'none'
+        })
     },
 
     /**

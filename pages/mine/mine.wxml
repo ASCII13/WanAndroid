@@ -4,7 +4,7 @@
     <view class="header-background"></view>
 
     <view class="personal-msg" bindtap="login">
-        <image class="head-icon" src="../../images/head_icon_login.png"></image>
+        <image class="head-icon" src="../../images/head_icon_normal.png"></image>
 
         <view class="account-info">
             <view class="account-name">这里是账户名展示的位置</view>
@@ -13,11 +13,10 @@
     </view>
 
     <view class="personal-feature">
-        <view class="to-do" style="background-color: #BDB76B" wx:for="{{testArray}}">
-            <image class="feature-icon"></image>
-            <view class="feature-description">功能名称</view>
+        <view class="feature-item" wx:for="{{featureList}}" bindtap="clickFeature" data-current="{{item.name}}">
+            <image class="feature-icon" src="{{item.icon}}"></image>
+            <view class="feature-description">{{item.name}}</view>
         </view>
-
     </view>
 </view>
 

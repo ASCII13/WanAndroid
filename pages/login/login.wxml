@@ -1,2 +1,27 @@
 <!--pages/login/login.wxml-->
-<text>pages/login/login.wxml</text>
+
+<form>
+    <view class="header-background"></view>
+
+    <view class="logo-area">
+        <image class="img-logo" src="../../images/logo.png" mode=""></image>
+    </view>
+
+    <view class="login-panel">
+        <input class="account-area" placeholder="请输入账户名" placeholder-style="color:"></input>
+        <input class="password-area" placeholder="请输入密码" password="true"></input>
+    </view>
+
+    <view wx:if="{{isAllowLogin === false}}">
+        <view class="btn-login btn-disable-login">登录</view>
+    </view>
+    <view wx:else>
+        <view class="btn-login btn-enable-login" bindtap="login">登录</view>
+    </view>
+
+    <view class="btn-register" bindtap="register">免费注册</view>
+</form>
+
+
+
+
