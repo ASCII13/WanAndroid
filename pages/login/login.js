@@ -45,6 +45,17 @@ Page({
                             wx.setStorageSync('account', _this.data.account);
                             wx.setStorageSync('password', _this.data.password);
                             console.log('登录成功');
+
+                            let pages = getCurrentPages();
+                            let lastPage = pages[pages.length - 2];
+                            lastPage.setData({
+                                isLogin: true,
+                                nickname: res.data.data.nickname
+                            });
+                            wx.navigateBack({
+                                delta: 1
+                            });
+
                         } else {
                             console.log('Set-Cookie为空');
                         }
