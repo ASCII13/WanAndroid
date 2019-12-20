@@ -1,0 +1,80 @@
+/* pages/register/register.wxss */
+
+page {
+    height: 100%;
+    width: 100%;
+    background-color: #F7F7F7;
+}
+
+.header-background {
+    width: 100%;
+    height: 350rpx;
+    background-color: #48C9B0;
+}
+
+.logo-area {
+    position: absolute;
+    top: 55rpx;
+    left: 40rpx;
+    right: 40rpx;
+    height: 200rpx;
+
+}
+
+.img-logo {
+    width: 100%;
+    height: 100%;
+}
+
+.register-panel {
+    position: absolute;
+    height: 400rpx;
+    top: 250rpx;
+    left: 40rpx;
+    right: 40rpx;
+    background-color: white;
+    border-radius: 11rpx;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.account-area, .password-area, .confirm-password-area {
+    margin: 0 40rpx;
+    height: 100rpx;
+    border-bottom: 0.5rpx solid #C0C0C0;
+}
+
+.btn-register {
+    color: white;
+    margin: 330rpx 40rpx 0 40rpx; 
+    height: 100rpx;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 11rpx;
+}
+
+.btn-register-enable {
+    background-color: #48C9B0;
+}
+
+.btn-register-disable {
+    background-color: #DBDCDE;
+}
+
+.btn-login {
+    color: #9E9E9E;
+    background-color: #F7F7F7;
+    font-size: 25rpx;
+    margin: 10rpx 40rpx 0 40rpx;
+
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+
+

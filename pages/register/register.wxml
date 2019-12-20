@@ -1,0 +1,24 @@
+<!--pages/register/register.wxml-->
+
+<view>
+    <view class="header-background"></view>
+
+    <view class="logo-area">
+        <image class="img-logo" src="../../images/logo.png" mode=""></image>
+    </view>
+
+    <view class="register-panel">
+        <input class="account-area" placeholder="请输入账户名" bindinput="accountInput"></input>
+        <input class="password-area" placeholder="请输入密码" password="true" bindinput="passwordInput"></input>
+        <input class="confirm-password-area" placeholder="请再次输入密码" password="true" bindinput="confirmPasswordInput"></input>
+    </view>
+
+    <view wx:if="{{isAllowRegister === false}}">
+        <view class="btn-register btn-register-disable">注册</view>
+    </view>
+    <view wx:else>
+        <view class="btn-register btn-register-enable" bindtap="register">注册</view>
+    </view>
+
+    <view class="btn-login" bindtap="login">已有账号</view>
+</view>

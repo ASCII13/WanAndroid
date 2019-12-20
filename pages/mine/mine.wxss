@@ -43,6 +43,10 @@ page {
     margin-left: 30rpx;
 }
 
+.not-logged-in {
+    font-size: 32rpx;
+}
+
 .personal-feature {
     background-color: white;
     height: 400rpx;

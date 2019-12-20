@@ -8,8 +8,8 @@
     </view>
 
     <view class="login-panel">
-        <input class="account-area" placeholder="请输入账户名" placeholder-style="color:"></input>
-        <input class="password-area" placeholder="请输入密码" password="true"></input>
+        <input class="account-area" placeholder="请输入账户名" bindinput="accountInput"></input>
+        <input class="password-area" placeholder="请输入密码" password="true" bindinput="passwordInput"></input>
     </view>
 
     <view wx:if="{{isAllowLogin === false}}">

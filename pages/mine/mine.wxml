@@ -4,11 +4,15 @@
     <view class="header-background"></view>
 
     <view class="personal-msg" bindtap="login">
-        <image class="head-icon" src="../../images/head_icon_normal.png"></image>
+        <image wx:if="{{isLogin == false}}" class="head-icon" src="../../images/head_icon_normal.png"></image>
+        <image wx:else class="head-icon" src="../../images/head_icon_login.png"></image>
 
-        <view class="account-info">
-            <view class="account-name">这里是账户名展示的位置</view>
-            <view class="score-info">当前积分：6666</view>
+        <view wx:if="{{isLogin == false}}" class="account-info">
+            <view class="not-logged-in">未登录</view>
+        </view>
+        <view wx:else class="account-info">
+            <view class="account-name">{{nickname}}</view>
+            <view class="score-info">当前积分：{{personalScore}}</view>
         </view>
     </view>
 
