@@ -1,0 +1,61 @@
+/* pages/collectarticles/collectarticles.wxss */
+
+.content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 350rpx;
+}
+
+.tips-image-area {
+    width: 260rpx;
+    height: 260rpx;
+}
+
+.tips-area {
+    margin-top: 20rpx;
+    font-size: 32rpx;
+}
+
+.article-item {
+    display: flex;
+    flex-direction: column;
+    height: 150rpx;
+    border-bottom: 0.5rpx solid #cecece;
+    justify-content: center;   
+}
+
+.article-msg {
+    margin: 0 33rpx;
+}
+
+.article-title {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+    overflow: hidden;   
+}
+
+.article-info {
+    display: flex;
+    flex-direction: row;
+    margin-top: 15rpx;
+    font-size: 26rpx;
+}
+
+.article-author {
+    display: flex;
+    flex-direction: row;
+}
+
+.article-type {
+    margin: 0 30rpx;
+    display: flex;
+    flex-direction: row;
+}
+
+.article-collect-time {
+    display: flex;
+    flex-direction: row;
+}

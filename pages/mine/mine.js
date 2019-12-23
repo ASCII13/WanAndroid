@@ -157,11 +157,23 @@ Page({
     },
 
     clickFeature: function(e) {
-        let title = `点击了${e.currentTarget.dataset.current}`;
-        wx.showToast({
-            title: title,
-            icon: 'none'
-        });
+        if (this.data.isLogin) {
+            if (e.currentTarget.dataset.current == 0) {
+                wx.navigateTo({
+                    url: '../collectarticles/collectarticles',
+                });
+            } else {
+                let title = `点击了第${e.currentTarget.dataset.current}个item`
+                wx.showToast({
+                    title: title,
+                    icon: 'none'
+                });
+            }
+        } else {
+            wx.navigateTo({
+                url: '../login/login',
+            });
+        }
     },
 
     /**

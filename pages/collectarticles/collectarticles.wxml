@@ -1,0 +1,33 @@
+<!--pages/collectarticles/collectarticles.wxml-->
+
+<view wx:if="{{articles.length == 0}}" class="content-container">
+    <image class="tips-image-area" src="../../images/nothing.svg"></image>
+    <view class="tips-area">暂无收藏</view>
+</view>
+
+<view wx:else>
+    <scroll-view>
+        <view class="article-item" wx:for="{{articles}}">
+            <view class="article-msg">
+                <view class="article-title">{{item.title}}</view>
+                <view class="article-info">
+                    <view class="article-author">
+                        <view style="color: #9A9A9A">作者：</view>
+                        <view>{{item.author}}</view>
+                    </view>
+                    <view class="article-type">
+                        <view style="color: #9A9A9A">分类：</view>
+                        <view>{{item.chapterName}}</view>
+                    </view>
+                    <view class="article-collect-time">
+                        <view style="color: #9A9A9A">收藏时间：</view>
+                        <view>{{item.niceDate}}</view>
+                    </view>
+                </view>
+            </view>            
+        </view>
+    </scroll-view>
+</view>
+
+
+

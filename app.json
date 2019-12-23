@@ -5,7 +5,9 @@
         "pages/mine/mine",
         "pages/detail/detail",
         "pages/login/login",
-        "pages/register/register"
+        "pages/register/register",
+        "pages/personalinfosetting/personalinfosetting",
+        "pages/collectarticles/collectarticles"
     ],
     "window": {
         "backgroundTextStyle": "light",
