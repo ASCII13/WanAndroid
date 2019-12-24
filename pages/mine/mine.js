@@ -163,6 +163,10 @@ Page({
                 wx.navigateTo({
                     url: '../collectarticles/collectarticles',
                 });
+            } else if (e.currentTarget.dataset.current == 2) {
+                wx.navigateTo({
+                    url: '../scorelevel/scorelevel',
+                });
             } else {
                 let title = `点击了第${e.currentTarget.dataset.current}个item`
                 wx.showToast({

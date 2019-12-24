@@ -1,0 +1,23 @@
+<!--pages/scorelevel/scorelevel.wxml-->
+
+<view class="rank-info-area">
+    <view class="rank-info-mine">
+        <view class="rank-num">5</view>
+        <view class="icon-head">测</view>
+        <view class="username">测试昵称</view>
+        <view class="level-info" style="margin-left: 30rpx;">LV.100</view>
+        <view class="score-info">6666</view>
+    </view>
+
+    <scroll-view style="margin-top: 150rpx; height: {{scrollHeight}}rpx;" scroll-y="true">
+        <view wx:for="{{rankInfoList}}">
+            <view class="rank-info-users">
+                <view class="rank-num">{{item.rank}}</view>
+                <view class="icon-head">w</view>
+                <view class="username">{{item.username}}</view>
+                <view class="level-info" style="margin-left: 30rpx;">LV.{{item.level}}</view>
+                <view class="score-info">{{item.coinCount}}</view>
+            </view>
+        </view>
+    </scroll-view>
+</view>

@@ -7,7 +7,8 @@
         "pages/login/login",
         "pages/register/register",
         "pages/personalinfosetting/personalinfosetting",
-        "pages/collectarticles/collectarticles"
+        "pages/collectarticles/collectarticles",
+        "pages/scorelevel/scorelevel"
     ],
     "window": {
         "backgroundTextStyle": "light",
