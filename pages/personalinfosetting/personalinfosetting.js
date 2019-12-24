@@ -1,18 +1,83 @@
 // pages/personalinfosetting/personalinfosetting.js
+
+let host = require('../../utils/host.js');
+
 Page({
 
     /**
      * Page initial data
      */
     data: {
+        methodList: []
 
+    },
+
+    getMethodList: function() {
+        this.setData({
+            methodList: [
+                {   
+                    name: "修改密码",
+                    src: "../../images/password.png"
+                },
+                {
+                    name: "修改昵称",
+                    src: "../../images/nickname.png"
+                },
+                {
+                    name: "绑定邮箱",
+                    src: "../../images/email.png"
+                }
+            ]
+        });
+    },
+
+    clickFeature: function() {
+        wx.showToast({
+            title: '功能开发中，敬请期待',
+            icon: 'none'
+        });
+    },
+
+    logout: function() {
+        wx.request({
+            url: host.BASE_URL + 'user/logout/json',
+            method: 'GET',
+            success: function(res) {
+                if (res.data.errorCode != 0) {
+                    wx.showToast({
+                        title: res.data.errorMsg,
+                        icon: 'none'
+                    });
+                } else {
+                    wx.removeStorageSync('Set-Cookie');
+                    wx.removeStorageSync('account');
+                    wx.removeStorageSync('password');
+
+                    let pages = getCurrentPages();
+                    let lastPage = pages[pages.length - 2];
+                    lastPage.setData({
+                        isLogin: false
+                    });
+
+                    wx.navigateBack({
+                       delta: 1 
+                    });
+                }
+            },
+            fail: function() {
+                wx.showToast({
+                    title: '网络异常，请稍后再试',
+                    icon: 'none'
+                });
+            }
+        });
     },
 
     /**
      * Lifecycle function--Called when page load
      */
     onLoad: function (options) {
-
+        this.getMethodList();
     },
 
     /**

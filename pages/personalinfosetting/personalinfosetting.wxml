@@ -1,2 +1,10 @@
 <!--pages/personalinfosetting/personalinfosetting.wxml-->
-<text>pages/personalinfosetting/personalinfosetting.wxml</text>
+
+<view class="modify-userinfo-container">
+    <view class="userinfo-item" wx:for="{{methodList}}" bindtap="clickFeature">
+        <image class="icon-userinfo" src="{{item.src}}"></image>
+        <view class="modify-userinfo">{{item.name}}</view>
+    </view>
+</view>
+
+<view class="btn-logout" bindtap="logout">退出登录</view>

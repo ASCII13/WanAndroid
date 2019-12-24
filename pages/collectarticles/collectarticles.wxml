@@ -7,7 +7,7 @@
 
 <view wx:else>
     <scroll-view>
-        <view class="article-item" wx:for="{{articles}}">
+        <view class="article-item" wx:for="{{articles}}" bindtap="showArticleDetail" data-current="{{item.link}}">
             <view class="article-msg">
                 <view class="article-title">{{item.title}}</view>
                 <view class="article-info">

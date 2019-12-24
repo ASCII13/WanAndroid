@@ -23,7 +23,9 @@ Page({
             });
         } else {
             console.log("当前已登录");
-            return false;
+            wx.navigateTo({
+                url: '../personalinfosetting/personalinfosetting',
+            });
         }
     },
 
@@ -86,8 +88,7 @@ Page({
         } else {
             console.log('本地账户信息为空，无法登录');
             return false;
-        }
-        
+        }    
     },
 
     getPersonalScore: function() {

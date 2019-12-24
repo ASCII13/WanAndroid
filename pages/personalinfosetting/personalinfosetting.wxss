@@ -1,1 +1,41 @@
 /* pages/personalinfosetting/personalinfosetting.wxss */
+
+page {
+    background-color: #F7F7F7;
+}
+
+.modify-userinfo-container {
+    margin: 30rpx 20rpx 0 20rpx;
+    border-radius: 11rpx;
+}
+
+.userinfo-item {
+    height: 100rpx;
+    border-bottom: 1rpx solid #cecece;
+    background-color: white;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.icon-userinfo {
+    width: 45rpx;
+    height: 45rpx;
+    margin-left: 20rpx;
+}
+
+.modify-userinfo {
+    margin-left: 20rpx;
+}
+
+.btn-logout {
+    margin: 28rpx 20rpx 0 20rpx;
+    border-radius: 11rpx;
+    border: 1rpx solid #F7F7F7;
+    background-color: white;
+    height: 100rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

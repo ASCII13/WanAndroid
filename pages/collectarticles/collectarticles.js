@@ -49,6 +49,15 @@ Page({
         })
     },
 
+    showArticleDetail: function(e) {
+        console.log(`点击的收藏文章地址为${e.currentTarget.dataset.current}`);
+
+        let detailLink = encodeURIComponent(e.currentTarget.dataset.current);
+        wx.navigateTo({
+            url: '../detail/detail' + '?url=' + detailLink
+        });
+    },
+
     /**
      * Lifecycle function--Called when page load
      */
@@ -59,7 +68,7 @@ Page({
             total: 0,
             size: 0
         });
-        this.getArticles(0);
+        this.getArticles(this.data.pageNum);
         wx.stopPullDownRefresh();
     },
 
