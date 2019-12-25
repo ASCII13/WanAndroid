@@ -17,7 +17,13 @@
         <p>我的</P>
         <img width="232" height="505.3" src="https://github.com/ASCII13/ProjectScreenshot/blob/master/mine.png">
       </div> 
-    </td>     
+    </td>  
+    <td>
+      <div align="center">
+        <p>积分排行</p>
+        <img width="232" height="505.3" src="https://github.com/ASCII13/ProjectScreenshot/blob/master/score.png">
+      </div>
+    </td>
   </tr> 
 </table>
 
