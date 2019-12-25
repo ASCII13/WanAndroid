@@ -1,4 +1,6 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText": "TOP 120"
+  "navigationBarTitleText": "TOP 120",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark"
 }

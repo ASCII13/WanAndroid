@@ -12,6 +12,9 @@ Page({
         featureList: [],
         personalScore: 0,
         nickname: "",
+        level: 0,
+        rank: 0,
+        username: "",
         isAllowLogin: false
 
     },
@@ -109,7 +112,10 @@ Page({
                     } else {
                         if (res.statusCode == 200) {
                             _this.setData({
-                                personalScore: res.data.data.coinCount
+                                personalScore: res.data.data.coinCount,
+                                level: res.data.data.level,
+                                rank: res.data.data.rank,
+                                username: res.data.data.username
                             });
                         } else {
                             console.log('网络异常，获取积分失败');
@@ -159,13 +165,19 @@ Page({
 
     clickFeature: function(e) {
         if (this.data.isLogin) {
+            let _this = this;
             if (e.currentTarget.dataset.current == 0) {
                 wx.navigateTo({
                     url: '../collectarticles/collectarticles',
                 });
             } else if (e.currentTarget.dataset.current == 2) {
+                let rank = _this.data.rank;
+                let level = _this.data.level;
+                let username = _this.data.username;
+                let score = _this.data.personalScore;
+
                 wx.navigateTo({
-                    url: '../scorelevel/scorelevel',
+                    url: '../scorelevel/scorelevel?' + 'rank=' + rank + '&username=' + username + '&level=' + level + '&score=' + score,
                 });
             } else {
                 let title = `点击了第${e.currentTarget.dataset.current}个item`

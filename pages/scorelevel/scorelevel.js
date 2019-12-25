@@ -10,7 +10,11 @@ Page({
     data: {
         rankInfoList: [],
         scrollHeight: 0,
-        pageNum: 1
+        pageNum: 1,
+        rank: 0,
+        username: "",
+        level: 0,
+        score: 0
     },
 
     getRankInfoList: function(pageNum) {
@@ -25,8 +29,10 @@ Page({
                         icon: 'none'
                     });
                 } else {
+                    let oldData = _this.data.rankInfoList;
+                    let newData = res.data.data.datas;
                     _this.setData({
-                        rankInfoList: res.data.data.datas
+                        rankInfoList: oldData.concat(newData)
                     });
                 }
             },
@@ -37,6 +43,37 @@ Page({
                 });
             }
         });
+    },
+
+    getSelfRankInfo: function() {
+        let cookie = wx.getStorageSync('Set-Cookie');
+        let _this = this;
+        if (cookie.length != 0) {
+            wx.request({
+                url: host.BASE_URL + 'lg/coin/userinfo/json',
+                method: 'GET',
+                header: {
+                    'Cookie': cookie
+                },
+                success: function(res) {
+                    if (res.data.errorCode != 0) {
+                        return false
+                    } else {
+                        _this.setData({
+                            rank: res.data.data.rank,
+                            username: res.data.data.username,
+                            level: res.data.data.level,
+                            score: res.data.data.coinCount
+                        });
+                    }
+                },
+                fail: function() {
+                    console.log('个人积分接口，网络异常');
+                }
+            });
+        } else{
+
+        }
     },
 
     getWindowSize: function () {
@@ -68,6 +105,12 @@ Page({
      * Lifecycle function--Called when page load
      */
     onLoad: function (options) {
+        this.setData({
+            rank: options.rank,
+            username: options.username,
+            level: options.level,
+            score: options.score
+        });
         this.getWindowSize();
     },
 
@@ -83,6 +126,8 @@ Page({
      */
     onShow: function () {
         this.getRankInfoList(this.data.pageNum);
+        this.getSelfRankInfo();
+        wx.stopPullDownRefresh();
     },
 
     /**
@@ -103,14 +148,20 @@ Page({
      * Page event handler function--Called when user drop down
      */
     onPullDownRefresh: function () {
-
+        console.log('下拉刷新触发');
+        this.onShow();
     },
 
     /**
      * Called when page reach bottom
      */
     onReachBottom: function () {
-
+        console.log('上拉加载触发');
+        let pageNum = this.data.pageNum + 1;
+        this.setData({
+            pageNum: pageNum
+        });
+        this.getRankInfoList(this.data.pageNum);
     },
 
     /**

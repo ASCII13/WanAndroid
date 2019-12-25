@@ -15,6 +15,11 @@ page {
     align-items: center;
 }
 
+.image-TOP3 {
+    width: 50rpx;
+    height: 50rpx;
+}
+
 .rank-num {
     font-size: 35rpx;
     margin-left: 20rpx;
@@ -25,7 +30,8 @@ page {
 }
 
 .icon-head {
-    background-color: wheat;
+    background-color: #48C9B0;
+    color: white;
     width: 80rpx;
     height: 80rpx;
     border-radius: 40rpx;
