@@ -15,19 +15,31 @@
       <div align="center">
         <img width="232" height="505.3" src="https://github.com/ASCII13/ProjectScreenshot/blob/master/login.png">
       </div>  
-    </td>
+    </td>   
     <td>
       <div align="center">
         <img width="232" height="505.3" src="https://github.com/ASCII13/ProjectScreenshot/blob/master/mine.png">
       </div> 
-    </td>  
+    </td>
     <td>
       <div align="center">
         <img width="232" height="505.3" src="https://github.com/ASCII13/ProjectScreenshot/blob/master/score.png">
       </div>
     </td>
   </tr> 
+  
+  <tr>
+    <th>首页</th>
+  </tr>
+  <tr>
+    <td>
+      <div align="center">
+        <img width="232" height="505.3" src="https://github.com/ASCII13/ProjectScreenshot/blob/master/home.png">
+      </div>
+    </td>
+  </tr>
 </table>
+
 
 
 
