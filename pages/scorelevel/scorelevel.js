@@ -20,12 +20,14 @@ Page({
         wx.showLoading({
             title: '',
         });
+        
         let _this = this;
         wx.request({
             url: host.BASE_URL + 'coin/rank/' + pageNum + '/json',
             method: 'GET',
             success: function(res) {
                 wx.hideLoading();
+
                 if (res.data.errorCode != 0) {
                     wx.showToast({
                         title: res.data.errorMsg,
