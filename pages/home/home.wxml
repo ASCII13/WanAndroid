@@ -1,2 +1,41 @@
 <!--pages/home/home.wxml-->
-<text>pages/home/home.wxml</text>
+
+<swiper style="width: 100%; height: 400rpx;" autoplay="true" circular="true">
+    <swiper-item wx:for="{{bannerList}}">
+        <image class="banner-image" src="{{item.imagePath}}" bindtap="clickBannerItem" data-current="{{item.url}}"></image>
+    </swiper-item>
+</swiper>
+
+<view class="article-list-container">
+    <block wx:for="{{topArticleList}}">
+        <view class="article-item" bindtap="clicktopArticleItem" data-link="{{item.link}}">
+            <view class="article-author-info" style="margin-top: 13rpx;">
+                <view style="margin-right: 15rpx; color: #e6a157;" hidden="{{!item.fresh}}">新</view>
+                <view style="width: 350rpx; color: #777777;">{{item.author}}</view>
+                <view style="margin-left: 20rpx; width: 330rpx; display: flex; flex-direction: row-reverse; color: #777777;">{{item.niceDate}}</view>
+            </view>
+            <text class="article-title" style="margin: 18rpx 0; font-size: 33rpx;" decode="true">{{item.title}}</text>
+            <view class="article-type-info" style="margin-bottom: 13rpx;">
+                <view style="margin-right: 15rpx; color: #eb8242;">置顶</view>
+                <view style="width: 560rpx; color: #777777;">{{item.superChapterName}}-{{item.chapterName}}</view>
+                <image style="margin-left: 30rpx; width: 40rpx; height: 40rpx;" src="../../images/{{item.collect ? 'collected' : 'uncollect'}}.png" catchtap="clickTopArticleCollect" data-index="{{index}}"></image>
+            </view>
+        </view>
+    </block>
+    <block wx:for="{{articleList}}">
+        <view class="article-item" bindtap="clickArticleItem" data-link="{{item.link}}">
+            <view class="article-author-info" style="margin-top: 13rpx;">
+                <view style="margin-right: 15rpx; color: #e6a157;" hidden="{{!item.fresh}}">新</view>
+                <view style="width: 350rpx; color: #777777;">{{item.shareUser.length == 0 ? item.author : item.shareUser}}</view>
+                <view style="margin-left: 20rpx; width: 330rpx; display: flex; flex-direction: row-reverse; color: #777777;">{{item.niceShareDate}}</view>
+            </view>
+            <view class="article-title" style="margin: 18rpx 0; font-size: 33rpx;">{{item.title}}</view>
+            <view class="article-type-info" style="margin-bottom: 13rpx;">
+                <view style="margin-right: 15rpx; color: #eb8242;" hidden="true">置顶</view>
+                <view style="width: 560rpx; color: #777777;">{{item.superChapterName}}-{{item.chapterName}}</view>
+                <image style="margin-left: 100rpx; width: 40rpx; height: 40rpx;" src="../../images/{{item.collect ? 'collected' : 'uncollect'}}.png" catchtap="clickArticleCollect" data-index="{{index}}"></image>
+            </view>
+        </view>
+    </block>
+
+</view>

@@ -1,11 +1,341 @@
 // pages/home/home.js
+
+let host = require('../../utils/host.js');
+
 Page({
 
     /**
      * Page initial data
      */
     data: {
+        bannerList: [],
+        topArticleList: [],
+        articleList: [],
+        pageNum: 0,
+        isLogin: false
+    },
 
+    getBanner: function() {
+        let _this = this;
+        wx.request({
+            url: host.BASE_URL + 'banner/json',
+            method: 'GET',
+            success: function(res) {
+                if (res.data.errorCode != 0) {
+                    wx.showToast({
+                        title: res.data.errorMsg,
+                        icon: 'none'
+                    });
+                } else {
+                    _this.setData({
+                        bannerList: res.data.data
+                    });
+                }
+            },
+            fail: function() {
+                console.log('网络异常');
+            }
+        })
+    },
+
+    clickBannerItem: function(e) {
+        let url = encodeURIComponent(e.currentTarget.dataset.current);
+        wx.navigateTo({
+            url: '../detail/detail' + '?url=' + url
+        });
+    },
+
+    getTopArticleList: function() {
+        let _this = this;
+        if (!this.data.isLogin) {
+            console.log('获取置顶文章，未携带cookie');
+            wx.request({
+                url: host.BASE_URL + 'article/top/json',
+                method: 'GET',
+                success: function (res) {
+                    if (res.data.errorCode != 0) {
+                        wx.showToast({
+                            title: res.data.errorMsg,
+                            icon: 'none'
+                        });
+                    } else {
+                        _this.setData({
+                            topArticleList: res.data.data
+                        });
+                    }
+                },
+                fail: function () {
+                    console.log('网络异常');
+                }
+            });
+        } else {
+            console.log('获取置顶文章，携带cookie');
+            wx.request({
+                url: host.BASE_URL + 'article/top/json',
+                method: 'GET',
+                header: {
+                    'Cookie': wx.getStorageSync('Set-Cookie')
+                },
+                success: function(res) {
+                    if (res.data.errorCode != 0) {
+                        wx.showToast({
+                            title: res.data.errorMsg,
+                            icon: 'none'
+                        });
+                    } else {
+                        _this.setData({
+                            topArticleList: res.data.data
+                        });
+                    }
+                },
+                fail: function() {
+                    console.log('网络异常');
+                }
+            });
+        }
+    },
+
+    getArticleList: function(pageNum) {
+        let _this = this;
+        if (!this.data.isLogin) {
+            console.log('获取文章，未携带cookie');
+            wx.request({
+                url: host.BASE_URL + 'article/list/' + pageNum + '/json',
+                method: 'GET',
+                success: function (res) {
+                    if (res.data.errorCode != 0) {
+                        wx.showToast({
+                            title: res.data.errorMsg,
+                            icon: 'none'
+                        });
+                    } else {
+                        _this.setData({
+                            articleList: res.data.data.datas
+                        });
+                    }
+                },
+                fail: function () {
+                    console.log('网络异常');
+                }
+            });
+        } else {
+            console.log('获取文章，携带cookie');
+            wx.request({
+                url: host.BASE_URL + 'article/list/' + pageNum + '/json',
+                method: 'GET',
+                header: {
+                    'Cookie': wx.getStorageSync('Set-Cookie')
+                },
+                success: function (res) {
+                    if (res.data.errorCode != 0) {
+                        wx.showToast({
+                            title: res.data.errorMsg,
+                            icon: 'none'
+                        });
+                    } else {
+                        _this.setData({
+                            articleList: res.data.data.datas
+                        });
+                    }
+                },
+                fail: function () {
+                    console.log('网络异常');
+                }
+            });
+        }
+        
+    },
+
+    clicktopArticleItem: function(e) {
+        let link = encodeURIComponent(e.currentTarget.dataset.link);
+        wx.navigateTo({
+            url: '../detail/detail' + '?url=' + link,
+        });
+    },
+
+    clickArticleItem: function(e) {
+        let link = encodeURIComponent(e.currentTarget.dataset.link);
+        wx.navigateTo({
+            url: '../detail/detail' + '?url=' + link,
+        })
+    },
+
+    checkLoginState: function() {
+        let account = wx.getStorageSync('account');
+        let password = wx.getStorageSync('password');
+        let cookie = wx.getStorageSync('Set-Cookie');
+
+        if (account.length != 0 && password.length != 0 && cookie.length != 0) {
+            this.setData({
+                isLogin: true
+            });
+        } else {
+            this.setData({
+                isLogin: false
+            });
+        }
+    },
+
+    clickTopArticleCollect: function(e) {
+        if (this.data.isLogin) {
+            let _this = this;
+            let index = e.currentTarget.dataset.index;
+            let id = _this.data.topArticleList[index].id;
+
+            if (_this.data.topArticleList[index].collect) {
+                wx.request({
+                    url: host.BASE_URL + 'lg/uncollect_originId/' + id + '/json',
+                    method: 'POST',
+                    header: {
+                        'Cookie': wx.getStorageSync('Set-Cookie')
+                    },
+                    success: function(res) {
+                        if (res.data.errorCode != 0) {
+                            wx.showToast({
+                                title: res.data.errorMsg,
+                                icon: 'none'
+                            });
+                        } else {
+                            _this.data.topArticleList[index].collect = false;
+                            _this.setData({
+                                topArticleList: _this.data.topArticleList
+                            });
+                            wx.showToast({
+                                title: '已取消收藏',
+                                icon: 'none'
+                            });
+                        }
+                    },
+                    fail: function() {
+                        wx.showToast({
+                            title: '网络异常，请稍后重试',
+                            icon: 'none'
+                        });
+                    }
+                })
+            } else {
+                wx.request({
+                    url: host.BASE_URL + 'lg/collect/' + id + '/json',
+                    method: 'POST',
+                    header: {
+                        'Cookie': wx.getStorageSync('Set-Cookie')
+                    },
+                    success: function(res) {
+                        if (res.data.errorCode != 0) {
+                            wx.showToast({
+                                title: res.data.errorMsg,
+                                icon: 'none'
+                            });
+                        } else {
+                            _this.data.topArticleList[index].collect = true;
+                            _this.setData({
+                                topArticleList: _this.data.topArticleList
+                            });
+                            wx.showToast({
+                                title: '已成功收藏',
+                                icon: 'none'
+                            });
+                        }
+                    },
+                    fail: function() {
+                        wx.showToast({
+                            title: '网络异常，请稍后重试',
+                            icon: 'none'
+                        });
+                    }
+                })
+            }
+        } else {
+            wx.navigateTo({
+              url: '../login/login',
+            });
+        }
+    },
+
+    clickArticleCollect: function(e) {
+        if (this.data.isLogin) {     
+            let _this = this;
+            let index = e.currentTarget.dataset.index;
+            let id = _this.data.articleList[index].id;
+    
+            if (_this.data.articleList[index].collect) {
+                _this.uncollectArticle(id, index);
+            } else {
+                _this.collectArticle(id, index);
+            }
+        } else {
+            wx.navigateTo({
+              url: '../login/login',
+            });
+        }
+    },
+
+    collectArticle: function(id, index) {
+        let _this = this;
+        wx.request({
+            url: host.BASE_URL + 'lg/collect/' + id + '/json',
+            method: 'POST',
+            header: {
+                'Cookie': wx.getStorageSync('Set-Cookie')
+            },
+            success: function(res) {
+                if (res.data.errorCode != 0) {
+                    wx.showToast({
+                        title: res.data.errorMsg,
+                        icon: 'none'
+                    });
+                } else {
+                    _this.data.articleList[index].collect = true;
+                    _this.setData({
+                        articleList: _this.data.articleList
+                    });
+                    wx.showToast({
+                        title: '已成功收藏',
+                        icon: 'none'
+                    });
+                }
+            },
+            fail: function() {
+                wx.showToast({
+                    title: '网络异常，请稍后重试',
+                    icon: 'none'
+                });
+            }
+        })
+    },
+
+    uncollectArticle: function(id, index) {
+        let _this = this;
+        wx.request({
+            url: host.BASE_URL + 'lg/uncollect_originId/' + id + '/json',
+            method: 'POST',
+            header: {
+                'Cookie': wx.getStorageSync('Set-Cookie')
+            },
+            success: function(res) {
+                if (res.data.errorCode != 0) {
+                    wx.showToast({
+                        title: res.data.errorMsg,
+                        icon: 'none'
+                    });
+                } else {
+                    _this.data.articleList[index].collect = false;
+                    _this.setData({
+                        articleList: _this.data.articleList
+                    });
+                    wx.showToast({
+                        title: '已取消收藏',
+                        icon: 'none'
+                    });
+                }
+            },
+            fail: function() {
+                wx.showToast({
+                    title: '网络异常，请稍后重试',
+                    icon: 'none'
+                });
+            }
+        })
     },
 
     /**
@@ -26,7 +356,10 @@ Page({
      * Lifecycle function--Called when page show
      */
     onShow: function () {
-
+        this.checkLoginState();
+        this.getBanner();
+        this.getTopArticleList();
+        this.getArticleList(this.data.pageNum);
     },
 
     /**

@@ -1,1 +1,28 @@
 /* pages/home/home.wxss */
+
+.banner-image {
+    width: 100%;
+    height: 100%;
+}
+
+.article-item {
+    display: flex;
+    flex-direction: column;
+    margin: 0 25rpx;
+    border-bottom: 1rpx solid #cecece;
+}
+
+.article-author-info, .article-type-info {
+    display: flex;
+}
+
+.article-title {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+
+

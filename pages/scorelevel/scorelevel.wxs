@@ -3,15 +3,6 @@ function getSubstring(string, start, length) {
     return string.slice(start, length);
 };
 
-/**
- * 因为积分排行接口中每页rank字段都从1开始，导致上拉加载时排名出错
- * 排名信息直接使用index
- */
-function getRank(rankInfoList) {
-    return rankInfoList;
-};
-
 module.exports = {
     getSubstring: getSubstring,
-    rank: getRank
 }
