@@ -30,11 +30,17 @@
   
   <tr>
     <th>首页</th>
+    <th>收藏文章</th>
   </tr>
   <tr>
     <td>
       <div align="center">
         <img width="232" height="505.3" src="https://github.com/ASCII13/ProjectScreenshot/blob/master/home.png">
+      </div>
+    </td>
+    <td>
+      <div align="center">
+        <img width="232" height="505.3" src="https://github.com/ASCII13/ProjectScreenshot/blob/master/collectArticles.png">
       </div>
     </td>
   </tr>
