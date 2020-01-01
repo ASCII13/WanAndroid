@@ -10,9 +10,6 @@ Page({
     data: {
         articles: [],
         pageNum: 0,
-        total: 0,
-        size: 0    // 每页数量
-
     },
 
     getArticles: function(pageNum) {
@@ -32,12 +29,19 @@ Page({
                 } else {
                     let oldData = _this.data.articles;
                     let newData = res.data.data.datas;
-
-                    _this.setData({
-                        articles: oldData.concat(newData),
-                        total: res.data.data.total,
-                        size: res.data.data.size
-                    });
+                    if (res.data.data.total > oldData.length) {
+                        _this.setData({
+                            articles: oldData.concat(newData),
+                            pageNum: pageNum
+                        });
+                    } else if (oldData.length == 0 && newData.length == 0) {
+                        return
+                    } else {
+                        wx.showToast({
+                            title: '无更多数据',
+                            icon: 'none'
+                          });
+                    }
                 }
             },
             fail: function() {
@@ -47,9 +51,10 @@ Page({
                 })
             }
         })
+        wx.stopPullDownRefresh();
     },
 
-    showArticleDetail: function(e) {
+    clickArticleItem: function(e) {
         console.log(`点击的收藏文章地址为${e.currentTarget.dataset.current}`);
 
         let detailLink = encodeURIComponent(e.currentTarget.dataset.current);
@@ -62,14 +67,7 @@ Page({
      * Lifecycle function--Called when page load
      */
     onLoad: function (options) {
-        this.setData({
-            articles: [],
-            pageNum: 0,
-            total: 0,
-            size: 0
-        });
         this.getArticles(this.data.pageNum);
-        wx.stopPullDownRefresh();
     },
 
     /**
@@ -83,7 +81,7 @@ Page({
      * Lifecycle function--Called when page show
      */
     onShow: function () {
-
+        
     },
 
     /**
@@ -104,7 +102,11 @@ Page({
      * Page event handler function--Called when user drop down
      */
     onPullDownRefresh: function () {
-        this.onLoad();
+        this.setData({
+            pageNum: 0,
+            articles: []
+        });
+        this.getArticles(this.data.pageNum);
     },
 
     /**
@@ -112,19 +114,8 @@ Page({
      */
     onReachBottom: function () {
         console.log("触发上拉加载");
-
-        if (this.data.size * this.data.pageNum < this.data.total) {
-            let pageNum = this.data.pageNum + 1;
-            this.setData({
-                pageNum: pageNum
-            });
-            this.getArticles(this.data.pageNum);
-        } else {
-            wx.showToast({
-                title: '无更多数据',
-                icon: 'none'
-            });
-        }
+        let pageNum = this.data.pageNum + 1;
+        this.getArticles(pageNum);
     },
 
     /**

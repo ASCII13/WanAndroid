@@ -18,44 +18,22 @@
 }
 
 .article-item {
-    display: flex;
-    flex-direction: column;
-    height: 150rpx;
-    border-bottom: 0.5rpx solid #cecece;
-    justify-content: center;   
-}
-
-.article-msg {
-    margin: 0 33rpx;
-}
-
-.article-title {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    text-overflow: ellipsis;
-    overflow: hidden;   
+    margin: 15rpx 30rpx 0 30rpx;
+    border-bottom: 1rpx solid #cecece;
 }
 
 .article-info {
     display: flex;
     flex-direction: row;
-    margin-top: 15rpx;
-    font-size: 26rpx;
+
 }
 
-.article-author {
-    display: flex;
-    flex-direction: row;
+.article-title {
+    margin: 15rpx 0;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
-.article-type {
-    margin: 0 30rpx;
-    display: flex;
-    flex-direction: row;
-}
-
-.article-collect-time {
-    display: flex;
-    flex-direction: row;
-}

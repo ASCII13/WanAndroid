@@ -5,29 +5,16 @@
     <view class="tips-area">暂无收藏</view>
 </view>
 
-<view wx:else>
-    <scroll-view>
-        <view class="article-item" wx:for="{{articles}}" bindtap="showArticleDetail" data-current="{{item.link}}">
-            <view class="article-msg">
-                <view class="article-title">{{item.title}}</view>
-                <view class="article-info">
-                    <view class="article-author">
-                        <view style="color: #9A9A9A">作者：</view>
-                        <view>{{item.author}}</view>
-                    </view>
-                    <view class="article-type">
-                        <view style="color: #9A9A9A">分类：</view>
-                        <view>{{item.chapterName}}</view>
-                    </view>
-                    <view class="article-collect-time">
-                        <view style="color: #9A9A9A">收藏时间：</view>
-                        <view>{{item.niceDate}}</view>
-                    </view>
-                </view>
-            </view>            
+<block wx:else>
+    <view class="article-item" wx:for="{{articles}}" bindtap="clickArticleItem" data-current="{{item.link}}">
+        <view class="article-info">
+            <view style="width: 60%; font-size: 26rpx; color: #e6a157;">{{item.chapterName}}</view>
+            <view style="width: 40%; display: flex; flex-direction: row-reverse; font-size: 26rpx; color: #777777;">{{item.niceDate}}</view>
         </view>
-    </scroll-view>
-</view>
+        <view class="article-title">{{item.title}}</view>
+    </view>
+</block>
+
 
 
 
