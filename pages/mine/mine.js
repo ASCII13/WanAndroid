@@ -96,7 +96,7 @@ Page({
 
     getPersonalScore: function() {
         let _this = this;
-        if (this.data.isLogin == true) {
+        if (this.data.isLogin) {
             wx.request({
                 url: host.BASE_URL + 'lg/coin/userinfo/json',
                 method: 'GET',
@@ -198,8 +198,6 @@ Page({
      */
     onLoad: function (options) {
         this.getFeatureList();
-        this.getLocalAccountInfo();
-        this.autoLogin();
     },
 
     /**
@@ -213,7 +211,8 @@ Page({
      * Lifecycle function--Called when page show
      */
     onShow: function () {
-        this.getPersonalScore();
+        this.getLocalAccountInfo();
+        this.autoLogin();
     },
 
     /**
