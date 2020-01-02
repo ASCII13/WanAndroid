@@ -35,7 +35,7 @@ Page({
                             pageNum: pageNum
                         });
                     } else if (oldData.length == 0 && newData.length == 0) {
-                        return
+                        return;
                     } else {
                         wx.showToast({
                             title: '无更多数据',
@@ -55,11 +55,69 @@ Page({
     },
 
     clickArticleItem: function(e) {
-        console.log(`点击的收藏文章地址为${e.currentTarget.dataset.current}`);
-
-        let detailLink = encodeURIComponent(e.currentTarget.dataset.current);
+        let index = e.currentTarget.dataset.current;
+        let detailLink = encodeURIComponent(this.data.articles[index].link);
         wx.navigateTo({
-            url: '../detail/detail' + '?url=' + detailLink
+          url: '../detail/detail' + '?url=' + detailLink
+        });
+    },
+
+    longPressArticleItem: function(e) {
+        let _this = this;
+        let index = e.currentTarget.dataset.current;
+
+        wx.showModal({
+          content: '确定取消该收藏文章？',
+          success: function(res) {
+            if (res.confirm) {
+                _this.unCollectArticle(index);
+            } else {
+                return;
+            }
+          }
+        });
+    },
+
+    unCollectArticle: function(index) {
+        let id = this.data.articles[index].id;
+        let originId = this.data.articles[index].originId;
+        let _this = this;
+
+        wx.request({
+          url: host.BASE_URL + 'lg/uncollect/' + id + '/json',
+          method: 'POST',
+          header: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+              'Cookie': wx.getStorageSync('Set-Cookie')
+          },
+          data: {
+            originId: originId
+          },
+          success: function(res) {
+              if (res.data.errorCode != 0) {
+                  wx.showToast({
+                    title: res.data.errorMsg,
+                    icon: 'none'
+                  });
+              } else {
+                  let articles = _this.data.articles;
+                  articles.splice(index, 1);
+
+                  _this.setData({
+                      articles: articles
+                  });
+                  wx.showToast({
+                    title: '取消收藏成功',
+                    icon: 'none'
+                  });
+              }
+          },
+          fail: function() {
+              wx.showToast({
+                title: '网络异常，请稍后重试',
+                icon: 'none'
+              });
+          }
         });
     },
 
