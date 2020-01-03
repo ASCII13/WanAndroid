@@ -16,18 +16,14 @@ Page({
         score: 0
     },
 
-    getRankInfoList: function(pageNum) {
-        wx.showLoading({
-            title: '',
-        });
-        
+    getRankInfoList: function(pageNum) {  
+        wx.stopPullDownRefresh();
+              
         let _this = this;
         wx.request({
             url: host.BASE_URL + 'coin/rank/' + pageNum + '/json',
             method: 'GET',
             success: function(res) {
-                wx.hideLoading();
-
                 if (res.data.errorCode != 0) {
                     wx.showToast({
                         title: res.data.errorMsg,
@@ -36,9 +32,23 @@ Page({
                 } else {
                     let oldData = _this.data.rankInfoList;
                     let newData = res.data.data.datas;
-                    _this.setData({
-                        rankInfoList: oldData.concat(newData)
-                    });
+
+                    if (oldData.length >= 120) {
+                        wx.showToast({
+                          title: '排行榜仅展示前120名',
+                          icon: 'none'
+                        });
+                    } else if (oldData.length == 0 && newData.length == 0) {
+                        wx.showToast({
+                            title: '暂无排行榜数据',
+                            icon: 'none'
+                          });
+                    } else {
+                        _this.setData({
+                            rankInfoList: oldData.concat(newData),
+                            pageNum: pageNum
+                        });
+                    }
                 }
             },
             fail: function() {
@@ -51,8 +61,10 @@ Page({
     },
 
     getSelfRankInfo: function() {
-        let cookie = wx.getStorageSync('Set-Cookie');
+        wx.stopPullDownRefresh();
+
         let _this = this;
+        let cookie = wx.getStorageSync('Set-Cookie');
         if (cookie.length != 0) {
             wx.request({
                 url: host.BASE_URL + 'lg/coin/userinfo/json',
@@ -77,34 +89,9 @@ Page({
                 }
             });
         } else{
-
+            return;
         }
     },
-
-    // getWindowSize: function () {
-    //     let _this = this;
-
-    //     wx.getSystemInfo({
-    //         success: function (res) {
-    //             let clientHeight = res.windowHeight;
-    //             let clientWidth = res.windowWidth;
-    //             let rpxR = 750 / clientWidth;
-
-    //             console.log("设备高度: ", clientHeight);
-    //             console.log("设备宽度: ", clientWidth);
-
-    //             let height = clientHeight * rpxR;
-    //             let width = clientWidth * rpxR;
-
-    //             console.log("高度: ", height);
-    //             console.log("宽度: ", width);
-
-    //             _this.setData({
-    //                 scrollHeight: height - 150,  // 150为 scroll-view margin-top 高度
-    //             });
-    //         }
-    //     });
-    // },
 
     /**
      * Lifecycle function--Called when page load
@@ -114,6 +101,7 @@ Page({
         wx.setBackgroundColor({
             backgroundColor: "#F7F7F7"
         });
+        
         this.setData({
             rank: options.rank,
             username: options.username,
@@ -135,7 +123,6 @@ Page({
     onShow: function () {
         this.getRankInfoList(this.data.pageNum);
         this.getSelfRankInfo();
-        wx.stopPullDownRefresh();
     },
 
     /**
@@ -157,7 +144,16 @@ Page({
      */
     onPullDownRefresh: function () {
         console.log('下拉刷新触发');
-        this.onShow();
+        this.setData({
+            rankInfoList: [],
+            pageNum: 1,
+            rank: 0,
+            username: "",
+            level: 0,
+            score: 0
+        });
+        this.getRankInfoList(this.data.pageNum);
+        this.getSelfRankInfo();
     },
 
     /**
@@ -165,18 +161,8 @@ Page({
      */
     onReachBottom: function () {
         console.log('上拉加载触发');
-        if (this.data.pageNum < 4) {
-            let pageNum = this.data.pageNum + 1;
-            this.setData({
-                pageNum: pageNum
-            });
-            this.getRankInfoList(this.data.pageNum);
-        } else {
-            wx.showToast({
-                title: '积分榜单仅展示前120名',
-                icon: 'none'
-            });
-        }
+        let pageNum = this.data.pageNum + 1;
+        this.getRankInfoList(pageNum);
     },
 
     /**
