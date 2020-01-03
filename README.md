@@ -13,34 +13,28 @@
   <tr>
     <td>
       <div align="center">
-        <img width="232" height="505.3" src="https://github.com/ASCII13/ProjectScreenshot/blob/master/login.png">
+        <img width="232" height="505.3" src="https://github.com/ASCII13/WanAndroid/blob/master/screenshot/login.png">
       </div>  
     </td>   
     <td>
       <div align="center">
-        <img width="232" height="505.3" src="https://github.com/ASCII13/ProjectScreenshot/blob/master/mine.png">
+        <img width="232" height="505.3" src="https://github.com/ASCII13/WanAndroid/blob/master/screenshot/mine.png">
       </div> 
     </td>
     <td>
       <div align="center">
-        <img width="232" height="505.3" src="https://github.com/ASCII13/ProjectScreenshot/blob/master/score.png">
+        <img width="232" height="505.3" src="https://github.com/ASCII13/WanAndroid/blob/master/screenshot/rank.png">
       </div>
     </td>
   </tr> 
   
   <tr>
     <th>首页</th>
-    <th>收藏文章</th>
   </tr>
   <tr>
     <td>
       <div align="center">
-        <img width="232" height="505.3" src="https://github.com/ASCII13/ProjectScreenshot/blob/master/home.png">
-      </div>
-    </td>
-    <td>
-      <div align="center">
-        <img width="232" height="505.3" src="https://github.com/ASCII13/ProjectScreenshot/blob/master/collectArticles.png">
+        <img width="232" height="505.3" src="https://github.com/ASCII13/WanAndroid/blob/master/screenshot/home.png">
       </div>
     </td>
   </tr>
