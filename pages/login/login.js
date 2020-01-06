@@ -11,7 +11,9 @@ Page({
         isAllowLogin: false,
         account: "",
         password: "",
-
+        isShowPassword: false,
+        isShowAccountClearBtn: false,
+        isShowPasswordClearBtnAndShowPasswordBtn: false
     },
 
     register: function() {
@@ -85,18 +87,105 @@ Page({
 
     accountInput: function(e) {
         console.log(`输入的账户名为：${e.detail.value}`);
+
+        let _this = this;
+
         this.setData({
             account: e.detail.value
         });
+
+        if (e.detail.value.length != 0) {
+            _this.setData({
+                isShowAccountClearBtn: true
+            });
+        } else {
+            _this.setData({
+                isShowAccountClearBtn: false
+            });
+        }
+
         this.setAllowLoginState();
     },
 
     passwordInput: function(e) {
         console.log(`输入的密码为:${e.detail.value}`);
+
+        let _this = this;
+
         this.setData({
-            password: e.detail.value
+            password: e.detail.value,
+        });
+
+        if (e.detail.value.length != 0) {
+            _this.setData({
+                isShowPasswordClearBtnAndShowPasswordBtn: true
+            });
+        } else {
+            _this.setData({
+                isShowPasswordClearBtnAndShowPasswordBtn: false
+            });
+        }
+
+        this.setAllowLoginState();
+    },
+
+    clearAccountContent: function() {
+        this.setData({
+            account: "",
+            isShowAccountClearBtn: false
         });
         this.setAllowLoginState();
+    },
+
+    clearPasswordContent: function() {
+        this.setData({
+            password: "",
+            isShowPasswordClearBtnAndShowPasswordBtn: false
+        });
+        this.setAllowLoginState();
+    },
+
+    showPassword: function() {
+        let isShowPassword = !this.data.isShowPassword;
+        this.setData({
+            isShowPassword: isShowPassword
+        });
+    },
+
+    accountFocus: function() {
+        let _this = this;
+
+        this.setData({
+            isShowPasswordClearBtnAndShowPasswordBtn: false
+        });
+
+        if (this.data.account.length != 0) {
+            _this.setData({
+                isShowAccountClearBtn: true,
+            });
+        } else {
+            _this.setData({
+                isShowAccountClearBtn: false,
+            });
+        }
+    },
+
+    passwordFocus: function() {
+        let _this = this;
+
+        this.setData({
+            isShowAccountClearBtn: false
+        });
+
+        if (this.data.password.length != 0) {
+            _this.setData({
+                isShowPasswordClearBtnAndShowPasswordBtn: true
+            });
+        } else {
+            _this.setData({
+                isShowPasswordClearBtnAndShowPasswordBtn: false
+            })
+        }
     },
 
     /**

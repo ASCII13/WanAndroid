@@ -8,8 +8,16 @@
     </view>
 
     <view class="login-panel">
-        <input class="account-area" placeholder="请输入账户名" bindinput="accountInput"></input>
-        <input class="password-area" placeholder="请输入密码" password="true" bindinput="passwordInput"></input>
+        <view class="account-area">
+            <input placeholder="请输入账户名" style="width: 90%;" bindinput="accountInput" value="{{account}}" bindfocus="accountFocus"></input>
+            <image hidden="{{!isShowAccountClearBtn}}" src="../../images/delete.png" style="width: 50rpx; height: 50rpx; margin-left: 10rpx;" bindtap="clearAccountContent"></image>
+        </view>
+
+        <view class="password-area">
+            <input placeholder="请输入密码" style="width: 80%;" password="{{!isShowPassword}}" bindinput="passwordInput" value="{{password}}" bindfocus="passwordFocus"></input>
+            <image hidden="{{!isShowPasswordClearBtnAndShowPasswordBtn}}" src="../../images/delete.png" style="width: 50rpx; height: 50rpx; margin-left: 10rpx;" bindtap="clearPasswordContent"></image>
+            <image hidden="{{!isShowPasswordClearBtnAndShowPasswordBtn}}" src="../../images/{{isShowPassword ? 'show_password' : 'show_normal'}}.png" style="width: 50rpx; height: 50rpx; margin-left: 10rpx;" bindtap="showPassword"></image>
+        </view>
     </view>
 
     <view wx:if="{{isAllowLogin === false}}">

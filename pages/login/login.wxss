@@ -44,6 +44,10 @@ page {
     margin: 0 40rpx;
     height: 100rpx;
     border-bottom: 0.5rpx solid #C0C0C0;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .btn-login {
