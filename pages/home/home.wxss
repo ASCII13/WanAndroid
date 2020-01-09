@@ -5,6 +5,24 @@
     height: 100%;
 }
 
+.banner-title-container {
+    position: absolute;
+    top: 320rpx;
+    padding: 0 15rpx;
+    display: flex;
+    align-items: center;
+    color: white;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.banner-title {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
 .article-item {
     display: flex;
     flex-direction: column;
@@ -14,6 +32,7 @@
 
 .article-author-info, .article-type-info {
     display: flex;
+    font-size: 28rpx;
 }
 
 .article-title {
