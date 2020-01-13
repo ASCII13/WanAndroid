@@ -1,6 +1,8 @@
 // pages/collectarticles/collectarticles.js
 
 let host = require('../../utils/host.js');
+let utils = require('../../utils/util.js');
+let app = getApp();
 
 Page({
 
@@ -18,7 +20,7 @@ Page({
             url: host.BASE_URL + 'lg/collect/list/'+ pageNum + '/json',
             method: 'GET',
             header: {
-                'Cookie': wx.getStorageSync('Set-Cookie') 
+                'Cookie': wx.getStorageSync('cookie') 
             },
             success: function(res) {
                 if (res.data.errorCode != 0) {
@@ -67,7 +69,7 @@ Page({
         let index = e.currentTarget.dataset.current;
 
         wx.showModal({
-          content: '确定取消该收藏文章？',
+          content: '确定取消收藏此文章？',
           success: function(res) {
             if (res.confirm) {
                 _this.unCollectArticle(index);
@@ -80,7 +82,7 @@ Page({
 
     unCollectArticle: function(index) {
         let id = this.data.articles[index].id;
-        let originId = this.data.articles[index].originId;
+        let originId = this.data.articles[index].originId.length == 0 ? -1 : this.data.articles[index].originId;
         let _this = this;
 
         wx.request({
@@ -88,7 +90,7 @@ Page({
           method: 'POST',
           header: {
               'Content-Type': 'application/x-www-form-urlencoded',
-              'Cookie': wx.getStorageSync('Set-Cookie')
+              'Cookie': wx.getStorageSync('cookie')
           },
           data: {
             originId: originId

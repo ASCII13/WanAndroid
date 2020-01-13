@@ -1,6 +1,7 @@
 // pages/scorelevel/scorelevel.js
 
 let host = require('../../utils/host.js');
+let utils = require('../../utils/util.js');
 
 Page({
 
@@ -64,13 +65,12 @@ Page({
         wx.stopPullDownRefresh();
 
         let _this = this;
-        let cookie = wx.getStorageSync('Set-Cookie');
-        if (cookie.length != 0) {
+        if (utils.isLogin()) {
             wx.request({
                 url: host.BASE_URL + 'lg/coin/userinfo/json',
                 method: 'GET',
                 header: {
-                    'Cookie': cookie
+                    'Cookie': wx.getStorageSync('cookie')
                 },
                 success: function(res) {
                     if (res.data.errorCode != 0) {
@@ -86,9 +86,21 @@ Page({
                 },
                 fail: function() {
                     console.log('个人积分接口，网络异常');
+                    _this.setData({
+                        rank: "-",
+                        username: "-",
+                        level: "-",
+                        score: "-"
+                    });
                 }
             });
         } else{
+            _this.setData({
+                rank: "-",
+                username: "-",
+                level: "-",
+                score: "-"
+            });
             return;
         }
     },

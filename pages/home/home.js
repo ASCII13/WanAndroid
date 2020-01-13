@@ -1,6 +1,7 @@
 // pages/home/home.js
 
 let host = require('../../utils/host.js');
+let utils = require('../../utils/util.js');
 
 Page({
 
@@ -47,7 +48,7 @@ Page({
 
     getTopArticleList: function() {
         let _this = this;
-        if (!this.data.isLogin) {
+        if (!utils.isLogin()) {
             console.log('获取置顶文章，未携带cookie');
             wx.request({
                 url: host.BASE_URL + 'article/top/json',
@@ -74,7 +75,7 @@ Page({
                 url: host.BASE_URL + 'article/top/json',
                 method: 'GET',
                 header: {
-                    'Cookie': wx.getStorageSync('Set-Cookie')
+                    'Cookie': wx.getStorageSync('cookie')
                 },
                 success: function(res) {
                     if (res.data.errorCode != 0) {
@@ -96,8 +97,9 @@ Page({
     },
 
     getArticleList: function(pageNum) {
+        console.log(`pageNum是${pageNum}`);
         let _this = this;
-        if (!this.data.isLogin) {
+        if (!utils.isLogin()) {
             console.log('获取文章，未携带cookie');
             wx.request({
                 url: host.BASE_URL + 'article/list/' + pageNum + '/json',
@@ -109,9 +111,19 @@ Page({
                             icon: 'none'
                         });
                     } else {
-                        _this.setData({
-                            articleList: res.data.data.datas
-                        });
+                        let oldData = _this.data.articleList;
+                        let newData = res.data.data.datas;
+                        if (typeof(newData) == 'undefined' || newData == null || newData.length == 0) {
+                            wx.showToast({
+                                title: '无更多数据',
+                                icon: 'none'
+                              });
+                        } else {
+                            _this.setData({
+                                articleList: oldData.concat(newData),
+                                pageNum: pageNum
+                            });
+                        }
                     }
                 },
                 fail: function () {
@@ -124,7 +136,7 @@ Page({
                 url: host.BASE_URL + 'article/list/' + pageNum + '/json',
                 method: 'GET',
                 header: {
-                    'Cookie': wx.getStorageSync('Set-Cookie')
+                    'Cookie': wx.getStorageSync('cookie')
                 },
                 success: function (res) {
                     if (res.data.errorCode != 0) {
@@ -133,17 +145,26 @@ Page({
                             icon: 'none'
                         });
                     } else {
-                        _this.setData({
-                            articleList: res.data.data.datas
-                        });
+                        let oldData = _this.data.articleList;
+                        let newData = res.data.data.datas;
+                        if (typeof(newData) == 'undefined' || newData == null || newData.length == 0) {
+                            wx.showToast({
+                                title: '无更多数据',
+                                icon: 'none'
+                              });
+                        } else {    
+                            _this.setData({
+                                articleList: oldData.concat(newData),
+                                pageNum: pageNum
+                            });
+                        }
                     }
                 },
                 fail: function () {
                     console.log('网络异常');
                 }
             });
-        }
-        
+        }    
     },
 
     clicktopArticleItem: function(e) {
@@ -160,24 +181,8 @@ Page({
         })
     },
 
-    checkLoginState: function() {
-        let account = wx.getStorageSync('account');
-        let password = wx.getStorageSync('password');
-        let cookie = wx.getStorageSync('Set-Cookie');
-
-        if (account.length != 0 && password.length != 0 && cookie.length != 0) {
-            this.setData({
-                isLogin: true
-            });
-        } else {
-            this.setData({
-                isLogin: false
-            });
-        }
-    },
-
     clickTopArticleCollect: function(e) {
-        if (this.data.isLogin) {
+        if (utils.isLogin()) {
             let _this = this;
             let index = e.currentTarget.dataset.index;
             let id = _this.data.topArticleList[index].id;
@@ -187,7 +192,7 @@ Page({
                     url: host.BASE_URL + 'lg/uncollect_originId/' + id + '/json',
                     method: 'POST',
                     header: {
-                        'Cookie': wx.getStorageSync('Set-Cookie')
+                        'Cookie': wx.getStorageSync('cookie')
                     },
                     success: function(res) {
                         if (res.data.errorCode != 0) {
@@ -218,7 +223,7 @@ Page({
                     url: host.BASE_URL + 'lg/collect/' + id + '/json',
                     method: 'POST',
                     header: {
-                        'Cookie': wx.getStorageSync('Set-Cookie')
+                        'Cookie': wx.getStorageSync('cookie')
                     },
                     success: function(res) {
                         if (res.data.errorCode != 0) {
@@ -253,7 +258,7 @@ Page({
     },
 
     clickArticleCollect: function(e) {
-        if (this.data.isLogin) {     
+        if (utils.isLogin()) {     
             let _this = this;
             let index = e.currentTarget.dataset.index;
             let id = _this.data.articleList[index].id;
@@ -276,7 +281,7 @@ Page({
             url: host.BASE_URL + 'lg/collect/' + id + '/json',
             method: 'POST',
             header: {
-                'Cookie': wx.getStorageSync('Set-Cookie')
+                'Cookie': wx.getStorageSync('cookie')
             },
             success: function(res) {
                 if (res.data.errorCode != 0) {
@@ -310,7 +315,7 @@ Page({
             url: host.BASE_URL + 'lg/uncollect_originId/' + id + '/json',
             method: 'POST',
             header: {
-                'Cookie': wx.getStorageSync('Set-Cookie')
+                'Cookie': wx.getStorageSync('cookie')
             },
             success: function(res) {
                 if (res.data.errorCode != 0) {
@@ -342,7 +347,9 @@ Page({
      * Lifecycle function--Called when page load
      */
     onLoad: function (options) {
-
+        this.getBanner();
+        // this.getTopArticleList();
+        // this.getArticleList(this.data.pageNum);
     },
 
     /**
@@ -356,8 +363,11 @@ Page({
      * Lifecycle function--Called when page show
      */
     onShow: function () {
-        this.checkLoginState();
-        this.getBanner();
+        if (utils.isLogin()) {
+            console.log('当前为已登录状态');
+        } else {
+            console.log('当前为未登录状态');
+        }
         this.getTopArticleList();
         this.getArticleList(this.data.pageNum);
     },
@@ -366,14 +376,17 @@ Page({
      * Lifecycle function--Called when page hide
      */
     onHide: function () {
-
+        this.setData({
+            pageNum: 0,
+            articleList: []
+        })
     },
 
     /**
      * Lifecycle function--Called when page unload
      */
     onUnload: function () {
-
+        console.log('执行了onUnload方法');
     },
 
     /**
@@ -387,7 +400,9 @@ Page({
      * Called when page reach bottom
      */
     onReachBottom: function () {
-
+        console.log('上拉加载触发');
+        let pageNum = this.data.pageNum + 1;
+        this.getArticleList(pageNum);
     },
 
     /**

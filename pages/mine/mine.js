@@ -1,6 +1,7 @@
 // pages/mine/mine.js
 
 let host = require('../../utils/host.js');
+let utils = require('../../utils/util.js');
 
 Page({
 
@@ -8,49 +9,29 @@ Page({
      * Page initial data
      */
     data: {
-        isLogin: false,
         featureList: [],
         personalScore: 0,
         nickname: "",
         level: 0,
         rank: 0,
         username: "",
-        isAllowLogin: false
-
+        isLogin: false
     },
 
     login: function() {
-        if (this.data.isLogin === false) {
+        if (this.data.isLogin) {
             wx.navigateTo({
-                url: '../login/login',
+              url: '../personalinfosetting/personalinfosetting',
             });
         } else {
-            console.log("当前已登录");
             wx.navigateTo({
-                url: '../personalinfosetting/personalinfosetting',
-            });
-        }
-    },
-
-    getLocalAccountInfo: function() {
-        let account = wx.getStorageSync('account');
-        let password = wx.getStorageSync('password');
-        console.log(`获取的account为：${account}`);
-        console.log(`获取的password为：${password}`);
-
-        if (account.length != 0 && password.length != 0 ) {
-            this.setData({
-                isAllowLogin: true
-            });
-        } else {
-            this.setData({
-                isAllowLogin: false
+              url: '../login/login',
             });
         }
     },
 
     autoLogin: function() {
-        if (this.data.isAllowLogin) {
+        if (this.data.isLogin) {
             let _this = this;
             wx.request({
                 url: host.BASE_URL + 'user/login',
@@ -64,6 +45,8 @@ Page({
                 },
                 success: function (res) {
                     if (res.data.errorCode != 0) {
+                        utils.clearLoginInfo();
+
                         wx.showToast({
                             title: res.data.errorMsg,
                             icon: 'none'
@@ -72,11 +55,6 @@ Page({
                         _this.setData({
                             isLogin: true,
                             nickname: res.data.data.nickname
-                        });
-
-                        wx.showToast({
-                            title: '登录成功',
-                            icon: 'none'
                         });
                     }
                     _this.getPersonalScore();
@@ -101,7 +79,7 @@ Page({
                 url: host.BASE_URL + 'lg/coin/userinfo/json',
                 method: 'GET',
                 header: {
-                    "Cookie": wx.getStorageSync('Set-Cookie')
+                    "Cookie": wx.getStorageSync('cookie')
                 },
                 success: function(res) {
                     if (res.data.errorCode != 0) {
@@ -110,16 +88,12 @@ Page({
                             icon: 'none'
                         });
                     } else {
-                        if (res.statusCode == 200) {
-                            _this.setData({
-                                personalScore: res.data.data.coinCount,
-                                level: res.data.data.level,
-                                rank: res.data.data.rank,
-                                username: res.data.data.username
-                            });
-                        } else {
-                            console.log('网络异常，获取积分失败');
-                        }
+                        _this.setData({
+                            personalScore: res.data.data.coinCount,
+                            level: res.data.data.level,
+                            rank: res.data.data.rank,
+                            username: res.data.data.username
+                        });
                     }
                 },
                 fail: function() {
@@ -166,29 +140,37 @@ Page({
     clickFeature: function(e) {
         if (this.data.isLogin) {
             let _this = this;
-            if (e.currentTarget.dataset.current == 0) {
-                wx.navigateTo({
-                    url: '../collectarticles/collectarticles',
-                });
-            } else if (e.currentTarget.dataset.current == 2) {
-                let rank = _this.data.rank;
-                let level = _this.data.level;
-                let username = _this.data.username;
-                let score = _this.data.personalScore;
+            switch (e.currentTarget.dataset.current) {
+                case 0:
+                    wx.navigateTo({
+                      url: '../collectarticles/collectarticles'
+                    });
+                    break;
+                case 1:
+                    wx.navigateTo({
+                      url: '../todolist/todolist'
+                    });
+                    break;
+                case 2:
+                    let rank = _this.data.rank;
+                    let level = _this.data.level;
+                    let username = _this.data.username;
+                    let score = _this.data.personalScore;
 
-                wx.navigateTo({
-                    url: '../scorelevel/scorelevel?' + 'rank=' + rank + '&username=' + username + '&level=' + level + '&score=' + score,
-                });
-            } else {
-                let title = `点击了第${e.currentTarget.dataset.current}个item`
-                wx.showToast({
-                    title: title,
-                    icon: 'none'
-                });
+                    wx.navigateTo({
+                      url: '../scorelevel/scorelevel' + '?rank=' + rank + '&username=' + username + '&level=' + level + '&score=' + score
+                    });
+                    break;
+                default:
+                    let title = `点击了第${e.currentTarget.dataset.current}个item`;
+                    wx.showToast({
+                      title: title,
+                      icon: 'none'
+                    });
             }
         } else {
             wx.navigateTo({
-                url: '../login/login',
+              url: '../login/login',
             });
         }
     },
@@ -211,7 +193,10 @@ Page({
      * Lifecycle function--Called when page show
      */
     onShow: function () {
-        this.getLocalAccountInfo();
+        let isLogin = utils.isLogin();
+        this.setData({
+            isLogin: isLogin
+        });
         this.autoLogin();
     },
 

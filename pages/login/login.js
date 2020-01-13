@@ -1,6 +1,7 @@
 // pages/login/login.js
 
 let host = require('../../utils/host.js');
+let utils = require('../../utils/util.js');
 
 Page({
 
@@ -41,24 +42,24 @@ Page({
                         icon: 'none'
                     });
                 } else {
-                    if (res.statusCode == 200) {
-                        if (res.header['Set-Cookie'] != '') {
-                            wx.setStorageSync('Set-Cookie', res.header['Set-Cookie']);
-                            wx.setStorageSync('account', _this.data.account);
-                            wx.setStorageSync('password', _this.data.password);
-                            console.log('登录成功');
+                    let cookie = res.header['Set-Cookie'];
+                    if (!utils.isEmpty(cookie)) {
+                        wx.setStorageSync('cookie', cookie);
+                        wx.setStorageSync('account', _this.data.account);
+                        wx.setStorageSync('password', _this.data.password);
 
-                            wx.navigateBack({
-                                delta: 1
-                            });
+                        console.log('登录成功');
 
-                        } else {
-                            console.log('Set-Cookie为空');
-                        }
+                        wx.navigateBack({
+                          complete: (res) => {},
+                          delta: 1,
+                          fail: (res) => {},
+                          success: (res) => {},
+                        });
                     } else {
                         wx.showToast({
-                            title: '网络异常，请稍后重试',
-                            icon: 'none'
+                          title: 'cookie异常，请稍后重试',
+                          icon: 'none'
                         });
                     }
                 }

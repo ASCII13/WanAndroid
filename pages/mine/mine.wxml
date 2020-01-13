@@ -4,8 +4,7 @@
     <view class="header-background"></view>
 
     <view class="personal-msg" bindtap="login">
-        <image wx:if="{{isLogin == false}}" class="head-icon" src="../../images/head_icon_normal.png"></image>
-        <image wx:else class="head-icon" src="../../images/head_icon_login.png"></image>
+        <image class="head-icon" src="../../images/{{isLogin ? 'head_icon_login' : 'head_icon_normal'}}.png"></image>
 
         <view wx:if="{{isLogin == false}}" class="account-info">
             <view class="not-logged-in">未登录</view>

@@ -1,6 +1,7 @@
 // pages/personalinfosetting/personalinfosetting.js
 
 let host = require('../../utils/host.js');
+let utils = require('../../utils/util.js');
 
 Page({
 
@@ -49,16 +50,7 @@ Page({
                         icon: 'none'
                     });
                 } else {
-                    wx.removeStorageSync('Set-Cookie');
-                    wx.removeStorageSync('account');
-                    wx.removeStorageSync('password');
-
-                    let pages = getCurrentPages();
-                    let lastPage = pages[pages.length - 2];
-                    lastPage.setData({
-                        isLogin: false
-                    });
-
+                    utils.clearLoginInfo();
                     wx.navigateBack({
                        delta: 1 
                     });

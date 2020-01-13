@@ -14,6 +14,35 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+function isEmpty(string) {
+  if (typeof(string) == 'undefined' || string == null || string == '') {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function isLogin() {
+  let cookie = wx.getStorageSync('cookie');
+  let account = wx.getStorageSync('account');
+  let password = wx.getStorageSync('password');
+
+  if (!isEmpty(cookie) && !isEmpty(account) && !isEmpty(password)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function clearLoginInfo() {
+  wx.removeStorageSync('cookie');
+  wx.removeStorageSync('account');
+  wx.removeStorageSync('password');
+}
+
 module.exports = {
-  formatTime: formatTime
+  formatTime: formatTime,
+  isEmpty: isEmpty,
+  isLogin: isLogin,
+  clearLoginInfo: clearLoginInfo
 }
