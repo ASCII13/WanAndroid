@@ -1,0 +1,6 @@
+<!--pages/todolist/todolist.wxml-->
+
+<view class="state-container">
+    <view class="state">进行中</view>
+    <view class="state">已完成</view>
+</view>

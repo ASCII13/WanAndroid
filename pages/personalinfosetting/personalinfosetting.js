@@ -18,15 +18,15 @@ Page({
             methodList: [
                 {   
                     name: "修改密码",
-                    src: "../../images/password.png"
+                    src: "../../assets/images/password.png"
                 },
                 {
                     name: "修改昵称",
-                    src: "../../images/nickname.png"
+                    src: "../../assets/images/nickname.png"
                 },
                 {
                     name: "绑定邮箱",
-                    src: "../../images/email.png"
+                    src: "../../assets/images/email.png"
                 }
             ]
         });

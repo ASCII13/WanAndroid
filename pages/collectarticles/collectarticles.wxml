@@ -1,7 +1,7 @@
 <!--pages/collectarticles/collectarticles.wxml-->
 
 <view wx:if="{{articles.length == 0}}" class="content-container">
-    <image class="tips-image-area" src="../../images/nothing.svg"></image>
+    <image class="tips-image-area" src="../../assets/images/nothing.svg"></image>
     <view class="tips-area">暂无收藏</view>
 </view>
 

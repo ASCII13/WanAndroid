@@ -19,7 +19,7 @@
 .author-item {
     padding: 0 30rpx;
     display: inline-block;
-    font-weight: bold;
+    font-size: 30rpx;
 }
 
 .author-item.item-selected {
@@ -39,31 +39,15 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    height: 160rpx;
+    margin: 0 25rpx;
     border-bottom: 0.5rpx solid #cecece;
-}
-
-.collection-state-container {
-    width: 40rpx;
-    height: 150rpx;
-    margin: 0 20rpx 0 20rpx;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .collection-state {
     width: 40rpx;
     height: 40rpx;
     display: flex;
-}
-
-.article-msg {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: 0 20rpx 0 0rpx; 
-    height: 160rpx;    
+    margin: 0 10rpx;
 }
 
 .article-title {
@@ -72,12 +56,13 @@
     -webkit-line-clamp: 2;
     text-overflow: ellipsis;
     overflow: hidden;
-    font-weight: bold;
-    font-size: 28rpx;   
+    /* font-weight: bold; */
+    font-size: 30rpx;   
+    margin: 16rpx 0;
 }
 
 .article-time {
-    font-size: 22rpx;
+    font-size: 25rpx;
     color: #9A9A9A;
-    margin-top: 10rpx;
+    margin-top: 13rpx;
 }

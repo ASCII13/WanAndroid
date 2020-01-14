@@ -8,7 +8,8 @@
         "pages/register/register",
         "pages/personalinfosetting/personalinfosetting",
         "pages/collectarticles/collectarticles",
-        "pages/scorelevel/scorelevel"
+        "pages/scorelevel/scorelevel",
+        "pages/todolist/todolist"
     ],
     "window": {
         "backgroundTextStyle": "light",
@@ -21,21 +22,21 @@
             {
                 "pagePath": "pages/home/home",
                 "text": "首页",
-                "iconPath": "images/home.png",
-                "selectedIconPath": "images/home_selected.png"
+                "iconPath": "assets/images/home.png",
+                "selectedIconPath": "assets/images/home_selected.png"
             },
             {
                 "pagePath": "pages/officialaccount/officialaccount",
                 "text": "公众号",
-                "iconPath": "images/official_account.png",
-                "selectedIconPath": "images/official_account_selected.png"
+                "iconPath": "assets/images/official_account.png",
+                "selectedIconPath": "assets/images/official_account_selected.png"
             },
             {
                 "pagePath": "pages/mine/mine",
                 "text": "我的",
-                "iconPath": "images/mine.png",
-                "selectedIconPath": "images/mine_selected.png"
-            }     
+                "iconPath": "assets/images/mine.png",
+                "selectedIconPath": "assets/images/mine_selected.png"
+            }    
         ]
     },
     "style": "v2",

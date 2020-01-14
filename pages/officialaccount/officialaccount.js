@@ -1,9 +1,7 @@
 // pages/officialaccount/officialaccount.js
 
 let host = require('../../utils/host.js');
-
-const AUTHORS = host.AUTHORS;
-const BASE_URL = host.BASE_URL;
+let utils = require('../../utils/util.js');
 
 Page({
 
@@ -169,15 +167,14 @@ Page({
     },
 
     getAuthorList: function() {
-        wx.stopPullDownRefresh();
+        // wx.stopPullDownRefresh();
 
-        console.log(`请求地址为：${AUTHORS}`)
         let _this = this;
         wx.request({
-            url: AUTHORS,
+            url: host.BASE_URL + 'wxarticle/chapters/json',
             method: 'GET',
             success: function(res) {
-                console.log(`公众号列表返回数据为：${res.data.data.title}`)
+                console.log(`公众号列表返回数据为：${res.data.data}`)
                 _this.setData({
                     authorList: res.data.data,
                     isGetAuthorsSuccess: true
@@ -205,9 +202,9 @@ Page({
                     currentId = item.id;
                 }
             });
-            console.log(`当前文章列表请求地址为：${BASE_URL}wxarticle/list/${currentId}/${pageNum}/json`)
+            console.log(`当前文章列表请求地址为：${host.BASE_URL}wxarticle/list/${currentId}/${pageNum}/json`)
             wx.request({
-                url: BASE_URL + 'wxarticle/list/' + currentId + '/' + pageNum + '/json',
+                url: host.BASE_URL + 'wxarticle/list/' + currentId + '/' + pageNum + '/json',
                 method: 'GET',
                 success: function(res) {
                     let oldData = _this.data.articleList;

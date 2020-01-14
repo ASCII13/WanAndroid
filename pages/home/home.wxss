@@ -32,7 +32,7 @@
 
 .article-author-info, .article-type-info {
     display: flex;
-    font-size: 28rpx;
+    font-size: 25rpx;
 }
 
 .article-title {

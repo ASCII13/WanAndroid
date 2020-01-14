@@ -17,13 +17,13 @@
         <block wx:for="{{rankInfoList}}">
             <view class="rank-info-users">
                 <view class="rank-num" wx:if="{{item.rank == 1}}">
-                    <image class="image-TOP3" src="../../images/NO1.png"></image>
+                    <image class="image-TOP3" src="../../assets/images/NO1.png"></image>
                 </view>
                 <view class="rank-num" wx:elif="{{item.rank == 2}}">
-                    <image class="image-TOP3" src="../../images/NO2.png"></image>
+                    <image class="image-TOP3" src="../../assets/images/NO2.png"></image>
                 </view>
                 <view class="rank-num" wx:elif="{{item.rank == 3}}">
-                    <image class="image-TOP3" src="../../images/NO3.png"></image>
+                    <image class="image-TOP3" src="../../assets/images/NO3.png"></image>
                 </view>
                 <view class="rank-num" wx:else>{{item.rank}}</view>
                 <view class="icon-head">{{scorelevel_wxs.getSubstring(item.username, 0, 1)}}</view>

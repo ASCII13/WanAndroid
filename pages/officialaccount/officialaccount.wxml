@@ -9,17 +9,11 @@
         <swiper-item wx:for="{{authorList.length}}">
             <scroll-view class="scroll-h" scroll-y="true">
                 <view class="article-item" wx:for="{{articleList}}">
-                    <view class="collection-state-container" wx:if="{{item.collect === false}}">
-                        <image class="collection-state" src="../../images/uncollection.png" bindtap="changeCollectionState"></image>
+                    <view style="display: flex: flex-direction: column; width:100%;">
+                        <view class="article-time">{{item.niceDate}}</view>
+                        <text class="article-title" decode="true">{{item.title}}</text>
                     </view>
-                    <view wx:else class="collection-state-container">
-                        <image class="collection-state" src="../../images/collection.png" bindtap="changeCollectionState"></image>
-                    </view>
-
-                    <view class="article-msg" bindtap="showArticleDetail" data-link="{{item.link}}">
-                        <view class="article-title">{{item.title}}</view>
-                        <view class="article-time">时间：{{item.niceDate}}</view>
-                    </view>
+                    <image class="collection-state" src="../../assets/images/{{item.collect ? 'collected' : 'uncollect'}}.png"></image>
                 </view>              
             </scroll-view>
         </swiper-item>

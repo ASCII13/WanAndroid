@@ -4,7 +4,7 @@
     <view class="header-background"></view>
 
     <view class="logo-area">
-        <image class="img-logo" src="../../images/logo.png" mode=""></image>
+        <image class="img-logo" src="../../assets/images/logo.png" mode=""></image>
     </view>
 
     <view class="register-panel">

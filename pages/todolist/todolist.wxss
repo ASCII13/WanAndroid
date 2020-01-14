@@ -1,0 +1,18 @@
+/* pages/todolist/todolist.wxss */
+
+.state-container {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1rpx solid #cecece;
+}
+
+.state {
+    height: 80rpx;
+    width: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
