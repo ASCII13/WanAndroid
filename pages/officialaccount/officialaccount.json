@@ -1,7 +1,9 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "tab": "../../components/tab/tab",
+    "scroll": "../../components/scroll/scroll"
+  },
   "navigationBarTitleText": "公众号",
-  "enablePullDownRefresh": true,
-  "backgroundTextStyle": "dark",
-  "onReachBottomDistance": 300
+  "disableScroll": true
+
 }

@@ -23,7 +23,6 @@ App({
 	 * @param loadingMsg 请求提示信息
 	 */
     httpBase: function(method, url, data, loading = false, loadingMsg) {
-        let _this = this;
         let requestUrl = this.baseUrl + url;
 
         if (loading) {

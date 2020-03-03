@@ -1,21 +1,46 @@
 <!--pages/officialaccount/officialaccount.wxml-->
 
-<view>
-    <scroll-view class="author-list" scroll-x="true" scroll-left="{{scrollLeft}}" scroll-with-animation="true">
-        <view class="author-item {{currentTab == index ? 'item-selected' : ''}}" data-current= "{{index}}" bindtap="switchNav" wx:for="{{authorList}}">{{item.name}}</view>
-    </scroll-view>
-
-    <swiper class="article-list-container" current="{{currentTab}}" duration="300" bindchange="switchTab" style="height:{{windowHeight}}rpx">
-        <swiper-item wx:for="{{authorList.length}}">
-            <scroll-view class="scroll-h" scroll-y="true">
-                <view class="article-item" wx:for="{{articleList}}">
-                    <view style="display: flex: flex-direction: column; width:100%;">
-                        <view class="article-time">{{item.niceDate}}</view>
-                        <text class="article-title" decode="true">{{item.title}}</text>
-                    </view>
-                    <image class="collection-state" src="../../assets/images/{{item.collect ? 'collected' : 'uncollect'}}.png"></image>
-                </view>              
-            </scroll-view>
-        </swiper-item>
-    </swiper>
+<view class="top-wrap">
+	<tab id="category"
+			tab-data="{{categoryMenu}}"
+			tab-cur="{{categoryCur}}"
+			size="{{80}}"
+			scroll="{{true}}"
+			bindchange="toggleCategory">
+	</tab>
 </view>
+
+<swiper current="{{categoryCur}}" duration="{{duration}}" bindanimationfinish="animationFinish">
+	<swiper-item wx:for="{{categoryData}}" wx:key="index">
+		<scroll requesting="{{item.requesting}}"
+				end="{{item.end}}"
+				empty-show="{{item.emptyShow}}"
+				list-count="{{item.listData.length}}"
+				has-top="{{true}}"
+				refresh-size="{{80}}"
+				bind:refresh="refresh"
+				bind:more="more">
+				<view class="cells">
+					<view class="cell"
+						  wx:for="{{item.listData}}"
+						  wx:key="index"
+						  data-link="{{item.link}}"
+							bindtap="showArticle">
+						<view class="cell__bd">
+							<view class="name">
+								<rich-text nodes="{{item.title}}"></rich-text>
+							</view>
+							<view class="tags">
+								<view class="tags__bd">
+									<view wx:for="{{item.tags}}" wx:key="name" class="tag">
+										{{item.name}}
+									</view>
+								</view>
+								<view class="date">{{item.niceDate}}</view>
+							</view>
+						</view>
+					</view>
+				</view>
+		</scroll>
+	</swiper-item>
+</swiper>
