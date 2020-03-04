@@ -38,7 +38,7 @@ swiper {
 
 .cell__bd .name {
     height: 80rpx;
-    font-size: 28rpx;
+    font-size: 30rpx;
     margin-bottom: 12rpx;
 }
 
@@ -57,9 +57,11 @@ swiper {
 
 .cell__bd .tags .tags__bd {
     flex: 1;
+    display: flex;
+    flex-direction: row-reverse;
 }
 
-.cell__bd .tags .tags__bd>view {
+/* .cell__bd .tags .tags__bd>view {
     display: inline-block;
     border: 1px solid rgba(63, 130, 253, 0.6);
     color: rgba(63, 130, 253, 0.6);
@@ -67,9 +69,14 @@ swiper {
     height: 30rpx;
     line-height: 30rpx;
     padding: 0 8rpx;
+} */
+
+.collect_state {
+    width: 40rpx;
+    height: 40rpx;
 }
 
 .cell__bd .tags .date {
-    color: #999999;
+    color: #777777;
     font-size: 24rpx;
 }

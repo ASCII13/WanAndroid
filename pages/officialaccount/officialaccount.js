@@ -91,19 +91,19 @@ Page({
 		this.getList('more', this.getCurrentData(this.data.categoryCur).page);
 	},
 	showArticle(e) {
-		// wx.setClipboardData({
-		// 	data: e.currentTarget.dataset.link,
-		// 	success (res) {
-		// 		wx.showToast({
-		// 			icon: "none",
-		// 			title: "链接已复制到剪切板"
-		// 		})
-		// 	}
-		// })
+		let url = encodeURIComponent(e.currentTarget.dataset.link);
+		
 		wx.navigateTo({
-			url: `/pages/detail/detail?url=${e.currentTarget.dataset.link}`
+			url: `/pages/detail/detail?url=${url}`
 		})
 	},
+	collectState(e) {
+		wx.showToast({
+		  title: `点击了${e.currentTarget.dataset.id}`,
+		  icon: 'none'
+		});
+	},
+
 	onLoad() {
 		app.httpGet("/wxarticle/chapters/json").then((res) => {
 			let menus = res.data || [];
