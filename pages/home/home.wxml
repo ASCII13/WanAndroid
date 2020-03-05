@@ -32,7 +32,8 @@
 				<view style="width: 350rpx; color: #777777;">{{item.shareUser.length == 0 ? item.author : item.shareUser}}</view>
 				<view style="margin-left: 20rpx; width: 330rpx; display: flex; flex-direction: row-reverse; color: #777777;">{{item.niceShareDate}}</view>
 			</view>
-			<view class="article-title" style="margin: 12rpx 0; font-size: 30rpx;">{{item.title}}</view>
+			<!-- <view class="article-title" style="margin: 12rpx 0; font-size: 30rpx;">{{item.title}}</view> -->
+			<rich-text class="article-title" style="margin: 12rpx 0; font-size: 30rpx;" nodes="{{item.title}}"></rich-text>
 			<view class="article-type-info" style="margin-bottom: 13rpx;">
 				<view style="margin-right: 15rpx; color: #eb8242;" hidden="true">置顶</view>
 				<view style="width: 560rpx; color: #777777;">{{item.superChapterName}} / {{item.chapterName}}</view>
