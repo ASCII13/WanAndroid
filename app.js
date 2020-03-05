@@ -24,6 +24,7 @@ App({
 	 */
     httpBase: function(method, url, data, loading = false, loadingMsg) {
         let requestUrl = this.baseUrl + url;
+        let cookie = wx.getStorageSync('cookie');
 
         if (loading) {
             wx.showLoading({
@@ -37,7 +38,8 @@ App({
         function request(resolve, reject) {
             wx.request({
                 header: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Cookie': cookie
                 },
                 method: method,
                 url: requestUrl,
@@ -96,7 +98,7 @@ App({
         return this.httpBase('GET', url, data, loading, loadingMsg);
     },
 
-    httpPost: function() {
+    httpPost: function(url, data, loading, loadingMsg) {
         return this.httpBase('POST', url, data, loading, loadingMsg);
     },
 

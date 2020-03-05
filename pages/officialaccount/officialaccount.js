@@ -1,6 +1,8 @@
 // pages/officialaccount/officialaccount.js
 
 const app = getApp();
+const utils = require('../../utils/util.js');
+const host = require('../../utils/host.js');
 
 let pageStart = 1;
 
@@ -98,12 +100,61 @@ Page({
 		})
 	},
 	collectState(e) {
-		wx.showToast({
-		  title: `点击了${e.currentTarget.dataset.id}`,
-		  icon: 'none'
+		if (utils.isLogin()) {
+			let id = e.currentTarget.dataset.id;
+			let pageData = this.getCurrentData(this.data.categoryCur);
+			
+			pageData.listData.forEach((item) => {
+				if (item.id == id) {
+					if (item.collect === false) {
+						this.collect(id);
+					} else {
+						this.uncollect(id);
+					}
+				}
+			});
+		} else {
+			wx.navigateTo({
+			  url: '../login/login',
+			});
+		}
+	},
+	collect(id) {
+		app.httpPost(`/lg/collect/${id}/json`).then(() => {
+			let pageData = this.getCurrentData(this.data.categoryCur);
+
+			pageData.listData.forEach((item) => {
+				if (item.id == id) {
+					item.collect = true;
+				}
+			});
+			
+			this.setCurrentData(this.data.currentCur, pageData);
+
+			wx.showToast({
+			  title: '收藏成功',
+			  icon: 'none'
+			});
 		});
 	},
+	uncollect(id) {
+		app.httpPost(`/lg/uncollect_originId/${id}/json`).then(() => {
+			let pageData = this.getCurrentData(this.data.categoryCur);
 
+			pageData.listData.forEach((item) => {
+				if (item.id == id) {
+					item.collect = false;
+				}
+			});
+
+			this.setCurrentData(this.data.currentCur, pageData);
+
+			wx.showToast({
+				title: '取消收藏',
+				icon: 'none'
+			  });
+		});
+	},
 	onLoad() {
 		app.httpGet("/wxarticle/chapters/json").then((res) => {
 			let menus = res.data || [];
