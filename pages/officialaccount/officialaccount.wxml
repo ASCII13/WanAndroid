@@ -38,7 +38,7 @@
 									</view> -->
 									<image src="../../assets/images/{{item.collect ? 'collected' : 'uncollect'}}.png"
 											class="collect_state"
-											catchtap="collectState"
+											catchtap="collect"
 											data-id="{{item.id}}">
 									</image>
 								</view>
