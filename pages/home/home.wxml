@@ -17,7 +17,8 @@
 				<view style="width: 350rpx; color: #777777;">{{item.author || item.chapterName}}</view>
 				<view style="margin-left: 20rpx; width: 330rpx; display: flex; flex-direction: row-reverse; color: #777777;">{{item.niceDate}}</view>
 			</view>
-			<text class="article-title" style="margin: 12rpx 0; font-size: 30rpx;" decode="true">{{item.title}}</text>
+			<!-- <text class="article-title" style="margin: 12rpx 0; font-size: 30rpx;" decode="true">{{item.title}}</text> -->
+			<rich-text class="article-title" style="margin: 12rpx 0; font-size: 30rpx;" nodes="{{item.title}}"></rich-text>
 			<view class="article-type-info" style="margin-bottom: 13rpx;">
 				<view style="margin-right: 15rpx; color: #eb8242;">置顶</view>
 				<view style="width: 560rpx; color: #777777;">{{item.superChapterName}} / {{item.chapterName}}</view>
