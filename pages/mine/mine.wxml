@@ -16,7 +16,11 @@
     </view>
 
     <view class="personal-feature">
-        <view class="feature-item" wx:for="{{featureList}}" bindtap="clickFeature" data-current="{{index}}">
+        <view class="feature-item" 
+            wx:for="{{featureList}}" 
+            bindtap="clickFeature" 
+            data-current="{{index}}"
+            wx:key="index">
             <image class="feature-icon" src="{{item.icon}}"></image>
             <view class="feature-description">{{item.name}}</view>
         </view>

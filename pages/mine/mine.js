@@ -115,7 +115,7 @@ Page({
                 },
                 {
                     icon: "../../assets/images/todo_list.png",
-                    name: "代办清单"
+                    name: "待办清单"
                 },
                 {
                     icon: "../../assets/images/score_level.png",
