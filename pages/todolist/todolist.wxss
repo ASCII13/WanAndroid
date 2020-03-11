@@ -1,18 +1,59 @@
 /* pages/todolist/todolist.wxss */
 
-.state-container {
-    display: flex;
-    flex-direction: row;
-    border-bottom: 1rpx solid #cecece;
+page {
+    background: #F7F7F7;
 }
 
-.state {
-    height: 80rpx;
-    width: 50%;
+swiper {
+    height: 100vh;
+}
 
+.tab-wrap {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background-color: #ffffff;
+    z-index: 99;
+    box-shadow: 0 0 20rpx -5rpx rgba(0, 0, 0, 0.1);
+}
+
+.cells {
+    background: #ffffff;
+    margin-top: 20rpx;
+}
+
+.cell {
     display: flex;
-    justify-content: center;
+    padding: 20rpx;
+}
+
+.cell:not(:last-child) {
+    border-bottom: 1rpx solid #ebedf0;
+}
+
+.cell_bd {
+    flex: 1;
+}
+
+.cell_bd .time {
+    height: 50rpx;
+    font-size: 30rpx;
+    display: flex;
     align-items: center;
 }
+
+.cell_bd .time .arrow_container {
+    flex: 1;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+
+
+
+
+
+
 
 

@@ -1,6 +1,42 @@
 <!--pages/todolist/todolist.wxml-->
 
-<view class="state-container">
-    <view class="state">进行中</view>
-    <view class="state">已完成</view>
+<view class="tab-wrap">
+	<tab tab-cur="{{categoryCur}}"
+		    tab-data="{{tabData}}"
+		    bindchange="tabChange"
+			size="{{80}}"
+			scroll="{{false}}">
+	</tab>
 </view>
+
+<swiper current="{{categoryCur}}" duration="duration" bindanimationfinish="animationFinish">
+	<swiper-item wx:for="{{categoryData}}" wx:key="index">
+		<scroll requesting="{{item.requesting}}"
+				end="{{item.end}}"
+				empty-show="{{item.emptyShow}}"
+				list-count="{{item.listData.length}}"
+				has-top="{{true}}"
+				refresh-size="{{80}}"
+				bind:refresh="refresh"
+				bind:more="more">
+				<view class="cells">
+					<view class="cell"
+							wx:for="{{item.listData}}"
+							wx:key="index"
+							bindtap="showToDoList"
+							data-id="{{item.id}}">
+							<view class="cell_bd">
+								<view class="time">
+									<view>{{item.dateStr}}</view>
+									<view class="arrow_container">
+										<image style="width: 35rpx; height: 35rpx;"
+												src="../../assets/images/{{showTodolist ? 'arrow_down' : 'arrow_right'}}.png">
+										</image>										
+									</view>
+								</view>
+							</view>
+					</view>
+				</view>
+		</scroll>
+	</swiper-item>
+</swiper>
