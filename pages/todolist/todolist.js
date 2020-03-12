@@ -76,7 +76,7 @@ Page({
 
             let data = res.data || {
                 datas: [],
-                over: false
+                // over: false
             };
 
             let listData = data.datas || [];
@@ -84,11 +84,11 @@ Page({
 
             if (type === 'refresh') {
                 pageData.listData = listData;
-                pageData.end = data.over;
+                // pageData.end = data.over;
                 pageData.page = currentPage + 1;
             } else {
                 pageData.listData = pageData.listData.concat(listData);
-                pageData.end = data.over;
+                // pageData.end = data.over;
                 pageData.page = currentPage + 1;
             }
 
@@ -134,8 +134,8 @@ Page({
 
     showToDoList(e) {
         wx.showToast({
-          title: `点击了${e.currentTarget.dataset.id}`,
-          icon: 'none'
+            title: `点击了${e.currentTarget.dataset.id}`,
+            icon: 'none'
         });
     },
 
