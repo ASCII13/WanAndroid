@@ -14,7 +14,7 @@ Page({
         categoryData: [],
         categoryCur: 0,
         duration: 300,
-        showToDoList: false
+        showList: false
     },
 
     /**
@@ -137,6 +137,15 @@ Page({
             title: `点击了${e.currentTarget.dataset.id}`,
             icon: 'none'
         });
+        if (this.data.showList) {
+            this.setData({
+                showList: false
+            });
+        } else {
+            this.setData({
+                showList: true
+            });
+        }
     },
 
     tabChange(e) {
@@ -155,6 +164,13 @@ Page({
 
     more() {
         this.getCategoryData('more', this.getCurrentData().page);
+    },
+
+    delete() {
+        wx.showToast({
+          title: '点击了删除按钮',
+          icon: 'none'
+        });
     },
 
     /**
