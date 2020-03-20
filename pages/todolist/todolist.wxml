@@ -23,10 +23,12 @@
 					<view class="cell"
 							wx:for="{{item.listData}}"
 							wx:for-item="timeCategory"
-							wx:key="index">
+							wx:for-index="timeCategoryIndex"
+							wx:key="timeCategoryIndex">
 							<view class="categoty"
 								bindtap="showToDoList"
-								data-id="{{timeCategory.date}}">
+								data-id="{{timeCategory.date}}"
+								hidden="{{timeCategory.list.length == 0}}">
 								<view class="cell_bd">
 									<view class="time">
 										<view>{{timeCategory.date}}</view>
@@ -42,6 +44,7 @@
 									hidden="{{!timeCategory.showDetail}}"
 									wx:for="{{timeCategory.list}}"
 									wx:for-item="todoItem"
+									wx:for-index="todoIndex"
 									wx:key="index">
 									<view class="title-container">
 										<checkbox-group bindchange="changeStatus">
@@ -54,6 +57,8 @@
 											<image style="width: 40rpx; height: 40rpx;"
 													src="../../assets/images/delete_todolist.png"
 													catchtap="delete"
+													data-category="{{timeCategoryIndex}}"
+													data-detail="{{todoIndex}}"
 													data-id="{{todoItem.id}}">
 											</image>
 										</view>

@@ -179,9 +179,10 @@ Page({
     },
 
     delete(e) {
-        console.log(`点击了删除${e.currentTarget.dataset.id}`);
-
+        let categoryIndex = e.currentTarget.dataset.category;
+        let detailIndex = e.currentTarget.dataset.detail;
         let id = e.currentTarget.dataset.id;
+
         let pageData = this.getCurrentData();
         let currentCur = this.data.categoryCur;
 
@@ -194,6 +195,13 @@ Page({
                       console.log(res);
                       if (res.errorCode == 0) {
                           // 删除操作
+                          pageData.listData[categoryIndex].list.splice(detailIndex, 1);
+                          this.setCurrentData(currentCur, pageData);
+
+                          wx.showToast({
+                            title: '删除成功',
+                            icon: 'none',
+                          });
                       } else {
                           wx.showToast({
                             title: 'res.errorMsg',
