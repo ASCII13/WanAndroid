@@ -22,54 +22,47 @@
 				<view class="cells">
 					<view class="cell"
 							wx:for="{{item.listData}}"
+							wx:for-item="timeCategory"
 							wx:key="index">
 							<view class="categoty"
 								bindtap="showToDoList"
-								data-id="{{item.id}}">
+								data-id="{{timeCategory.date}}">
 								<view class="cell_bd">
 									<view class="time">
-										<view>{{item.dateStr}}</view>
+										<view>{{timeCategory.date}}</view>
 										<view class="arrow_container">
 											<image style="width: 35rpx; height: 35rpx;"
-													src="../../assets/images/{{showList ? 'arrow_down' : 'arrow_right'}}.png">
+													src="../../assets/images/{{timeCategory.showDetail ? 'arrow_down' : 'arrow_right'}}.png">
 											</image>										
 										</view>
 									</view>
 								</view>
 							</view>
 							<view class="detail"
-									hidden="{{!showList}}">
+									hidden="{{!timeCategory.showDetail}}"
+									wx:for="{{timeCategory.list}}"
+									wx:for-item="todoItem"
+									wx:key="index">
 									<view class="title-container">
-										<checkbox checked="true"></checkbox>
-										<view class="title">测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试</view>
+										<checkbox-group bindchange="changeStatus">
+											<checkbox checked="{{todoItem.status}}" 
+														value="{{!todoItem.status}}">
+											</checkbox>
+										</checkbox-group>
+										<view class="title">{{todoItem.title}}</view>
 										<view class="delete-container">
 											<image style="width: 40rpx; height: 40rpx;"
 													src="../../assets/images/delete_todolist.png"
-													catchtap="delete">
+													catchtap="delete"
+													data-id="{{todoItem.id}}">
 											</image>
 										</view>
 									</view>
 									<view class="content-container">
-										<view class="content">1. 测试详情\n2. 测试详情\n3. 测试详情\n4. 测试详情\n5. 测试详情\n6. 测试详情\n7. 测试详情</view>
+										<view class="content">{{todoItem.content}}</view>
 									</view>				
 							</view>
 					</view>
-					<!-- <view class="cell"
-							wx:for="{{item.listData}}"
-							wx:key="index"
-							bindtap="showToDoList"
-							data-id="{{item.id}}">
-							<view class="cell_bd">
-								<view class="time">
-									<view>{{item.dateStr}}</view>
-									<view class="arrow_container">
-										<image style="width: 35rpx; height: 35rpx;"
-												src="../../assets/images/{{showTodolist ? 'arrow_down' : 'arrow_right'}}.png">
-										</image>										
-									</view>
-								</view>
-							</view>
-					</view> -->
 				</view>
 		</scroll>
 	</swiper-item>

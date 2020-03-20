@@ -40,6 +40,10 @@ swiper {
     flex-direction: column;
 }
 
+.detail:not(:last-child) {
+    border-bottom: 1rpx solid #ebedf0;
+}
+
 .title-container {
     display: flex;
     align-items: center;
@@ -59,6 +63,7 @@ swiper {
     flex: 1;
     display: flex;
     align-items: center;
+    flex-direction: row-reverse;
 }
 
 .content-container {

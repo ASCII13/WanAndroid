@@ -13,8 +13,7 @@ Page({
         tabData: [],
         categoryData: [],
         categoryCur: 0,
-        duration: 300,
-        showList: false
+        duration: 300
     },
 
     /**
@@ -68,18 +67,34 @@ Page({
 
         let status = {
             status: pageData.id,
-            orderby: 3
+            orderby: 4
         }
 
         app.httpGet(`/lg/todo/v2/list/${currentPage}/json`, status).then((res) => {
             console.log(res.data);
 
-            let data = res.data || {
-                datas: [],
-                // over: false
-            };
+            // let data = res.data || {
+            //     datas: [],
+            //     // over: false
+            // };
 
-            let listData = data.datas || [];
+            let tmp = res.data.datas.map((item) => {
+                return item.dateStr;
+            });
+            let time = new Set(tmp);
+            let timeCatgoryData = [];
+
+            for (let ele of time) {
+                let list = res.data.datas.filter((i) => i.dateStr == ele);
+                timeCatgoryData.push({
+                    showDetail: false,
+                    date: ele,
+                    list: list
+                });
+            }
+            
+            // let listData = data.datas || [];
+            let listData = timeCatgoryData || [];
             pageData.requesting = false;
 
             if (type === 'refresh') {
@@ -91,7 +106,7 @@ Page({
                 // pageData.end = data.over;
                 pageData.page = currentPage + 1;
             }
-
+            console.log(pageData)
             this.setCurrentData(currentCur, pageData);
         });
     },
@@ -132,20 +147,17 @@ Page({
         }, 0);
     },
 
-    showToDoList(e) {
-        wx.showToast({
-            title: `点击了${e.currentTarget.dataset.id}`,
-            icon: 'none'
+    showToDoList(e) {        
+        let pageData = this.getCurrentData();
+        let currentCur = this.data.categoryCur;
+        let date = e.currentTarget.dataset.id;
+
+        pageData.listData.forEach((item) => {
+            if (item.date == date) {
+                item.showDetail = !item.showDetail;
+                this.setCurrentData(currentCur, pageData);
+            }
         });
-        if (this.data.showList) {
-            this.setData({
-                showList: false
-            });
-        } else {
-            this.setData({
-                showList: true
-            });
-        }
     },
 
     tabChange(e) {
@@ -166,11 +178,36 @@ Page({
         this.getCategoryData('more', this.getCurrentData().page);
     },
 
-    delete() {
-        wx.showToast({
-          title: '点击了删除按钮',
-          icon: 'none'
-        });
+    delete(e) {
+        console.log(`点击了删除${e.currentTarget.dataset.id}`);
+
+        let id = e.currentTarget.dataset.id;
+        let pageData = this.getCurrentData();
+        let currentCur = this.data.categoryCur;
+
+        wx.showModal({
+          content: '确定删除该事项？',
+          success: (result) => {
+              if (result.confirm) {
+                  console.log(`确认删除`);
+                  app.httpPost(`/lg/todo/delete/${id}/json`).then((res) => {
+                      console.log(res);
+                      if (res.errorCode == 0) {
+                          // 删除操作
+                      } else {
+                          wx.showToast({
+                            title: 'res.errorMsg',
+                            icon: 'none'
+                          });
+                      }
+                  });
+              }
+          },
+        })
+    },
+
+    changeStatus(e) {
+        console.log(e.detail.value);
     },
 
     /**
