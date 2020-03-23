@@ -38,7 +38,7 @@ App({
         function request(resolve, reject) {
             wx.request({
                 header: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/x-www-form-urlencoded',
                     'Cookie': cookie
                 },
                 method: method,

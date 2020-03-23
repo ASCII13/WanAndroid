@@ -15,7 +15,7 @@ const formatNumber = n => {
 }
 
 function isEmpty(string) {
-  if (typeof(string) == 'undefined' || string == null || string == '') {
+  if (typeof (string) == 'undefined' || string == null || string == '') {
     return true;
   } else {
     return false;
@@ -40,9 +40,17 @@ function clearLoginInfo() {
   wx.removeStorageSync('password');
 }
 
+function showToastWithoutIcon(content) {
+  wx.showToast({
+    title: content,
+    icon: 'none'
+  });
+}
+
 module.exports = {
   formatTime: formatTime,
   isEmpty: isEmpty,
   isLogin: isLogin,
-  clearLoginInfo: clearLoginInfo
+  clearLoginInfo: clearLoginInfo,
+  showToastWithoutIcon: showToastWithoutIcon,
 }

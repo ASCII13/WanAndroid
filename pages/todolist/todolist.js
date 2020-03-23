@@ -1,6 +1,7 @@
 // pages/todolist/todolist.js
 
 const app = getApp();
+const utils = require('../../utils/util.js');
 
 let pageStart = 1;
 
@@ -122,7 +123,6 @@ Page({
         this.setData({
             categoryData: categoryData
         });
-
     },
 
     refresh() {
@@ -183,9 +183,6 @@ Page({
         let detailIndex = e.currentTarget.dataset.detail;
         let id = e.currentTarget.dataset.id;
 
-        let pageData = this.getCurrentData();
-        let currentCur = this.data.categoryCur;
-
         wx.showModal({
           content: '确定删除该事项？',
           success: (result) => {
@@ -193,29 +190,57 @@ Page({
                   console.log(`确认删除`);
                   app.httpPost(`/lg/todo/delete/${id}/json`).then((res) => {
                       console.log(res);
-                      if (res.errorCode == 0) {
-                          // 删除操作
-                          pageData.listData[categoryIndex].list.splice(detailIndex, 1);
-                          this.setCurrentData(currentCur, pageData);
-
-                          wx.showToast({
-                            title: '删除成功',
-                            icon: 'none',
-                          });
-                      } else {
-                          wx.showToast({
-                            title: 'res.errorMsg',
-                            icon: 'none'
-                          });
-                      }
+                      this.deleteTodo(categoryIndex, detailIndex, 1);
+                      utils.showToastWithoutIcon('删除成功');
                   });
               }
           },
-        })
+        });
+    },
+
+    createTodoList() {
+        wx.navigateTo({
+          url: '../createtodolist/createtodolist',
+        });
     },
 
     changeStatus(e) {
         console.log(e.detail.value);
+        console.log(e.currentTarget.dataset);
+        
+        let status = e.detail.value ? 1 : 0;
+        let categoryIndex = e.currentTarget.dataset.category;
+        let detailIndex = e.currentTarget.dataset.detail;
+        let id = e.currentTarget.dataset.id;
+
+        let data = {
+            status: status
+        };
+
+        app.httpPost(`/lg/todo/done/${id}/json`, data).then((res) => {
+            console.log(res);
+            this.deleteTodo(categoryIndex, detailIndex, 1);
+
+            if (status == 1) {
+                utils.showToastWithoutIcon('该事项标记为已完成');
+            } else {
+                utils.showToastWithoutIcon('该事项标记为待办理');
+            }
+        });
+    },
+
+    /**
+     * 删除待办事项
+     * @param categoryIndex 分组日期的下标位置
+     * @param detailIndex  当前分组中下标位置
+     * @param howmany 删除数量
+     */
+    deleteTodo(categoryIndex, detailIndex, howmany) {
+        let pageData = this.getCurrentData();
+        let currentCur = this.data.categoryCur;
+
+        pageData.listData[categoryIndex].list.splice(detailIndex, howmany);
+        this.setCurrentData(currentCur, pageData);
     },
 
     /**

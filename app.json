@@ -9,7 +9,8 @@
         "pages/personalinfosetting/personalinfosetting",
         "pages/collectarticles/collectarticles",
         "pages/scorelevel/scorelevel",
-        "pages/todolist/todolist"
+        "pages/todolist/todolist",
+        "pages/createtodolist/createtodolist"
     ],
     "window": {
         "backgroundTextStyle": "light",

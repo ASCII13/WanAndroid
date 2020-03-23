@@ -94,3 +94,12 @@ swiper {
     display: flex;
     flex-direction: row-reverse;
 }
+
+.create-todo-list {
+    position: absolute;
+    bottom: 200rpx;
+    right: 40rpx;
+
+    width: 70rpx;
+    height: 70rpx;
+}
