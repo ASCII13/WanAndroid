@@ -1,22 +1,30 @@
 <!--pages/createtodolist/createtodolist.wxml-->
 
-<view class="base title-container">
+<view class="base cell-container">
 	<view>标题</view>
-	<input placeholder="必填" class="title-area" bindinput="inputTitle"></input>
+	<input placeholder="必填" class="msg-area" bindinput="inputTitle"></input>
 </view>
 
-<view class="base content-container">
+<view class="base">
 	<view>详情</view>
-	<textarea placeholder="非必填" class="content-area" bindinput="inputContent"></textarea>
+	<textarea placeholder="非必填" 
+                class="msg-area" 
+                bindinput="inputContent"
+                disable-default-padding="{{true}}">
+    </textarea>
 </view>
 
-<view class="base time-container">
+<view class="base cell-container">
     <view>时间</view>
     <picker mode="date"
-            class="time-area"
+            class="msg-area"
             start="{{startDate}}"
             bindchange="changeDate">{{currentDate}}
     </picker>
 </view>
 
-<button class="btn-create" disabled="{{!allowCreate}}" bindtap="create" style="width: 100%;">创建</button>
+<button class="btn-create {{isFullScreen ? 'full-screen' : ''}}" 
+        disabled="{{!allowCreate}}" 
+        bindtap="create" 
+        style="width: 100%;">创建
+</button>

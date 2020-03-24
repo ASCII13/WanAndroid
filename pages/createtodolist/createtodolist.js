@@ -13,7 +13,8 @@ Page({
         startDate: '',
         allowCreate: false,
         title: '',
-        content: ''
+        content: '',
+        isFullScreen: app.globalData.isFullScreen
     },
 
     setDate(date) {

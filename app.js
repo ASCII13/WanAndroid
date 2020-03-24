@@ -8,6 +8,9 @@ App({
                 if (res.model.search('iphone X') !== -1) {
                     this.globalData.isIpohoneX = true;
                 }
+                if (res.screenHeight - res.windowHeight - res.statusBarHeight - 34 > 72) {
+                    this.globalData.isFullScreen = true;
+                }
             }
         });
     },
@@ -105,6 +108,7 @@ App({
     globalData: {
         systemInfo: null,
         userInfo: null,
-        isIpohoneX: false
+        isIpohoneX: false,
+        isFullScreen: false
     }
 })

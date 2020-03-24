@@ -5,27 +5,11 @@
     padding: 20rpx;
 }
 
-.base.title-container {
+.cell-container {
     align-items: center;
 }
 
-.title-area {
-    flex: 1;
-    margin-left: 20rpx;
-    border: 2rpx solid #ebedf0;
-}
-
-.base.content-container {
-    align-items: flex-start;
-}
-
-.content-area {
-    flex: 1;
-    margin-left: 20rpx;
-    border: 2rpx solid #ebedf0;
-}
-
-.time-area {
+.msg-area {
     flex: 1;
     margin-left: 20rpx;
     border: 2rpx solid #ebedf0;
@@ -39,6 +23,10 @@
     background-color: #3F82FD;
     color: white;
     border-radius: 0;
+}
+
+.full-screen {
+    padding-bottom: 32pt;
 }
 
 button[disabled] {
