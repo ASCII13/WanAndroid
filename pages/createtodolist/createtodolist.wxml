@@ -1,0 +1,22 @@
+<!--pages/createtodolist/createtodolist.wxml-->
+
+<view class="base title-container">
+	<view>标题</view>
+	<input placeholder="必填" class="title-area" bindinput="inputTitle"></input>
+</view>
+
+<view class="base content-container">
+	<view>详情</view>
+	<textarea placeholder="非必填" class="content-area" bindinput="inputContent"></textarea>
+</view>
+
+<view class="base time-container">
+    <view>时间</view>
+    <picker mode="date"
+            class="time-area"
+            start="{{startDate}}"
+            bindchange="changeDate">{{currentDate}}
+    </picker>
+</view>
+
+<button class="btn-create" disabled="{{!allowCreate}}" bindtap="create" style="width: 100%;">创建</button>

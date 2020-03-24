@@ -1,0 +1,47 @@
+/* pages/createtodolist/createtodolist.wxss */
+
+.base {
+    display: flex;
+    padding: 20rpx;
+}
+
+.base.title-container {
+    align-items: center;
+}
+
+.title-area {
+    flex: 1;
+    margin-left: 20rpx;
+    border: 2rpx solid #ebedf0;
+}
+
+.base.content-container {
+    align-items: flex-start;
+}
+
+.content-area {
+    flex: 1;
+    margin-left: 20rpx;
+    border: 2rpx solid #ebedf0;
+}
+
+.time-area {
+    flex: 1;
+    margin-left: 20rpx;
+    border: 2rpx solid #ebedf0;
+}
+
+.btn-create {
+    position: absolute;
+    bottom: 0;
+
+    height: 70rpx;
+    background-color: #3F82FD;
+    color: white;
+    border-radius: 0;
+}
+
+button[disabled] {
+    background-color: gray !important;
+    color: white !important;
+}
