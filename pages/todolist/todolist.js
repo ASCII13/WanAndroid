@@ -205,28 +205,32 @@ Page({
     },
 
     changeStatus(e) {
-        console.log(e.detail.value);
         console.log(e.currentTarget.dataset);
-        
-        let status = e.detail.value ? 1 : 0;
+
+        let status = e.currentTarget.dataset.status == 0 ? 1 : 0;
         let categoryIndex = e.currentTarget.dataset.category;
         let detailIndex = e.currentTarget.dataset.detail;
         let id = e.currentTarget.dataset.id;
+
+        let content = status == 1 ? '确定将该事项标记为已完成？' : '确定将该事项标记为待办理？';
+        let msg = status == 1 ? '该事项标记为已完成' : '该事项标记为待办理';
 
         let data = {
             status: status
         };
 
-        app.httpPost(`/lg/todo/done/${id}/json`, data).then((res) => {
-            console.log(res);
-            this.deleteTodo(categoryIndex, detailIndex, 1);
-
-            if (status == 1) {
-                utils.showToastWithoutIcon('该事项标记为已完成');
-            } else {
-                utils.showToastWithoutIcon('该事项标记为待办理');
-            }
-        });
+        wx.showModal({
+          content: content,
+          success: (result) => {
+              if (result.confirm) {
+                  app.httpPost(`/lg/todo/done/${id}/json`, data).then((res) => {
+                      console.log(res);
+                      this.deleteTodo(categoryIndex, detailIndex, 1);
+                      utils.showToastWithoutIcon(msg);
+                  });
+              }
+          },
+        })
     },
 
     /**

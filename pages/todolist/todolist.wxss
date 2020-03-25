@@ -55,7 +55,7 @@ swiper {
     -webkit-line-clamp: 1;
     overflow: hidden;
 
-    margin-right: 15rpx;
+    margin-right: 10rpx;
     font-size: 34rpx;
 }
 

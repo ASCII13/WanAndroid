@@ -47,18 +47,16 @@
 									wx:for-index="todoIndex"
 									wx:key="index">
 									<view class="title-container">
-										<switch type="checkbox"
-												checked="{{todoItem.status}}"
-												bindchange="changeStatus"
+										<view style="display: flex; padding-right: 15rpx;" 
+												bindtap="changeStatus"
 												data-category="{{timeCategoryIndex}}"
 												data-detail="{{todoIndex}}"
-												data-id="{{todoItem.id}}">
-										</switch>
-										<!-- <checkbox-group bindchange="changeStatus">
-											<checkbox checked="{{todoItem.status}}" 
-														value="{{!todoItem.status}}">
-											</checkbox>
-										</checkbox-group> -->
+												data-id="{{todoItem.id}}"
+												data-status="{{todoItem.status}}">
+											<image src="../../assets/images/{{todoItem.status ? 'selected' : 'unselect'}}.png"
+													style="width: 40rpx; height: 40rpx;">
+											</image>
+										</view>
 										<view class="title">{{todoItem.title}}</view>
 										<view class="delete-container">
 											<image style="width: 40rpx; height: 40rpx;"
@@ -70,7 +68,7 @@
 											</image>
 										</view>
 									</view>
-									<view class="content-container">
+									<view class="content-container" hidden="{{!todoItem.content}}">
 										<view class="content">{{todoItem.content}}</view>
 									</view>				
 							</view>
