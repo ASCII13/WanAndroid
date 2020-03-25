@@ -150,7 +150,7 @@ Page({
 					categoryCur: index,
 					requesting: false,
 					end: false,
-					emptyShow: false,
+					emptyShow: true,
 					page: pageStart,
 					listData: []
 				});

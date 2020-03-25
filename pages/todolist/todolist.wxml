@@ -14,6 +14,7 @@
 		<scroll requesting="{{item.requesting}}"
 				end="{{item.end}}"
 				empty-show="{{item.emptyShow}}"
+				empty-text="{{emptyText}}"
 				list-count="{{item.listData.length}}"
 				has-top="{{true}}"
 				refresh-size="{{80}}"

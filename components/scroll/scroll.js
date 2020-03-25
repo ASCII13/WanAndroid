@@ -26,12 +26,12 @@ Component({
 		// 空状态的图片
 		emptyUrl: {
 			type: String,
-			value: "../../assets/image/nothing.svg"
+			value: "../../assets/images/nothing.svg"
 		},
 		// 空状态的文字提示
 		emptyText: {
 			type: String,
-			value: "未找到数据"
+			value: "暂无数据"
 		},
 		// 是否有header
 		hasTop: {

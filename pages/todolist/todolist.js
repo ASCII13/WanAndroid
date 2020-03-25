@@ -14,7 +14,8 @@ Page({
         tabData: [],
         categoryData: [],
         categoryCur: 0,
-        duration: 300
+        duration: 300,
+        emptyText: '暂无数据'
     },
 
     /**
@@ -41,7 +42,7 @@ Page({
                 categoryCur: index,
                 requesting: false,
                 end: false,
-                emptyShow: false,
+                emptyShow: true,
                 page: pageStart,
                 listData: []
             });
