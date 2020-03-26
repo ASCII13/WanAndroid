@@ -46,10 +46,12 @@
 									wx:for="{{timeCategory.list}}"
 									wx:for-item="todoItem"
 									wx:for-index="todoIndex"
-									wx:key="index">
+									wx:key="index"
+									bindtap="editTodoItem"
+									data-item="{{todoItem}}">
 									<view class="title-container">
 										<view style="display: flex; padding-right: 15rpx;" 
-												bindtap="changeStatus"
+												catchtap="changeStatus"
 												data-category="{{timeCategoryIndex}}"
 												data-detail="{{todoIndex}}"
 												data-id="{{todoItem.id}}"

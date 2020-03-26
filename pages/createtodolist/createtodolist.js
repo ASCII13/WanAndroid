@@ -17,16 +17,6 @@ Page({
         isFullScreen: app.globalData.isFullScreen
     },
 
-    setDate(date) {
-        console.log(utils.formateDate(date));
-        
-        let dateStr = utils.formateDate(date);
-        this.setData({
-            currentDate: dateStr,
-            startDate: dateStr
-        });
-    },
-
     changeDate(e) {
         console.log(e.detail.value);
         this.setData({currentDate: e.detail.value}); 
@@ -42,6 +32,8 @@ Page({
         let date = this.data.currentDate;
         let type = 1;
         let priority = 1;
+        let id = this.data.id;
+        let status = this.data.status;
 
         let data = {
             title: title,
@@ -51,22 +43,27 @@ Page({
             priority: priority
         };
 
-        app.httpPost('/lg/todo/add/json', data).then((res) => {
-            this.backLastPage();
-        });
+        switch (this.data.dataSrc) {
+            case 0:
+                app.httpPost('/lg/todo/add/json', data).then((res) => {
+                    this.backLastPage(this.data.dataSrc);
+                });
+                break;
+            case 1:
+                data.status = status;
+                console.log(data);
+                app.httpPost(`/lg/todo/update/${id}/json`, data).then((res) => {
+                    this.backLastPage(this.data.dataSrc);
+                });
+                break;
+        }
     },
 
     inputTitle(e) {
         console.log(e.detail.value);
-
         let title = e.detail.value;
         this.setData({title: title});
-
-        if (!utils.isEmpty(title)) {
-            this.setData({allowCreate: true});
-        } else {
-            this.setData({allowCreate: false});
-        }
+        this.checkCreateStatus();
     },
 
     inputContent(e) {
@@ -76,13 +73,14 @@ Page({
         this.setData({content: content});
     },
 
-    backLastPage() {
+    backLastPage(dataSrc) {
+        let msg = dataSrc == 0 ? '创建成功' : '修改成功';
         wx.navigateBack({
           complete: (res) => {},
           delta: 1,
           fail: (res) => {},
           success: (res) => {
-              utils.showToastWithoutIcon('创建成功');
+              utils.showToastWithoutIcon(msg);
           },
         })
     },
@@ -91,14 +89,68 @@ Page({
      * Lifecycle function--Called when page load
      */
     onLoad: function (options) {
-        this.setDate(new Date());
+        let dateStr = utils.formateDate(new Date());
+
+        if (options.item === undefined) {
+            console.log('创建待办');
+
+            this.setData({
+                btnText: '创建',
+                dataSrc: 0,
+                currentDate: dateStr,
+                startDate: dateStr
+            });
+        } else {
+            console.log('编辑待办');
+
+            let item = JSON.parse(options.item);
+            this.setData({
+                currentDate: item.dateStr,
+                startDate: dateStr,
+                title: item.title,
+                content: item.content,
+                id: item.id,
+                status: item.status,
+                type: item.type,
+                priority: item.priority,
+                btnText: '确定',
+                dataSrc: 1
+            });
+        }
+        this.checkCreateStatus();
+    },
+
+    setNavigationTitle(dataSrc) {
+        switch (dataSrc) {
+            case 0:
+                wx.setNavigationBarTitle({
+                  title: '创建事项',
+                });
+                break;
+            case 1:
+                wx.setNavigationBarTitle({
+                  title: '编辑事项',
+                });
+                break;    
+        }
+    },
+
+    checkCreateStatus() {
+        let title = this.data.title;
+        let time = this.data.currentDate;
+
+        if (utils.isEmpty(title) || utils.isEmpty(time)) {
+            this.setData({allowCreate: false});
+        } else {
+            this.setData({allowCreate: true});
+        }
     },
 
     /**
      * Lifecycle function--Called when page is initially rendered
      */
     onReady: function () {
-
+        this.setNavigationTitle(this.data.dataSrc);
     },
 
     /**

@@ -2,7 +2,7 @@
 
 <view class="base cell-container">
 	<view>标题</view>
-	<input placeholder="必填" class="msg-area" bindinput="inputTitle"></input>
+	<input placeholder="必填" class="msg-area" bindinput="inputTitle" value="{{title}}"></input>
 </view>
 
 <view class="base">
@@ -10,7 +10,8 @@
 	<textarea placeholder="非必填" 
                 class="msg-area" 
                 bindinput="inputContent"
-                disable-default-padding="{{true}}">
+                disable-default-padding="{{true}}"
+                value="{{content}}">
     </textarea>
 </view>
 
@@ -26,5 +27,5 @@
 <button class="btn-create {{isFullScreen ? 'full-screen' : ''}}" 
         disabled="{{!allowCreate}}" 
         bindtap="create" 
-        style="width: 100%;">创建
+        style="width: 100%;">{{btnText}}
 </button>

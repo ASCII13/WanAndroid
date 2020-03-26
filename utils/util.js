@@ -55,6 +55,14 @@ function showToastWithoutIcon(content) {
   });
 }
 
+function isEmptyObj(obj) {
+  if (Object.keys(obj).length > 0) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
 module.exports = {
   formatTime: formatTime,
   formateDate: formateDate,
@@ -62,4 +70,5 @@ module.exports = {
   isLogin: isLogin,
   clearLoginInfo: clearLoginInfo,
   showToastWithoutIcon: showToastWithoutIcon,
+  isEmptyObj: isEmptyObj
 }

@@ -248,6 +248,15 @@ Page({
         this.setCurrentData(currentCur, pageData);
     },
 
+    editTodoItem(e) {
+        console.log(e.currentTarget.dataset.item);
+        let item = JSON.stringify(e.currentTarget.dataset.item);
+
+        wx.navigateTo({
+          url: `../createtodolist/createtodolist?item=${item}`,
+        });
+    },
+
     /**
      * Lifecycle function--Called when page is initially rendered
      */
