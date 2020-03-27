@@ -1,7 +1,7 @@
 <!--pages/personalinfosetting/personalinfosetting.wxml-->
 
 <view class="modify-userinfo-container">
-    <view class="userinfo-item" wx:for="{{methodList}}" bindtap="clickFeature">
+    <view class="userinfo-item" wx:for="{{methodList}}" bindtap="clickFeature" wx:key="index">
         <image class="icon-userinfo" src="{{item.src}}"></image>
         <view class="modify-userinfo">{{item.name}}</view>
     </view>

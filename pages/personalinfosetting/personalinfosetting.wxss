@@ -11,12 +11,15 @@ page {
 
 .userinfo-item {
     height: 100rpx;
-    border-bottom: 1rpx solid #cecece;
     background-color: white;
 
     display: flex;
     flex-direction: row;
     align-items: center;
+}
+
+.userinfo-item:not(:last-child) {
+    border-bottom: 1rpx solid #cecece;
 }
 
 .icon-userinfo {
