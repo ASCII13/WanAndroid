@@ -135,10 +135,10 @@ Page({
      * Lifecycle function--Called when page is initially rendered
      */
     onReady: function () {
-        let msg = this.data.dataSrc == 0 ? '创建事项' : '编辑事项';
-        wx.setNavigationBarTitle({
-          title: msg,
-        });
+        // let msg = this.data.dataSrc == 0 ? '创建事项' : '编辑事项';
+        // wx.setNavigationBarTitle({
+        //   title: msg,
+        // });
     },
 
     /**

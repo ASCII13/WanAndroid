@@ -1,5 +1,9 @@
 <!--pages/createtodolist/createtodolist.wxml-->
 
+<page-meta>
+    <navigation-bar title="{{dataSrc == 0 ? '创建事项' : '编辑事项'}}"></navigation-bar>
+</page-meta>
+
 <view class="base cell-container">
 	<view>标题</view>
 	<input placeholder="必填" class="msg-area" bindinput="inputTitle" value="{{title}}"></input>
