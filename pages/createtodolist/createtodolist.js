@@ -120,21 +120,6 @@ Page({
         this.checkCreateStatus();
     },
 
-    setNavigationTitle(dataSrc) {
-        switch (dataSrc) {
-            case 0:
-                wx.setNavigationBarTitle({
-                  title: '创建事项',
-                });
-                break;
-            case 1:
-                wx.setNavigationBarTitle({
-                  title: '编辑事项',
-                });
-                break;    
-        }
-    },
-
     checkCreateStatus() {
         let title = this.data.title;
         let time = this.data.currentDate;
@@ -150,7 +135,10 @@ Page({
      * Lifecycle function--Called when page is initially rendered
      */
     onReady: function () {
-        this.setNavigationTitle(this.data.dataSrc);
+        let msg = this.data.dataSrc == 0 ? '创建事项' : '编辑事项';
+        wx.setNavigationBarTitle({
+          title: msg,
+        });
     },
 
     /**
