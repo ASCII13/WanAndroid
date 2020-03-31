@@ -11,6 +11,10 @@ App({
                 if (res.screenHeight - res.windowHeight - res.statusBarHeight - 34 > 72) {
                     this.globalData.isFullScreen = true;
                 }
+
+                this.globalData.statusBarHeight = res.statusBarHeight;
+                let capsuleBound = wx.getMenuButtonBoundingClientRect();
+                this.globalData.navigationHeight = capsuleBound.top - res.statusBarHeight + capsuleBound.bottom;
             }
         });
     },
@@ -109,6 +113,8 @@ App({
         systemInfo: null,
         userInfo: null,
         isIpohoneX: false,
-        isFullScreen: false
+        isFullScreen: false,
+        statusBarHeight: 0,
+        navigationHeight: 0
     }
 })

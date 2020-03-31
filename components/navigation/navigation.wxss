@@ -1,0 +1,67 @@
+/* components/navigation/navigation.wxss */
+
+view {
+    box-sizing: border-box;
+	display: block;
+}
+
+.cu-custom .cu-bar {
+	min-height: 0px;
+	padding-right: 220rpx;
+	/* box-shadow: 0rpx 0rpx 0rpx; */
+	z-index: 9999;
+}
+
+.cu-bar.fixed{
+	position: fixed;
+	width: 100%;
+	top: 0;
+	z-index: 1024;
+	/* box-shadow: 0 1rpx 6rpx rgba(0, 0, 0, 0.1); */
+}
+
+.cu-bar {
+	display: flex;
+	position: relative;
+	align-items: center;
+	min-height: 100rpx;
+	justify-content: space-between;
+}
+
+.cu-bar .action:first-child {
+	margin-left: 30rpx;
+	font-size: 30rpx;
+}
+
+.cu-bar .action {
+	display: flex;
+	align-items: center;
+	height: 100%;
+	justify-content: center;
+	max-width: 100%;
+}
+
+.cu-custom .cu-bar .content {
+	width: calc(100% - 440rpx);
+}
+
+.cu-bar .content {
+	position: absolute;
+	text-align: center;
+	width: calc(100% - 340rpx);
+	left: 0;
+	right: 0;
+	bottom: 0;
+	top: 0;
+	margin: auto;
+	height: 60rpx;
+	font-size: 32rpx;
+	line-height: 60rpx;
+	cursor: none;
+	pointer-events: none;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+    overflow: hidden;
+    font-weight: bold;
+}
+

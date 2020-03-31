@@ -1,0 +1,11 @@
+
+<view class="cu-custom" style="height: {{navigationHeight}}px; background-color: {{bgColor}};">
+	<view class="cu-bar fixed" style="height: {{navigationHeight}}px; padding-top: {{statusBarHeight}}px;">
+		<view class="action" style="width: 45rpx; height: 45rpx;">
+            <slot></slot>
+		</view>
+		<view class="content" style="top: {{statusBarHeight}}px;">
+			<view>{{title}}</view>
+		</view>
+	</view>
+</view>
