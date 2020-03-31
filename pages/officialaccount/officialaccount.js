@@ -11,6 +11,7 @@ Page({
 		categoryCur: 0, // 当前数据列索引
 		categoryMenu: [], // 分类菜单数据, 字符串数组格式
 		categoryData: [], // 所有数据列
+		navigationHeight: app.globalData.navigationHeight // 自定义navigationBar高度
 	},
 	getList(type, currentPage) {
 		let currentCur = this.data.categoryCur;
@@ -135,6 +136,9 @@ Page({
 			  url: '../login/login',
 			});
 		}
+	},
+	search() {
+		utils.showToastWithoutIcon('点击了搜索按钮');
 	},
 	onLoad() {
 		app.httpGet("/wxarticle/chapters/json").then((res) => {

@@ -1,6 +1,10 @@
 <!--pages/officialaccount/officialaccount.wxml-->
 
-<view class="top-wrap">
+<navigaiton title="公众号">
+	<image src="../../assets/images/search.svg" bindtap="search"></image>
+</navigaiton>
+
+<view class="top-wrap" style="top: {{navigationHeight}}px;">
 	<tab id="category"
 			tab-data="{{categoryMenu}}"
 			tab-cur="{{categoryCur}}"

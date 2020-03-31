@@ -7,11 +7,11 @@ page {
 .top-wrap {
     position: fixed;
     left: 0;
-    top: 0;
+    /* top: 0; */
     width: 100%;
     background-color: #ffffff;
     z-index: 99;
-    box-shadow: 0 0 20rpx -5rpx rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 0 20rpx -5rpx rgba(0, 0, 0, 0.1); */
 }
 
 swiper {

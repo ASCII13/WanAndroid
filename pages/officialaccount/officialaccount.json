@@ -1,9 +1,9 @@
 {
   "usingComponents": {
     "tab": "../../components/tab/tab",
-    "scroll": "../../components/scroll/scroll"
+    "scroll": "../../components/scroll/scroll",
+    "navigaiton": "../../components/navigation/navigation"
   },
-  "navigationBarTitleText": "公众号",
-  "disableScroll": true
-
+  "disableScroll": true,
+  "navigationStyle": "custom"
 }
