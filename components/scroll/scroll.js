@@ -58,7 +58,7 @@ Component({
 		enableBackToTop: {
 			type: Boolean,
 			value: false
-    	}
+		}
 	},
 	data: {
 		/* 未渲染数据 */

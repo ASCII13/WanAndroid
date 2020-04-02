@@ -1,0 +1,99 @@
+/* pages/search/search.wxss */
+
+page {
+    background-color: #F7F7F7;
+    height: 100%;
+}
+
+.search-bar-bg {
+    background-color: #eaeaea;
+    box-sizing: border-box;
+    padding: 15rpx;
+    display: flex;
+    border-radius: 2rpx;
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 99;
+}
+
+.search-bar-container {
+    border-radius: 2rpx;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    flex: 1;
+    background-color: white;
+}
+
+.icon-container {
+    width: 40rpx;
+    height: 40rpx;
+    margin-left: 10rpx;
+}
+
+.input-container {
+    margin-left: 10rpx;
+    height: 100%;
+    flex: 1;
+}
+
+.cancel {
+    display: flex;
+    align-items: center;
+    margin-left: 20rpx;
+}
+
+.cells {
+    background: #ffffff;
+    margin-top: 20rpx;
+}
+
+.cell {
+    display: flex;
+    padding: 20rpx;
+}
+
+.cell:not(:last-child) {
+    border-bottom: 1rpx solid #ebedf0;
+}
+
+.cell__bd {
+    flex: 1;
+}
+
+.cell__bd .name {
+    height: 80rpx;
+    font-size: 30rpx;
+    margin-bottom: 12rpx;
+}
+
+.cell__bd .name>view {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    word-break: break-all;
+}
+
+.cell__bd .tags {
+    display: flex;
+    align-items: center;
+}
+
+.cell__bd .tags .tags__bd {
+    flex: 1;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.collect_state {
+    width: 40rpx;
+    height: 40rpx;
+}
+
+.cell__bd .tags .date {
+    color: #777777;
+    font-size: 24rpx;
+}

@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "list": "../../components/list/list"
+  },
+  "navigationBarTitleText": "文章搜索"
+}

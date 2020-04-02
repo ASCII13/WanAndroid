@@ -1,0 +1,38 @@
+<!--components/list/list.wxml-->
+
+<scroll-view class="scroll-view"
+            tyle="padding-bottom: {{bottomSize}}rpx;"
+			scroll-y="true"
+            bindscroll="scroll"
+            scroll-top="{{scrollTop}}"
+            enable-back-to-top="{{enableBackToTop}}"
+            lower-threshold="{{80}}rpx"
+            bindscrolltolower="more">
+            <slot></slot>
+            <view class="empty" wx:if="{{listCount == 0 && showEmpty}}">
+                <image class="empty__image" src="{{emptyUrl}}"></image>
+				<view class="empty__text">{{emptyText}}</view>
+            </view>
+            <view wx:if="{{listCount !== 0 && overOnePage}}" class="scroll__bottom">
+				<view class="scroll__loading" wx:if="{{end}}">
+					已全部加载
+				</view>
+				<view class="scroll__loading" wx:else>
+					<view class="loading">
+						<view class="loading__item"></view>
+						<view class="loading__item"></view>
+						<view class="loading__item"></view>
+						<view class="loading__item"></view>
+						<view class="loading__item"></view>
+						<view class="loading__item"></view>
+						<view class="loading__item"></view>
+						<view class="loading__item"></view>
+						<view class="loading__item"></view>
+						<view class="loading__item"></view>
+						<view class="loading__item"></view>
+						<view class="loading__item"></view>
+					</view>
+					<view class="text">加载中...</view>
+				</view>
+			</view>
+</scroll-view>

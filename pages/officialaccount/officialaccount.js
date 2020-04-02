@@ -138,7 +138,10 @@ Page({
 		}
 	},
 	search() {
-		utils.showToastWithoutIcon('点击了搜索按钮');
+		let pageData = this.getCurrentData();
+		wx.navigateTo({
+		  url: `../search/search?id=${pageData.id}&name=${pageData.name}`,
+		});
 	},
 	onLoad() {
 		app.httpGet("/wxarticle/chapters/json").then((res) => {
@@ -151,6 +154,7 @@ Page({
 				categoryMenu.push(item.name.replace("&amp;", "&"));
 				categoryData.push({
 					id: item.id,
+					name: item.name,
 					categoryCur: index,
 					requesting: false,
 					end: false,

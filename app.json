@@ -10,7 +10,8 @@
         "pages/collectarticles/collectarticles",
         "pages/scorelevel/scorelevel",
         "pages/todolist/todolist",
-        "pages/createtodolist/createtodolist"
+        "pages/createtodolist/createtodolist",
+        "pages/search/search"
     ],
     "window": {
         "backgroundTextStyle": "light",

@@ -1,0 +1,49 @@
+<!--pages/search/search.wxml-->
+
+<view class="search-bar-bg" style="height: {{height}}px;">
+    <view class="search-bar-container">
+        <view class="icon-container">
+            <image src="../../assets/images/search_gray.svg" style="width: 100%; height: 100%;"></image>
+        </view>
+        <input class="input-container" 
+                bindblur="loseFocus" 
+                bindfocus="getFocus"
+                confirm-type="search"
+                bindinput="inputContent"
+                bindconfirm="search"
+                placeholder="当前搜索{{searchCategory}}公众号, 请输入搜索词">
+        </input>
+    </view>
+    <view class="cancel" hidden="{{hideCancel}}" bindtap="test">取消</view>
+</view>
+
+<list show-empty="{{emptyShow}}"
+        empty-text="暂无搜索结果"
+        end="{{end}}"
+        list-count="{{listData.length}}"
+        enable-back-to-top="{{enableBackToTop}}"
+        bind:more="more">
+        <view class="cells" style="margin-top: {{height}}px;">
+		    <view class="cell"	
+			        wx:for="{{listData}}"
+					wx:key="index"
+					data-link="{{item.link}}"
+					bindtap="showArticle">
+					<view class="cell__bd">
+						<view class="name">
+							<rich-text nodes="{{item.title}}"></rich-text>
+						</view>
+						<view class="tags">
+							<view class="date">{{item.niceDate}}</view>
+							<view class="tags__bd">
+								<image src="../../assets/images/{{item.collect ? 'collected' : 'uncollect'}}.png"
+									    class="collect_state"
+										catchtap="collect"
+										data-id="{{item.id}}">
+								</image>
+							</view>
+						</view>
+					</view>
+			</view>
+		</view>
+</list>
