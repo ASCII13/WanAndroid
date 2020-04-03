@@ -30,6 +30,8 @@
   
   <tr>
     <th>首页</th>
+    <th>公众号</th>
+    <th>待办事项</th>
   </tr>
   <tr>
     <td>
@@ -37,9 +39,18 @@
         <img width="232" height="505.3" src="https://github.com/ASCII13/WanAndroid/blob/master/screenshot/home.png">
       </div>
     </td>
+    <td>
+      <div align="center">
+        <img width="232" height="505.3" src="https://github.com/ASCII13/WanAndroid/blob/master/screenshot/offcialaccount.png">
+      </div>
+    </td>
+    <td>
+      <div align="center">
+        <img width="232" height="505.3" src="https://github.com/ASCII13/WanAndroid/blob/master/screenshot/todo.png">
+      </div>
+    </td>
   </tr>
 </table>
-
 
 
 
