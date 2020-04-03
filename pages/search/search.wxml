@@ -18,7 +18,7 @@
 </view>
 
 <list show-empty="{{emptyShow}}"
-        empty-text="暂无搜索结果"
+        empty-text="暂无结果"
         end="{{end}}"
         list-count="{{listData.length}}"
         enable-back-to-top="{{enableBackToTop}}"
@@ -39,7 +39,8 @@
 								<image src="../../assets/images/{{item.collect ? 'collected' : 'uncollect'}}.png"
 									    class="collect_state"
 										catchtap="collect"
-										data-id="{{item.id}}">
+										data-id="{{item.id}}"
+										data-index="{{index}}">
 								</image>
 							</view>
 						</view>

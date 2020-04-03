@@ -2,6 +2,8 @@
 
 const app = getApp();
 
+let utils = require('../../utils/util');
+
 Page({
 
     /**
@@ -67,6 +69,41 @@ Page({
     more() {
         console.log('触发上拉加载');
         this.getList('more', this.data.pageNum);        
+    },
+
+    showArticle(e) {
+        let url = encodeURIComponent(e.currentTarget.dataset.link);
+        wx.navigateTo({
+          url: `../detail/detail?url=${url}`,
+        });
+    },
+
+    collect(e) {
+        console.log(e.currentTarget.dataset);
+
+        let index = e.currentTarget.dataset.index;
+        let id = e.currentTarget.dataset.id;
+        let pageData = this.data.listData;
+
+        if (utils.isLogin) {
+            if (!pageData[index].collect) {
+                app.httpPost(`/lg/collect/${id}/json`).then(() => {
+                    pageData[index].collect = true;
+                    this.setData({listData: pageData});
+                    utils.showToastWithoutIcon('收藏成功');
+                });
+            } else {
+                app.httpPost(`/lg/uncollect_originId/${id}/json`).then(() => {
+                    pageData[index].collect = false;
+                    this.setData({listData: pageData});
+                    utils.showToastWithoutIcon('取消收藏');
+                });
+            }
+        } else {
+            wx.navigateTo({
+              url: '../login/login',
+            });
+        }
     },
 
     /**
