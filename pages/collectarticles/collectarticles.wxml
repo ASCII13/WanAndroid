@@ -1,21 +1,23 @@
 <!--pages/collectarticles/collectarticles.wxml-->
 
-<view wx:if="{{articles.length == 0}}" class="content-container">
-    <image class="tips-image-area" src="../../assets/images/nothing.svg"></image>
-    <view class="tips-area">暂无收藏</view>
-</view>
-
-<block wx:else>
-    <view class="article-item" wx:for="{{articles}}" bindtap="clickArticleItem" data-current="{{index}}" bindlongpress="longPressArticleItem">
-        <view class="article-info">
-            <view style="width: 60%; font-size: 26rpx; color: #e6a157;">{{item.chapterName}}</view>
-            <view style="width: 40%; display: flex; flex-direction: row-reverse; font-size: 26rpx; color: #777777;">{{item.niceDate}}</view>
+<scroll requesting="{{requesting}}"
+        end="{{end}}"
+        empty-show="true"
+        list-count="{{dataList.length}}"
+        bind:refresh="refresh"
+        bind:more="more">
+        <view class="cell"
+                wx:for="{{dataList}}"
+                wx:key="index">
+                <view class="title">
+                    <rich-text nodes="{{item.title}}"></rich-text>
+                </view>
+                <view class="tags">
+                    <view class="chapter">{{item.chapterName}}</view>
+                    <view class="date">{{item.niceDate}}</view>
+                </view>
         </view>
-        <!-- <text class="article-title" decode="true">{{item.title}}</text> -->
-        <rich-text class="article-title" nodes="{{item.title}}"></rich-text>
-    </view>
-</block>
-
+</scroll>
 
 
 

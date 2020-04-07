@@ -1,39 +1,48 @@
 /* pages/collectarticles/collectarticles.wxss */
 
-.content-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 350rpx;
+page {
+    --chapter-color: #eb8242;
+    --tags-font-size: 24rpx;
+    --title-font-size: 30rpx;
 }
 
-.tips-image-area {
-    width: 260rpx;
-    height: 260rpx;
-}
-
-.tips-area {
-    margin-top: 20rpx;
-    font-size: 32rpx;
-}
-
-.article-item {
-    margin: 15rpx 30rpx 0 30rpx;
-    border-bottom: 1rpx solid #cecece;
-}
-
-.article-info {
-    display: flex;
-    flex-direction: row;
+.cell {
+    padding: 20rpx;
 
 }
 
-.article-title {
-    margin: 15rpx 0;
+.cell:not(:last-child) {
+    border-bottom: 1rpx solid #ebedf0;
+}
+
+.title {
+    font-size: var(--title-font-size);
+    margin-bottom: 12rpx;
+    height: 80rpx;
+
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
-    text-overflow: ellipsis;
     overflow: hidden;
+    word-break: break-all;
 }
 
+.tags {
+    display: flex;
+    align-items: center;
+}
+
+.chapter {
+    border: 1rpx solid var(--chapter-color);
+    color: var(--chapter-color);
+    border-radius: 5rpx;
+    font-size: var(--tags-font-size);
+    padding: 6rpx;
+}
+
+.date {
+    flex: 1;
+    display: flex;
+    flex-direction: row-reverse;
+    font-size: var(--tags-font-size);
+}

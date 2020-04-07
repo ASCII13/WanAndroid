@@ -1,5 +1,7 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "scroll": "../../components/scroll/scroll"
+  },
   "navigationBarTitleText": "收藏文章",
-  "enablePullDownRefresh": true
+  "disableScroll": true
 }
