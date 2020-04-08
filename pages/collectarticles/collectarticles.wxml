@@ -8,7 +8,10 @@
         bind:more="more">
         <view class="cell"
                 wx:for="{{dataList}}"
-                wx:key="index">
+                wx:key="index"
+                bindlongpress="longpressItem"
+                bindtap="clickItem"
+                data-index="{{index}}">
                 <view class="title">
                     <rich-text nodes="{{item.title}}"></rich-text>
                 </view>
@@ -18,6 +21,3 @@
                 </view>
         </view>
 </scroll>
-
-
-
