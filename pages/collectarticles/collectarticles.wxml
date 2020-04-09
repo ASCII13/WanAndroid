@@ -6,7 +6,22 @@
         list-count="{{dataList.length}}"
         bind:refresh="refresh"
         bind:more="more">
-        <view class="cell"
+        <side-slip wx:for="{{dataList}}"
+                    wx:key="index"
+                    bind:delete="delete"
+                    bind:click="showDetail"
+                    data-index="{{index}}">
+                    <view class="cell">
+                        <view class="title">
+                            <rich-text nodes="{{item.title}}"></rich-text>
+                        </view>
+                        <view class="tags">
+                            <view class="chapter">{{item.chapterName}}</view>
+                            <view class="date">{{item.niceDate}}</view>
+                        </view>
+                    </view>
+        </side-slip>
+        <!-- <view class="cell"
                 wx:for="{{dataList}}"
                 wx:key="index"
                 bindlongpress="longpressItem"
@@ -19,5 +34,5 @@
                     <view class="chapter">{{item.chapterName}}</view>
                     <view class="date">{{item.niceDate}}</view>
                 </view>
-        </view>
+        </view> -->
 </scroll>

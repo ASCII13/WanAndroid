@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "scroll": "../../components/scroll/scroll"
+    "scroll": "../../components/scroll/scroll",
+    "side-slip": "../../components/side-slip/side-slip"
   },
   "navigationBarTitleText": "收藏文章",
   "disableScroll": true

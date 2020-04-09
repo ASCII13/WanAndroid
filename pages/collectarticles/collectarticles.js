@@ -1,7 +1,7 @@
 // pages/collectarticles/collectarticles.js
 
-let utils = require('../../utils/util.js');
-let app = getApp();
+const utils = require('../../utils/util.js');
+const app = getApp();
 
 Page({
 
@@ -15,7 +15,7 @@ Page({
         end: false
     },
 
-    longpressItem(e) {
+    delete(e) {
         let index = e.currentTarget.dataset.index;
         wx.showModal({
             content: '确定取消收藏此文章？',
@@ -27,7 +27,7 @@ Page({
         }); 
     },
 
-    clickItem(e) {
+    showDetail(e) {
         let index = e.currentTarget.dataset.index;
         let currentData = this.getCurrentData(index);
         let url = encodeURIComponent(currentData.link);
