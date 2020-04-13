@@ -15,7 +15,11 @@ Component({
 		 * 删除事件
 		 */
 		delete() {
-            this.triggerEvent('delete');
+			this.triggerEvent('delete');
+			this.setData({
+				open: false,
+				move: 0
+			});
 		},
 		/**
 		 * movable-view 滚动监听
