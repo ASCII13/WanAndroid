@@ -29,9 +29,6 @@ Component({
 				diff: e.detail.x
 			});
         },
-        click() {
-            this.triggerEvent('click');
-        },
 		/**
 		 * movable-view 触摸结束事件
 		 */

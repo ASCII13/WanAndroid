@@ -7,7 +7,7 @@
 		bind:touchend="touchend"
 		direction="horizontal"
 		x='{{move}}'>
-		<view class="side__con" bindtap="click">
+		<view class="side__con">
 			<slot></slot>
 		</view>
 		<view id="movable_delete" class="side__del" bindtap="delete">
