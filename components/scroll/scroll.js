@@ -44,6 +44,11 @@ Component({
 			value: 90,
 			observer: 'refreshChange'
 		},
+		// 顶部高度
+		topSize: {
+			type: Number,
+			value: 0,
+		},
 		// 底部高度
 		bottomSize: {
 			type: Number,
