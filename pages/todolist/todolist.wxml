@@ -16,7 +16,7 @@
 				empty-show="{{item.emptyShow}}"
 				empty-text="{{emptyText}}"
 				list-count="{{item.listData.length}}"
-				has-top="{{true}}"
+				top-size="80"
 				refresh-size="{{80}}"
 				bind:refresh="refresh"
 				bind:more="more">
