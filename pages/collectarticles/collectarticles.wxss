@@ -1,18 +1,24 @@
 /* pages/collectarticles/collectarticles.wxss */
 
 page {
+
+    background-color: #F7F7F7;
+
     --chapter-color: #eb8242;
     --tags-font-size: 24rpx;
     --title-font-size: 30rpx;
 }
 
-.cell {
-    padding: 20rpx;
-
+side-slip:not(:last-child) .cell {
+    border-bottom: 1rpx solid #cecece;
 }
 
-.cell:not(:last-child) {
-    border-bottom: 1rpx solid #ebedf0;
+.cells {
+    background-color: white;
+}
+
+.cell {
+    padding: 20rpx;
 }
 
 .title {

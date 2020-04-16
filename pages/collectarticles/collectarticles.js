@@ -1,6 +1,7 @@
 // pages/collectarticles/collectarticles.js
 
-const utils = require('../../utils/util.js');
+import { showToastWithoutIcon } from '../../utils/util.js';
+
 const app = getApp();
 
 Page({
@@ -50,7 +51,7 @@ Page({
             dataList.splice(index, 1);
 
             this.setData({dataList: dataList});
-            utils.showToastWithoutIcon('已取消收藏');
+            showToastWithoutIcon('已取消收藏');
         });
     },
 
