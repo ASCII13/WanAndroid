@@ -1,7 +1,8 @@
 // pages/officialaccount/officialaccount.js
 
+import { isLogin } from '../../utils/util.js';
+
 const app = getApp();
-const utils = require('../../utils/util.js');
 
 let pageStart = 1;
 
@@ -11,7 +12,8 @@ Page({
 		categoryCur: 0, // 当前数据列索引
 		categoryMenu: [], // 分类菜单数据, 字符串数组格式
 		categoryData: [], // 所有数据列
-		navigationHeight: app.globalData.navigationHeight // 自定义navigationBar高度
+		navigationHeight: app.globalData.navigationHeight, // 自定义navigationBar高度
+		bottomHeight: 0
 	},
 	getList(type, currentPage) {
 		let currentCur = this.data.categoryCur;
@@ -100,7 +102,7 @@ Page({
 		})
 	},
 	collect(e) {
-		if (utils.isLogin()) {
+		if (isLogin()) {
 			let id = e.currentTarget.dataset.id;
 			let pageData = this.getCurrentData(this.data.categoryCur);
 			
@@ -143,7 +145,16 @@ Page({
 		  url: `../search/search?id=${pageData.id}&name=${pageData.name}`,
 		});
 	},
+	getBottomHeight() {
+		let res = app.globalData.systemInfo;
+		let rpx = 750 / res.screenWidth;
+		let bottomHeightRpx = (res.screenHeight - res.windowHeight) * rpx - 129;
+
+		this.setData({bottomHeight: bottomHeightRpx});	
+	},
 	onLoad() {
+		this.getBottomHeight();
+
 		app.httpGet("/wxarticle/chapters/json").then((res) => {
 			let menus = res.data || [];
 

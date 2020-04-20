@@ -29,7 +29,7 @@ swiper {
 }
 
 .cell:not(:last-child) {
-    border-bottom: 1rpx solid #ebedf0;
+    border-bottom: 1rpx solid #cecece;
 }
 
 .cell__bd {
