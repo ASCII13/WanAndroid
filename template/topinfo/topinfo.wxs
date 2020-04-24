@@ -1,0 +1,8 @@
+
+function getSubstring(string, start, length) {
+    return string.slice(start, length);
+};
+
+module.exports = {
+    getSubstring: getSubstring,
+}

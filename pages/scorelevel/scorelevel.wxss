@@ -1,76 +1,19 @@
 /* pages/scorelevel/scorelevel.wxss */
 
+@import "../../template/topinfo/topinfo.wxss";
+
 page {
     background-color: #F7F7F7;
 }
 
-.rank-info-mine {
+.top-area {
     position: fixed;
-    height: 120rpx;
-    width: 100%;
     top: 0;
-
-    display: flex;
-    background-color: white;
-    align-items: center;
+    left: 0;
+    z-index: 99;
+    width: 100%;
 }
 
-.image-TOP3 {
-    width: 50rpx;
-    height: 50rpx;
+.cells {
+    margin-top: 20rpx;
 }
-
-.rank-num {
-    font-size: 35rpx;
-    margin-left: 20rpx;
-    width: 50rpx;
-
-    display: flex;
-    justify-content: center;
-}
-
-.icon-head {
-    background-color: #48C9B0;
-    color: white;
-    width: 80rpx;
-    height: 80rpx;
-    border-radius: 40rpx;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    font-size: 45rpx;
-    margin-left: 25rpx;
-}
-
-.username {
-    margin-left: 20rpx;
-    width: 210rpx;
-
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-    text-overflow: ellipsis;
-    overflow: hidden;
-}
-
-.score-info {
-    margin: 0 35rpx 0 10rpx;
-    width: 175rpx;
-    display: flex;
-    flex-direction: row-reverse;
-}
-
-.rank-info-users {
-    display: flex;
-    flex-direction: row;
-    height: 120rpx;
-    background-color: white;
-    align-items: center;
-    border-bottom: 1rpx solid #cecece;
-}
-
-
-
-

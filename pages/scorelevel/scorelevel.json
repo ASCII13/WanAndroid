@@ -1,6 +1,7 @@
 {
-  "usingComponents": {},
-  "navigationBarTitleText": "TOP 120",
-  "enablePullDownRefresh": true,
-  "backgroundTextStyle": "dark"
+  "usingComponents": {
+    "scroll": "../../components/scroll/scroll"
+  },
+  "navigationBarTitleText": "排行榜",
+  "disableScroll": true
 }

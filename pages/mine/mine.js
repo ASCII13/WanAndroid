@@ -152,13 +152,8 @@ Page({
                     });
                     break;
                 case 2:
-                    let rank = _this.data.rank;
-                    let level = _this.data.level;
-                    let username = _this.data.username;
-                    let score = _this.data.personalScore;
-
                     wx.navigateTo({
-                      url: '../scorelevel/scorelevel' + '?rank=' + rank + '&username=' + username + '&level=' + level + '&score=' + score
+                      url: '../scorelevel/scorelevel'
                     });
                     break;
                 default:

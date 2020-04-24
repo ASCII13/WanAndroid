@@ -1,36 +1,27 @@
 <!--pages/scorelevel/scorelevel.wxml-->
 
-<wxs src="./scorelevel.wxs" module="scorelevel_wxs"></wxs>
+<import src="../../template/topinfo/topinfo.wxml"/>
 
-<!-- <view class="rank-info-area"> -->
-    <view class="rank-info-mine">
-        <view class="rank-num">{{rank}}</view>
-        <view class="icon-head">{{scorelevel_wxs.getSubstring(username, 0, 1)}}</view>
-        <view class="username">{{username}}</view>
-        <view class="level-info" style="margin-left: 30rpx;">LV.{{level}}</view>
-        <view class="score-info">{{score}}</view>
-    </view>
+<view class="top-area">
+    <template wx:if="{{myself !== undefined}}" 
+            is="topInfo" 
+            data="{{...myself}}">
+    </template>
+</view>
 
-    <view style="height: 30rpx; width: 100%; background-color: #F7F7F7; top: 120rpx; position: fixed;"></view>
-
-    <view style="margin-top: 150rpx;">
-        <block wx:for="{{rankInfoList}}">
-            <view class="rank-info-users">
-                <view class="rank-num" wx:if="{{item.rank == 1}}">
-                    <image class="image-TOP3" src="../../assets/images/NO1.png"></image>
-                </view>
-                <view class="rank-num" wx:elif="{{item.rank == 2}}">
-                    <image class="image-TOP3" src="../../assets/images/NO2.png"></image>
-                </view>
-                <view class="rank-num" wx:elif="{{item.rank == 3}}">
-                    <image class="image-TOP3" src="../../assets/images/NO3.png"></image>
-                </view>
-                <view class="rank-num" wx:else>{{item.rank}}</view>
-                <view class="icon-head">{{scorelevel_wxs.getSubstring(item.username, 0, 1)}}</view>
-                <view class="username">{{item.username}}</view>
-                <view class="level-info" style="margin-left: 30rpx;">LV.{{item.level}}</view>
-                <view class="score-info">{{item.coinCount}}</view>
-            </view>
-        </block>
-    </view>
-<!-- </view> -->
+<scroll requesting="{{requesting}}"
+        end="{{end}}"
+        empty-show="{{showEmpty}}"
+        top-size="130"
+        color="#D2691E"
+        list-count="{{rankInfoList.length}}"
+        bind:refresh="refresh"
+        bind:more="more">
+        <view class="cells">
+            <template is="topInfo" 
+                    wx:for="{{rankInfoList}}" 
+                    wx:key="index" 
+                    data="{{...item}}">
+            </template>
+        </view>
+</scroll>

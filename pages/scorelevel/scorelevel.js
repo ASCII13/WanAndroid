@@ -1,7 +1,6 @@
 // pages/scorelevel/scorelevel.js
 
-let host = require('../../utils/host.js');
-let utils = require('../../utils/util.js');
+const app = getApp();
 
 Page({
 
@@ -11,115 +10,57 @@ Page({
     data: {
         rankInfoList: [],
         pageNum: 1,
-        rank: 0,
-        username: "",
-        level: 0,
-        score: 0
+        requesting: false,
+        end: false,
+        showEmpty: false,
     },
 
-    getRankInfoList: function(pageNum) {  
-        wx.stopPullDownRefresh();
-              
-        let _this = this;
-        wx.request({
-            url: host.BASE_URL + 'coin/rank/' + pageNum + '/json',
-            method: 'GET',
-            success: function(res) {
-                if (res.data.errorCode != 0) {
-                    wx.showToast({
-                        title: res.data.errorMsg,
-                        icon: 'none'
+    getList(type, currentPage) {
+        this.setData({requesting: true});
+
+        app.httpGet(`/coin/rank/${currentPage}/json`).then((res) => {
+            this.setData({requesting: false});
+            
+            if (type === 'refresh') {
+                this.setData({
+                    rankInfoList: res.data.datas,
+                    pageNum: currentPage + 1
+                });
+            } else {
+                if (res.data.total > this.data.rankInfoList.length) {
+                    this.setData({
+                        rankInfoList: this.data.rankInfoList.concat(res.data.datas),
+                        pageNum: currentPage + 1
                     });
                 } else {
-                    let oldData = _this.data.rankInfoList;
-                    let newData = res.data.data.datas;
-
-                    if (oldData.length >= 120) {
-                        wx.showToast({
-                          title: '排行榜仅展示前120名',
-                          icon: 'none'
-                        });
-                    } else if (oldData.length == 0 && newData.length == 0) {
-                        wx.showToast({
-                            title: '暂无排行榜数据',
-                            icon: 'none'
-                          });
-                    } else {
-                        _this.setData({
-                            rankInfoList: oldData.concat(newData),
-                            pageNum: pageNum
-                        });
-                    }
+                    this.setData({end: true});
                 }
-            },
-            fail: function() {
-                wx.showToast({
-                    title: '网络异常，请稍后再试',
-                    icon: 'none'
-                });
             }
         });
     },
 
-    getSelfRankInfo: function() {
-        wx.stopPullDownRefresh();
+    more() {
+        this.getList('more', this.data.pageNum);
+    },
 
-        let _this = this;
-        if (utils.isLogin()) {
-            wx.request({
-                url: host.BASE_URL + 'lg/coin/userinfo/json',
-                method: 'GET',
-                header: {
-                    'Cookie': wx.getStorageSync('cookie')
-                },
-                success: function(res) {
-                    if (res.data.errorCode != 0) {
-                        return false
-                    } else {
-                        _this.setData({
-                            rank: res.data.data.rank,
-                            username: res.data.data.username,
-                            level: res.data.data.level,
-                            score: res.data.data.coinCount
-                        });
-                    }
-                },
-                fail: function() {
-                    console.log('个人积分接口，网络异常');
-                    _this.setData({
-                        rank: "-",
-                        username: "-",
-                        level: "-",
-                        score: "-"
-                    });
-                }
+    refresh() {
+        this.getList('refresh', 1);
+    },
+
+    getSelfInfo() {
+        app.httpGet('/lg/coin/userinfo/json').then((res) => {
+            this.setData({
+                myself: res.data
             });
-        } else{
-            _this.setData({
-                rank: "-",
-                username: "-",
-                level: "-",
-                score: "-"
-            });
-            return;
-        }
+        });
     },
 
     /**
      * Lifecycle function--Called when page load
      */
     onLoad: function (options) {
-        //设置下拉刷新背景色
-        wx.setBackgroundColor({
-            backgroundColor: "#F7F7F7"
-        });
-        
-        this.setData({
-            rank: options.rank,
-            username: options.username,
-            level: options.level,
-            score: options.score
-        });
+        this.getSelfInfo();
+        this.getList('refresh', 1);
     },
 
     /**
@@ -133,8 +74,7 @@ Page({
      * Lifecycle function--Called when page show
      */
     onShow: function () {
-        this.getRankInfoList(this.data.pageNum);
-        this.getSelfRankInfo();
+
     },
 
     /**
@@ -155,26 +95,14 @@ Page({
      * Page event handler function--Called when user drop down
      */
     onPullDownRefresh: function () {
-        console.log('下拉刷新触发');
-        this.setData({
-            rankInfoList: [],
-            pageNum: 1,
-            rank: 0,
-            username: "",
-            level: 0,
-            score: 0
-        });
-        this.getRankInfoList(this.data.pageNum);
-        this.getSelfRankInfo();
+
     },
 
     /**
      * Called when page reach bottom
      */
     onReachBottom: function () {
-        console.log('上拉加载触发');
-        let pageNum = this.data.pageNum + 1;
-        this.getRankInfoList(pageNum);
+
     },
 
     /**

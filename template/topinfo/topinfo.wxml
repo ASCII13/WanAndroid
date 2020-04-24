@@ -1,0 +1,27 @@
+
+<wxs src="./topinfo.wxs" module="topinfo_wxs"/>
+
+<template name="topInfo">
+    <view class="cell">
+        <view class="icon">{{topinfo_wxs.getSubstring(username, 0, 1)}}</view>
+        <view>
+            <view class="child username">{{username}}</view>
+            <view class="level">
+                <view class="child">等级：{{level}}</view>
+                <view class="child score">积分：{{coinCount}}</view>
+            </view>
+        </view>
+        <view class="rank" wx:if="{{rank == 1}}">
+            <image class="top" src="../../assets/images/NO1.png"></image>
+        </view>
+        <view class="rank" wx:elif="{{rank == 2}}">
+            <image class="top" src="../../assets/images/NO2.png"></image>
+        </view>
+        <view class="rank" wx:elif="{{rank == 3}}">
+            <image class="top" src="../../assets/images/NO3.png"></image>
+        </view>
+        <view class="rank" wx:else>
+            <view class="top">{{rank}}</view>
+        </view>
+    </view>
+</template>

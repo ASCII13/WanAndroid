@@ -1,0 +1,62 @@
+.cell {
+    display: flex;
+    align-items: center;
+    height: 130rpx;
+    padding: 0 30rpx;
+    box-sizing: border-box;
+    background-color: white;
+}
+
+.cell:not(:last-child) {
+    border-bottom: 1rpx solid #cecece;
+}
+
+.rank {
+    flex: 1;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.icon {
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 40rpx;
+    background-color: #99B46A;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 35rpx;
+    margin-right: 20rpx;
+}
+
+.level {
+    display: flex;
+    color: gray;
+    font-size: 25rpx;
+    margin-top: 5rpx;
+}
+
+.child {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.child.username {
+    font-size: 30rpx;
+}
+
+.child.score {
+    margin-left: 50rpx;
+}
+
+.top {
+    width: 50rpx;
+    height: 50rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
