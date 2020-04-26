@@ -158,3 +158,27 @@
     vertical-align: middle;
     margin-left: 40rpx;
 }
+
+@keyframes fadeDelay {
+    0%,
+    39%,
+    100% {
+        opacity: 0.2;
+    }
+  
+    40% {
+        opacity: 1;
+    }
+}
+  
+@-webkit-keyframes fadeDelay {
+    0%,
+    39%,
+    100% {
+        opacity: 0.2;
+    }
+
+    40% {
+        opacity: 1;
+    }
+}
