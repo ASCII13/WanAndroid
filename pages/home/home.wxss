@@ -1,5 +1,14 @@
 /* pages/home/home.wxss */
 
+page {
+    background-color: #F7F7F7;
+}
+
+swiper {
+    width: 100%;
+    height: 400rpx;
+}
+
 .banner-image {
     width: 100%;
     height: 100%;
@@ -13,6 +22,8 @@
     align-items: center;
     color: white;
     background: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 80rpx;
 }
 
 .banner-title {
@@ -23,19 +34,33 @@
     overflow: hidden;
 }
 
-.article-item {
-    display: flex;
-    flex-direction: column;
-    margin: 0 25rpx;
+.cell {
+    padding: 13rpx 25rpx;
+    background-color: white;
+}
+
+.cell:not(:last-child) {
     border-bottom: 1rpx solid #cecece;
 }
 
-.article-author-info, .article-type-info {
-    display: flex;
-    font-size: 25rpx;
+.tag {
+    color: #777777;
 }
 
-.article-title {
+.fresh {
+    color: #e6a157;
+    margin-right: 15rpx;
+}
+
+.date {
+    flex: 1;
+    display: flex;
+    flex-direction: row-reverse;
+    margin-left: 15rpx;
+}
+
+.title {
+    margin: 12rpx 0;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
@@ -43,5 +68,24 @@
     overflow: hidden;
 }
 
+.top {
+    color: #eb8242;
+    margin-right: 15rpx;
+}
 
+.state {
+    flex: 1;
+    display: flex;
+    flex-direction: row-reverse;
+}
 
+image {
+    width: 40rpx;
+    height: 40rpx;
+}
+
+.tags {
+    display: flex;
+    font-size: 25rpx;
+    align-items: center;
+}

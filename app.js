@@ -68,9 +68,9 @@ App({
                     if (code !== 0) {
                         reject(res);
                         
-                        if (res.message) {
+                        if (res.errorMsg) {
                             wx.showToast({
-                              title: res.message,
+                              title: res.errorMsg,
                               icon: 'none'
                             });
                         }
@@ -92,7 +92,7 @@ App({
                     }
 
                     wx.showToast({
-                      title: '网络出错',
+                      title: '网络异常，请稍后重试',
                       icon: 'none'
                     });
                 }
