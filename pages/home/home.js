@@ -27,13 +27,13 @@ Page({
             let articles = this.data.articleList;
 
             if (type === 'more') {
-                if (articles.length >= data.total) {
-                    showToastWithoutIcon('无更多数据');
-                } else {
+                if (data.total > articles.length) {
                     this.setData({
                         articleList: articles.concat(data.datas),
                         pageNum: currentPage + 1
                     });
+                } else {
+                    showToastWithoutIcon('无更多数据');
                 }
             } else {
                 this.setData({
