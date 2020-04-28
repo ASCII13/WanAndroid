@@ -2,7 +2,7 @@
 
 const app = getApp();
 
-let utils = require('../../utils/util');
+import { isLogin, showToastWithoutIcon } from '../../utils/util.js';
 
 Page({
 
@@ -85,18 +85,18 @@ Page({
         let id = e.currentTarget.dataset.id;
         let pageData = this.data.listData;
 
-        if (utils.isLogin) {
+        if (isLogin()) {
             if (!pageData[index].collect) {
                 app.httpPost(`/lg/collect/${id}/json`).then(() => {
                     pageData[index].collect = true;
                     this.setData({listData: pageData});
-                    utils.showToastWithoutIcon('收藏成功');
+                    showToastWithoutIcon('收藏成功');
                 });
             } else {
                 app.httpPost(`/lg/uncollect_originId/${id}/json`).then(() => {
                     pageData[index].collect = false;
                     this.setData({listData: pageData});
-                    utils.showToastWithoutIcon('取消收藏');
+                    showToastWithoutIcon('取消收藏');
                 });
             }
         } else {
