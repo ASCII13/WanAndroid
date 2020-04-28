@@ -50,10 +50,22 @@
       </div>
     </td>
   </tr>
+
+  <tr>
+    <th>收藏文章</th>
+  </tr>
+  <tr>
+    <td>
+      <div align="center">
+        <img width="232" height="505.3" src="https://github.com/ASCII13/WanAndroid/blob/master/screenshot/collection.png">
+      </div>
+    </td>
+  </tr>
 </table>
 
 ## 已实现功能
-* 登录 / 注册 / 退出登录
+* 登录 / 退出登录
+* 注册
 * 收藏文章
 * 待办清单
 * 积分排行
