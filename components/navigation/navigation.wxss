@@ -33,6 +33,11 @@ view {
 	font-size: 30rpx;
 }
 
+.action {
+	width: 45rpx;
+	height: 45rpx;
+}
+
 .cu-bar .action {
 	display: flex;
 	align-items: center;
