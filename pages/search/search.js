@@ -45,17 +45,22 @@ Page({
         let searchStr = this.data.searchStr;
 
         app.httpGet(`/wxarticle/list/${id}/${currentPage}/json?k=${searchStr}`).then((res) => {
-            let dataList = res.data.datas;
+            let data = res.data;
+            let articles = this.data.listData;
 
             if (type === 'more') {
-                this.setData({
-                    listData: this.data.listData.concat(dataList),
-                    pageNum: currentPage + 1,
-                    end: false
-                });
+                if (data.total > articles.length) {
+                    this.setData({
+                        listData: articles.concat(data.datas),
+                        pageNum: currentPage + 1,
+                        end: false
+                    });
+                } else {
+                    this.setData({end: true});
+                }
             } else {
                 this.setData({
-                    listData: dataList,
+                    listData: data.datas,
                     pageNum: currentPage + 1
                 })
             }
@@ -67,7 +72,6 @@ Page({
     },
 
     more() {
-        console.log('触发上拉加载');
         this.getList('more', this.data.pageNum);        
     },
 
@@ -79,8 +83,6 @@ Page({
     },
 
     collect(e) {
-        console.log(e.currentTarget.dataset);
-
         let index = e.currentTarget.dataset.index;
         let id = e.currentTarget.dataset.id;
         let pageData = this.data.listData;
