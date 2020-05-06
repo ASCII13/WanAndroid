@@ -75,7 +75,7 @@
 * 首页轮播
 
 ## 计划
-- [] 适配暗黑模式
+- [ ] 适配暗黑模式
 
 ## 使用说明
 由于项目appid使用的是测试id，所以无法添加体验权限，请将项目clone到本地，安装<a href="https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html">微信开发者工具</a>后将工程导入即可查看，
