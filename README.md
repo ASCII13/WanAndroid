@@ -2,18 +2,34 @@
 根据鸿洋大神提供的接口，制作的微信小程序版本WanAndroid，使用原生技术开发
 
 ## 项目预览
+### 正常模式
 
 | 首页 | 公众号| 我的 |
 |-----|------|------|
 | ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/home.png) | ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/offcialaccount.png) | ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/mine.png) |
 
-| 登录 | 待办事项| 积分排行 |
+| 登录 | 注册| 积分排行 |
 |-----|------|------|
-| ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/login.png) | ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/todo.png) | ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/rank.png) |
+| ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/login.png) | ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/register.png) | ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/rank.png) |
 
-| 收藏文章 | 搜索 | 注册 |
+| 收藏文章 | 搜索 | 待办事项 |
 |-----|------|------|
-| ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/collection.png) | ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/search.png) | ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/register.png) |
+| ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/collection.png) | ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/search.png) | ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/todo.png) |
+
+### 暗黑模式
+
+| 首页 | 公众号| 我的 |
+|-----|------|------|
+| ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/home_dark.png) | ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/offcialaccount_dark.png) | ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/mine_dark.png) |
+
+| 登录 | 注册| 积分排行 |
+|-----|------|------|
+| ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/login_dark.png) | ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/register_dark.png) | ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/rank_dark.png) |
+
+| 收藏文章 | 搜索 | 待办事项 |
+|-----|------|------|
+| ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/collection_dark.png) | ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/search_dark.png) | ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/todo_dark.png) |
+
 
 ## 已实现功能
 * 登录 / 退出登录
