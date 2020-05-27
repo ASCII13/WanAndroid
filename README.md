@@ -65,9 +65,13 @@
 | 首页 | 公众号| 我的 |
 |-----|------|------|
 | ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/home.png) | ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/offcialaccount.png) | ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/mine.png) |
+
 | 登录 | 待办事项| 积分排行 |
+|-----|------|------|
 | ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/login.png) | ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/todo.png) | ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/rank.png) |
+
 | 收藏文章 |
+|-----|
 | ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/collection.png) |
 
 ## 已实现功能
