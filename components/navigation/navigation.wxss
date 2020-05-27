@@ -5,6 +5,10 @@ view {
 	display: block;
 }
 
+.cu-custom {
+	background-color: #fff;
+}
+
 .cu-custom .cu-bar {
 	min-height: 0px;
 	padding-right: 220rpx;
@@ -70,3 +74,8 @@ view {
     font-weight: bold;
 }
 
+@media(prefers-color-scheme: dark) {
+	.cu-custom {
+		background-color: #252627;
+	}
+}

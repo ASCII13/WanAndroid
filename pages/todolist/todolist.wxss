@@ -1,7 +1,7 @@
 /* pages/todolist/todolist.wxss */
 
 page {
-    background: #F7F7F7;
+    background: var(--page-backgroung-color);
 }
 
 swiper {
@@ -13,7 +13,7 @@ swiper {
     left: 0;
     top: 0;
     width: 100%;
-    background-color: #ffffff;
+    background-color: var(--cell-background-color);
     z-index: 99;
     box-shadow: 0 0 20rpx -5rpx rgba(0, 0, 0, 0.1);
 }
@@ -40,6 +40,7 @@ swiper {
     flex-direction: column;
 }
 
+.cell:not(:last-child),
 .detail:not(:last-child) {
     border-bottom: 1rpx solid #ebedf0;
 }
@@ -74,9 +75,9 @@ swiper {
     color: gray;
 }
 
-.cell:not(:last-child) {
+/* .cell:not(:last-child) {
     border-bottom: 1rpx solid #ebedf0;
-}
+} */
 
 .cell_bd {
     flex: 1;
@@ -102,4 +103,24 @@ swiper {
 
     width: 70rpx;
     height: 70rpx;
+}
+
+@media(prefers-color-scheme: dark) {
+    page {
+        background-color: var(--page-backgroung-color-dark);
+    }
+
+    .tab-wrap,
+    .cells {
+        background-color: var(--cell-background-color-dark);
+    }
+
+    .categoty {
+        color: var(--text-color-dark);
+    }
+
+    .cell:not(:last-child),
+    .detail:not(:last-child) {
+        border-bottom: 1rpx solid var(--divider-line-color-dark);
+    }
 }

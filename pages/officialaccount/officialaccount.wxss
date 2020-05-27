@@ -1,7 +1,7 @@
 /* pages/officialaccount/officialaccount.wxss */
 
 page {
-    background-color: #F7F7F7;
+    background-color: var(--page-backgroung-color);
 }
 
 .search {
@@ -14,7 +14,7 @@ page {
     left: 0;
     /* top: 0; */
     width: 100%;
-    background-color: #ffffff;
+    background-color: var(--cell-background-color);
     z-index: 99;
     /* box-shadow: 0 0 20rpx -5rpx rgba(0, 0, 0, 0.1); */
 }
@@ -24,7 +24,7 @@ swiper {
 }
 
 .cells {
-    background: #ffffff;
+    background: var(--cell-background-color);
     margin-top: 20rpx;
 }
 
@@ -47,7 +47,7 @@ swiper {
     margin-bottom: 12rpx;
 }
 
-.cell__bd .name>view {
+.cell__bd .name {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
@@ -84,4 +84,23 @@ swiper {
 .cell__bd .tags .date {
     color: #777777;
     font-size: 24rpx;
+}
+
+@media(prefers-color-scheme: dark) {
+    page {
+        background-color: var(--page-backgroung-color-dark);
+    }
+
+    .cells,
+    .top-wrap {
+        background: var(--cell-background-color-dark);
+    }
+
+    .cell__bd .name {
+        color: var(--text-color-dark);
+    }
+
+    .cell:not(:last-child) {
+        border-bottom: 1rpx solid var(--divider-line-color-dark);
+    }
 }

@@ -33,15 +33,10 @@ Component({
      * Component methods
      */
     methods: {
-        init() {
-
-        }
 
     },
 
     lifetimes: {
-        ready() {
-            this.init();
-        }
+        
     }
 })

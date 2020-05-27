@@ -33,3 +33,19 @@ button[disabled] {
     background-color: gray !important;
     color: white !important;
 }
+
+@media(prefers-color-scheme: dark) {
+    page {
+        background-color: var(--page-backgroung-color-dark);
+    }
+
+    button[disabled] {
+        background-color: var(--cell-background-color-dark) !important;
+        color: var(--text-color-dark) !important;
+    }
+
+    .btn-create {
+        background-color: #244e99;
+        color: var(--text-color-dark);
+    }
+}

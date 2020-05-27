@@ -17,3 +17,9 @@ page {
 .cells {
     margin-top: 20rpx;
 }
+
+@media(prefers-color-scheme: dark) {
+    page {
+        background-color: var(--page-backgroung-color-dark);
+    }
+}

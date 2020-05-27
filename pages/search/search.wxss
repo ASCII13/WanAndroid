@@ -1,7 +1,7 @@
 /* pages/search/search.wxss */
 
 page {
-    background-color: #F7F7F7;
+    background-color: var(--page-backgroung-color);
     height: 100%;
 }
 
@@ -56,7 +56,7 @@ page {
 }
 
 .cell:not(:last-child) {
-    border-bottom: 1rpx solid #ebedf0;
+    border-bottom: 1rpx solid var(--divider-line-color);
 }
 
 .cell__bd {
@@ -96,4 +96,32 @@ page {
 .cell__bd .tags .date {
     color: #777777;
     font-size: 24rpx;
+}
+
+@media(prefers-color-scheme: dark) {
+    page,
+    .search-bar-container {
+        background-color: var(--page-backgroung-color-dark);
+    }
+
+    .search-bar-bg {
+        background-color: #232426;
+    }
+
+    .cancel,
+    .name {
+        color: var(--text-color-dark);
+    }
+
+    .date {
+        color: var(--tags-color);
+    }
+
+    .cells {
+        background-color: var(--cell-background-color-dark);
+    }
+
+    .cell:not(:last-child) {
+        border-bottom: 1rpx solid var(--divider-line-color-dark);
+    }
 }

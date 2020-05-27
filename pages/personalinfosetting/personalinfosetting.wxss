@@ -42,3 +42,27 @@ page {
     justify-content: center;
     align-items: center;
 }
+
+@media(prefers-color-scheme: dark) {
+    page {
+        background-color: var(--page-backgroung-color-dark);
+    }
+
+    .userinfo-item {
+        background-color: var(--cell-background-color-dark);
+    }
+
+    .userinfo-item:not(:last-child) {
+        border-bottom: 1rpx solid var(--divider-line-color-dark);
+    }
+
+    .btn-logout {
+        background-color: var(--cell-background-color-dark);
+        border: 1rpx solid var(--cell-background-color-dark);
+        color: var(--text-color-dark);
+    }
+
+    .modify-userinfo {
+        color: var(--text-color-dark);
+    }
+}

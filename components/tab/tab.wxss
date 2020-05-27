@@ -64,3 +64,13 @@
 .tabs__line.transition {
   transition: width 0.3s, transform 0.3s;
 }
+
+@media(prefers-color-scheme: dark) {
+  .tabs__line {
+    background-color: #244e99;
+  }
+
+  .tabs__item--cur {
+    color: #dadae5;
+  }
+}

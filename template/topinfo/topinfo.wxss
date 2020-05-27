@@ -4,11 +4,11 @@
     height: 130rpx;
     padding: 0 30rpx;
     box-sizing: border-box;
-    background-color: white;
+    background-color: var(--cell-background-color);
 }
 
 .cell:not(:last-child) {
-    border-bottom: 1rpx solid #cecece;
+    border-bottom: 1rpx solid var(--divider-line-color);
 }
 
 .rank {
@@ -32,7 +32,7 @@
 
 .level {
     display: flex;
-    color: gray;
+    color: var(--tags-color);
     font-size: 25rpx;
     margin-top: 5rpx;
 }
@@ -59,4 +59,23 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+@media(prefers-color-scheme: dark) {
+    .cell {
+        background-color: var(--cell-background-color-dark);
+    }
+
+    .cell:not(:last-child) {
+        border-bottom: 1rpx solid var(--divider-line-color-dark);
+    }
+
+    .icon {
+        background-color: #6c7f4b;
+        color: var();
+    }
+
+    .top {
+        color: var(--text-color-dark);
+    }
 }

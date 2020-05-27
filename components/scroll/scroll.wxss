@@ -299,3 +299,9 @@
     opacity: 1;
   }
 }
+
+@media(prefers-color-scheme: dark) {
+  .success>.info {
+    color: #a9a9b2;
+  }
+}

@@ -1,20 +1,15 @@
 /* pages/collectarticles/collectarticles.wxss */
 
 page {
-
-    background-color: #F7F7F7;
-
-    --chapter-color: #eb8242;
-    --tags-font-size: 24rpx;
-    --title-font-size: 30rpx;
+    background-color: var(--page-backgroung-color);
 }
 
 side-slip:not(:last-child) .cell {
-    border-bottom: 1rpx solid #cecece;
+    border-bottom: 1rpx solid var(--divider-line-color);
 }
 
 .cells {
-    background-color: white;
+    background-color: var(--cell-background-color);
 }
 
 .cell {
@@ -22,7 +17,6 @@ side-slip:not(:last-child) .cell {
 }
 
 .title {
-    font-size: var(--title-font-size);
     margin-bottom: 12rpx;
     height: 80rpx;
 
@@ -36,13 +30,13 @@ side-slip:not(:last-child) .cell {
 .tags {
     display: flex;
     align-items: center;
+    font-size: var(--tags-font-size);
 }
 
 .chapter {
-    border: 1rpx solid var(--chapter-color);
-    color: var(--chapter-color);
+    border: 1rpx solid var(--marked-tag-color);
+    color: var(--marked-tag-color);
     border-radius: 5rpx;
-    font-size: var(--tags-font-size);
     padding: 6rpx;
 }
 
@@ -50,5 +44,26 @@ side-slip:not(:last-child) .cell {
     flex: 1;
     display: flex;
     flex-direction: row-reverse;
-    font-size: var(--tags-font-size);
+}
+
+@media(prefers-color-scheme: dark) {
+    page {
+        background-color: var(--page-backgroung-color-dark);
+    }
+
+    .cells {
+        background-color: var(--cell-background-color-dark);
+    }
+
+    side-slip:not(:last-child) .cell {
+        border-bottom: 1rpx solid var(--divider-line-color-dark);
+    }
+
+    .title {
+        color: var(--text-color-dark);
+    }
+
+    .date{
+        color: var(--tags-color);
+    }
 }
