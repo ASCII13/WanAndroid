@@ -2,7 +2,7 @@
 根据鸿洋大神提供的接口，制作的微信小程序版本WanAndroid，使用原生技术开发
 
 ## 项目预览
-<table>
+<!-- <table>
   <caption>正常模式</caption>
   <tr>
     <th>登录</th>
@@ -60,7 +60,17 @@
       </div>
     </td>
   </tr>
-</table>
+</table> -->
+
+| 首页 | 公众号| 我的 |
+|-----|------|------|
+| ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/home.png) | ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/offcialaccount.png) | ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/mine.png) |
+| 登录 | 待办事项| 积分排行 |
+|------|-------|---------|
+| ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/login.png) | ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/todo.png) | ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/rank.png) |
+| 收藏文章 |
+|---------|
+| ![]() |
 
 ## 已实现功能
 * 登录 / 退出登录
@@ -75,8 +85,8 @@
 
 ## 计划
 - [x] 适配暗黑模式
-- [ ] 使用字体图标
-- [ ] 使用骨架屏
+- [ ] 引入字体图标
+- [ ] 引入骨架屏
 
 ## 使用说明
 由于项目appid使用的是测试id，所以无法添加体验权限，请将项目clone到本地，安装<a href="https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html">微信开发者工具</a>后将工程导入即可查看，
@@ -87,7 +97,7 @@
 暗黑模式适配完毕，但由于一些不可抗力的因素，暂时还不够完美，主要如下：
 1. 原生导航头标题颜色无法随意修改（目前官方仅支持black和white两种）
 2. 详情页由于是webView，里边呈现的内容，除了微信公众号的网页会自己适配暗黑模式外，其它站点不可控制
-3. 部分图标颜色暂未修改，如：未选中状态下的tabBar item，公众号页面的搜索等等，这一部分如果现在修改，需要新增一些图标来解决，但是由于自己后续打算引入字体图标，所以打算之后统一解决。
+3. 部分图标颜色暂未修改，如：未选中状态下的tabBar item，公众号页面的搜索等等，这一部分如果现在修改，需要新增一些图标来解决，但是由于自己后续打算引入字体图标，所以之后统一解决。
 
 注：暗黑模式需要基础库最低版本v2.11.0，开发者工具最低版本1.03.2004271。工具建议使用<a href="https://servicewechat.com/wxa-dev-logic/download_redirect?type=darwin&from=mpwiki&download_version=1032004271&version_type=1">RC Build（1.03.2004271）</a>，截止更新日期，微信开发者工具Stable Build（1.03.2005140），RC Build（1.03.2005141）在模拟器切换为暗黑模式后，仅有原生tabBar和导航头相关配置生效（真机不受影响）。
 
