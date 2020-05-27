@@ -2,7 +2,7 @@
 根据鸿洋大神提供的接口，制作的微信小程序版本WanAndroid，使用原生技术开发
 
 ## 项目预览
-### 正常模式
+<h3 align="center">正常模式</h3>
 
 | 首页 | 公众号| 我的 |
 |-----|------|------|
@@ -16,7 +16,7 @@
 |-----|------|------|
 | ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/collection.png) | ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/search.png) | ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/todo.png) |
 
-### 暗黑模式
+<h3 align="center">暗黑模式</h3>
 
 | 首页 | 公众号| 我的 |
 |-----|------|------|
