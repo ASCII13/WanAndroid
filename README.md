@@ -48,10 +48,11 @@
 - [ ] 引入骨架屏
 
 ## 使用说明
-由于项目appid使用的是测试id，所以无法添加体验权限，请将项目clone到本地，安装<a href="https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html">微信开发者工具</a>后将工程导入即可查看，
+1. 由于项目appid使用的是测试id，所以无法添加体验权限，请将项目clone到本地，安装<a href="https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html">微信开发者工具</a>后将工程导入即可查看，
 如需在真机上预览，请在开发者工具生成预览码后，使用微信扫码即可（如页面无法展示，开启debug模式）
+2. 微信小程序代码包大小限制为2M，由于项目中包含了预览图片，导入工程时可能会报错，这种情况下删除项目中screenshot文件夹即可
 
-## 更新说明
+## 重大更新说明
 ### 2020-05-27
 暗黑模式适配完毕，但由于一些不可抗力的因素，暂时还不够完美，主要如下：
 1. 原生导航头标题颜色无法随意修改（目前官方仅支持black和white两种）

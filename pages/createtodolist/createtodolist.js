@@ -14,7 +14,7 @@ Page({
         allowCreate: false,
         title: '',
         content: '',
-        isFullScreen: app.globalData.isFullScreen
+        // isFullScreen: app.globalData.isFullScreen
     },
 
     changeDate(e) {

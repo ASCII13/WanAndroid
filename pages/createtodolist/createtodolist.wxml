@@ -28,7 +28,7 @@
     </picker>
 </view>
 
-<button class="btn-create {{isFullScreen ? 'full-screen' : ''}}" 
+<button class="btn-create" 
         disabled="{{!allowCreate}}" 
         bindtap="create" 
         style="width: 100%;">{{btnText}}

@@ -19,14 +19,15 @@
     position: absolute;
     bottom: 0;
 
-    height: 70rpx;
+    height: calc(60rpx + constant(safe-area-inset-bottom));
+    height: calc(60rpx + env(safe-area-inset-bottom));
     background-color: #3F82FD;
     color: white;
     border-radius: 0;
-}
 
-.full-screen {
-    padding-bottom: 32pt;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 button[disabled] {
