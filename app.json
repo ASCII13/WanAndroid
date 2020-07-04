@@ -16,7 +16,7 @@
     "window": {
         "backgroundTextStyle": "light",
         "navigationBarBackgroundColor": "@navigationBgColor",
-        "navigationBarTitleText": "WeChat",
+        "navigationBarTitleText": "WanAndroid",
         "navigationBarTextStyle": "@navigationTextStyle"
     },
     "tabBar": {

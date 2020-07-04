@@ -1,4 +1,6 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText": "注册"
+  "navigationBarTitleText": "注册",
+  "navigationBarBackgroundColor": "@navBgColorCus",
+  "navigationBarTextStyle": "white"
 }
