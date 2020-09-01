@@ -79,9 +79,9 @@ swiper {
     flex-direction: row-reverse;
 }
 
-image {
-    width: 40rpx;
-    height: 40rpx;
+.state > text {
+    font-size: 40rpx;
+    color: var(--collection-state-color);
 }
 
 .tags {

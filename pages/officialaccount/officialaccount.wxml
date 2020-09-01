@@ -1,9 +1,7 @@
 <!--pages/officialaccount/officialaccount.wxml-->
 
 <navigaiton title="公众号">
-	<image class="search"
-		src="../../assets/images/search.svg" 
-		bindtap="search"></image>
+	<text class="iconfont icon-search search" bindtap="search"></text>
 </navigaiton>
 
 <view class="top-wrap" style="top: {{navigationHeight}}px;">
@@ -39,11 +37,10 @@
 						<view class="tags">
 							<view class="date">{{item.niceDate}}</view>
 							<view class="tags__bd">
-								<image src="../../assets/images/{{item.collect ? 'collected' : 'uncollect'}}.png"
-									class="collect_state"
+								<text class="iconfont {{item.collect ? 'icon-collected' : 'icon-uncollect'}}"
 									catchtap="collect"
 									data-id="{{item.id}}">
-								</image>
+								</text>
 							</view>
 						</view>
 					</view>

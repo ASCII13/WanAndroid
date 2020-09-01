@@ -67,6 +67,10 @@ swiper {
     flex-direction: row-reverse;
 }
 
+.delete {
+    color: gray;
+}
+
 .content-container {
     padding: 10rpx 55rpx 0rpx;
 }
@@ -96,13 +100,16 @@ swiper {
     flex-direction: row-reverse;
 }
 
+.arrow {
+    font-size: 35rpx;
+}
+
 .create-todo-list {
     position: absolute;
     bottom: 200rpx;
     right: 40rpx;
-
-    width: 70rpx;
-    height: 70rpx;
+    font-size: 70rpx;
+    color: #366ed8;
 }
 
 @media(prefers-color-scheme: dark) {
@@ -122,5 +129,9 @@ swiper {
     .cell:not(:last-child),
     .detail:not(:last-child) {
         border-bottom: 1rpx solid var(--divider-line-color-dark);
+    }
+
+    .create-todo-list {
+        color: #264d99;
     }
 }

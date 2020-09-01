@@ -1,5 +1,7 @@
 /**app.wxss**/
 
+@import "assets/iconfont/iconfont.wxss";
+
 page {
   --divider-line-color: #cecece;
   --divider-line-color-dark: #5d5d5f;
@@ -14,6 +16,7 @@ page {
   --login-header-color: #48C9B0;
   --login-header-color-dark: #318c7a;
   --marked-tag-color: #eb8242;
+  --collection-state-color: #c73420;
 }
 
 .container {

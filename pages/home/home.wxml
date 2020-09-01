@@ -28,11 +28,11 @@
 				<!-- <view class="top">置顶</view> -->
 				<view class="tag">{{item.superChapterName}} / {{item.chapterName}}</view>
 				<view class="state">
-					<image src="../../assets/images/{{item.collect ? 'collected' : 'uncollect'}}.png"
+					<text class="iconfont {{item.collect ? 'icon-collected' : 'icon-uncollect'}}"
 						catchtap="collect"
 						data-index="{{index}}"
 						data-id="{{item.id}}">
-					</image>
+					</text>
 				</view>
 			</view>
 		</view>

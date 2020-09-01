@@ -1,0 +1,45 @@
+@font-face {
+    font-family: 'iconfont';  /* project id 2038886 */
+    src: url('//at.alicdn.com/t/font_2038886_qyhgftti6pl.eot');
+    src: url('//at.alicdn.com/t/font_2038886_qyhgftti6pl.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_2038886_qyhgftti6pl.woff2') format('woff2'),
+    url('//at.alicdn.com/t/font_2038886_qyhgftti6pl.woff') format('woff'),
+    url('//at.alicdn.com/t/font_2038886_qyhgftti6pl.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_2038886_qyhgftti6pl.svg#iconfont') format('svg');
+}
+  
+.iconfont {
+    font-family: "iconfont" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+  
+.icon-arrow-down:before {
+    content: "\e649";
+}
+  
+.icon-arrow-right:before {
+    content: "\e628";
+}
+  
+.icon-delete:before {
+    content: "\e774";
+}
+  
+.icon-uncollect:before {
+    content: "\e617";
+}
+  
+.icon-collected:before {
+    content: "\e627";
+}
+  
+.icon-search:before {
+    content: "\e671";
+}
+  
+.icon-add:before {
+    content: "\e601";
+}

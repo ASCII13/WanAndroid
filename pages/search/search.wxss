@@ -28,9 +28,13 @@ page {
 }
 
 .icon-container {
-    width: 40rpx;
-    height: 40rpx;
+    text-align: center;
     margin-left: 10rpx;
+}
+
+.icon-container > text {
+    font-size: 40rpx;
+    color: gray;
 }
 
 .input-container {
@@ -88,10 +92,15 @@ page {
     flex-direction: row-reverse;
 }
 
-.collect_state {
+.tags__bd > text {
+    font-size: 40rpx;
+    color: var(--collection-state-color);
+}
+
+/* .collect_state {
     width: 40rpx;
     height: 40rpx;
-}
+} */
 
 .cell__bd .tags .date {
     color: #777777;

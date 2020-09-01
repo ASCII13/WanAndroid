@@ -34,9 +34,7 @@
 									<view class="time">
 										<view>{{timeCategory.date}}</view>
 										<view class="arrow_container">
-											<image style="width: 35rpx; height: 35rpx;"
-													src="../../assets/images/{{timeCategory.showDetail ? 'arrow_down' : 'arrow_right'}}.png">
-											</image>										
+											<text class="iconfont {{timeCategory.showDetail ? 'icon-arrow-down' : 'icon-arrow-right'}} arrow"></text>
 										</view>
 									</view>
 								</view>
@@ -62,13 +60,12 @@
 										</view>
 										<view class="title">{{todoItem.title}}</view>
 										<view class="delete-container">
-											<image style="width: 40rpx; height: 40rpx;"
-													src="../../assets/images/delete_todolist.png"
-													catchtap="delete"
-													data-category="{{timeCategoryIndex}}"
-													data-detail="{{todoIndex}}"
-													data-id="{{todoItem.id}}">
-											</image>
+											<text class="iconfont icon-delete delete"
+												catchtap="delete"
+												data-category="{{timeCategoryIndex}}"
+												data-detail="{{todoIndex}}"
+												data-id="{{todoItem.id}}">
+											</text>
 										</view>
 									</view>
 									<view class="content-container" hidden="{{!todoItem.content}}">
@@ -81,4 +78,4 @@
 	</swiper-item>
 </swiper>
 
-<image class="create-todo-list" src="../../assets/images/add_todolist.png" bindtap="createTodoList"></image>
+<text class="iconfont icon-add create-todo-list" bindtap="createTodoList"></text>
