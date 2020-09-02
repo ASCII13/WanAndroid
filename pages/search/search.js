@@ -35,12 +35,11 @@ Page({
 
     search() {
         console.log('点击了搜索按钮');
-        let currentPage = this.data.pageNum;
-        this.getList('refresh', currentPage);
+        this.getList('refresh');
 
     },
 
-    getList(type, currentPage) {
+    getList(type, currentPage = 1) {
         let id = this.data.id;
         let searchStr = this.data.searchStr;
 
@@ -61,7 +60,8 @@ Page({
             } else {
                 this.setData({
                     listData: data.datas,
-                    pageNum: currentPage + 1
+                    pageNum: currentPage + 1,
+                    end: false
                 })
             }
         });   
