@@ -62,7 +62,7 @@
 
 ## 重大更新说明
 ### 2020-09-21
-首页引入骨架屏，骨架屏文件由开发者工具生成，具体配置可参考![官方文档](https://developers.weixin.qq.com/miniprogram/dev/devtools/skeleton.html)
+首页引入骨架屏，骨架屏文件由开发者工具生成，具体配置可参考[官方文档](https://developers.weixin.qq.com/miniprogram/dev/devtools/skeleton.html)
 
 ### 2020-09-01
 部分图标已更换为字体图标
