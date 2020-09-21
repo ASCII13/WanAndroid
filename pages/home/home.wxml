@@ -1,5 +1,8 @@
 <!--pages/home/home.wxml-->
 
+<import src="home.skeleton.wxml"/>
+<template is="skeleton-home" wx-if="{{loading}}" />
+
 <swiper autoplay="true" circular="true">
 	<swiper-item wx:for="{{bannerList}}" wx:key="index">
 		<image class="banner-image" 
@@ -23,7 +26,10 @@
 				<view class="tag">{{item.author || item.chapterName}}</view>
 				<view class="tag date">{{item.niceDate}}</view>
 			</view>
-			<rich-text class="title" nodes="{{item.title}}"></rich-text>
+			<view class="title">
+				<rich-text nodes="{{item.title}}"></rich-text>
+			</view>
+			
 			<view class="tags">
 				<!-- <view class="top">置顶</view> -->
 				<view class="tag">{{item.superChapterName}} / {{item.chapterName}}</view>

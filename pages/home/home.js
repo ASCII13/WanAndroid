@@ -12,7 +12,8 @@ Page({
     data: {
         bannerList: [],
         articleList: [],
-        pageNum: 0
+        pageNum: 0,
+        loading: true //调试用
     },
 
     getBanner() {
@@ -38,7 +39,8 @@ Page({
             } else {
                 this.setData({
                     articleList: data.datas,
-                    pageNum: currentPage + 1
+                    pageNum: currentPage + 1,
+                    loading: false
                 });
             }
         });

@@ -53,7 +53,7 @@
 ## 计划
 - [x] 适配暗黑模式
 - [x] 引入字体图标
-- [ ] 引入骨架屏
+- [x] 引入骨架屏
 
 ## 使用说明
 1. 由于项目appid使用的是测试id，所以无法添加体验权限，请将项目clone到本地，安装<a href="https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html">微信开发者工具</a>后将工程导入即可查看，
@@ -61,6 +61,9 @@
 2. 微信小程序代码包大小限制为2M，由于项目中包含了预览图片，导入工程时可能会报错，这种情况下删除项目中screenshot文件夹即可
 
 ## 重大更新说明
+### 2020-09-21
+首页引入骨架屏，骨架屏文件由开发者工具生成，具体配置可参考![官方文档](https://developers.weixin.qq.com/miniprogram/dev/devtools/skeleton.html)
+
 ### 2020-09-01
 部分图标已更换为字体图标
 
@@ -74,4 +77,4 @@
 
 真机体验方式如下：
 1. iOS在设置-显示中开启暗黑模式
-2. Android由于各品牌不一致，请自行查找开启暗黑模式方法
+2. Android由于品牌差异，请自行查找对应的开启暗黑模式方法

@@ -1,0 +1,137 @@
+<!--
+此文件为开发者工具生成，生成时间: 9/21/2020, 4:54:23 PM 
+使用方法：
+在 /Users/apple/WeChatProjects/WanAndroid/pages/home/home.wxml 引入模板
+
+```
+<import src="home.skeleton.wxml"/>
+<template is="skeleton" wx-if="{{loading}}" />
+```
+
+在 /Users/apple/WeChatProjects/WanAndroid/pages/home/home.wxss 中引入样式
+```
+@import "./home.skeleton.wxss";
+```
+
+更多详细信息可以参考文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/skeleton.html
+-->
+<template name="skeleton-home">
+  <view class="sk-container">
+    <swiper autoplay="true" circular="true" current="1" current-item-id="true">
+      <swiper-item style="position: absolute; width: 100%; height: 100%; transform: translate(0%, 0px) translateZ(0px);">
+        <image class="banner-image sk-image" data-current="https://www.bilibili.com/video/BV1Ka4y1j7HA"></image>
+        <view class="banner-title-container">
+          <rich-text class="banner-title" nodes="【Android开发教程】高级UI：自定义ViewGroup与UI性能优化"></rich-text>
+        </view>
+      </swiper-item>
+      <swiper-item style="position: absolute; width: 100%; height: 100%; transform: translate(-100%, 0px) translateZ(0px);">
+        <image class="banner-image sk-image" data-current="https://flutter.cn/"></image>
+        <view class="banner-title-container">
+          <rich-text class="banner-title" nodes="flutter 中文社区 "></rich-text>
+        </view>
+      </swiper-item>
+    </swiper>
+    <view class="list">
+      <view class="cell" data-url="https://mp.weixin.qq.com/s/N45bKKtggkBqtAr6d5eMUw" style="border: none;">
+        <view class="tags">
+          <view class="tag sk-transparent sk-text-14-2857-848 sk-text">自助</view>
+          <view class="tag date sk-transparent sk-text-14-2857-318 sk-text">5小时前</view>
+        </view>
+        <view class="title"></view>
+        <view class="tags">
+          <view class="tag sk-transparent sk-text-14-2857-453 sk-text">广场Tab / 自助</view>
+          <view class="state">
+            <text class="iconfont icon-uncollect sk-pseudo sk-pseudo-circle" data-id="15296" data-index="0"></text>
+          </view>
+        </view>
+      </view>
+      <view class="cell" data-url="https://juejin.im/post/6844903830715367432" style="border: none;">
+        <view class="tags">
+          <view class="tag sk-transparent sk-text-14-2857-839 sk-text">自助</view>
+          <view class="tag date sk-transparent sk-text-14-2857-728 sk-text">7小时前</view>
+        </view>
+        <view class="title"></view>
+        <view class="tags">
+          <view class="tag sk-transparent sk-text-14-2857-770 sk-text">广场Tab / 自助</view>
+          <view class="state">
+            <text class="iconfont icon-uncollect sk-pseudo sk-pseudo-circle" data-id="15294" data-index="1"></text>
+          </view>
+        </view>
+      </view>
+      <view class="cell" data-url="https://juejin.im/post/6874061694491721736/" style="border: none;">
+        <view class="tags">
+          <view class="tag sk-transparent sk-text-14-2857-784 sk-text">自助</view>
+          <view class="tag date sk-transparent sk-text-14-2857-602 sk-text">2天前</view>
+        </view>
+        <view class="title"></view>
+        <view class="tags">
+          <view class="tag sk-transparent sk-text-14-2857-984 sk-text">广场Tab / 自助</view>
+          <view class="state">
+            <text class="iconfont icon-uncollect sk-pseudo sk-pseudo-circle" data-id="15289" data-index="2"></text>
+          </view>
+        </view>
+      </view>
+      <view class="cell" data-url="https://juejin.im/post/6873476209737629709/" style="border: none;">
+        <view class="tags">
+          <view class="tag sk-transparent sk-text-14-2857-114 sk-text">自助</view>
+          <view class="tag date sk-transparent sk-text-14-2857-754 sk-text">2020-09-18 13:31</view>
+        </view>
+        <view class="title"></view>
+        <view class="tags">
+          <view class="tag sk-transparent sk-text-14-2857-282 sk-text">广场Tab / 自助</view>
+          <view class="state">
+            <text class="iconfont icon-uncollect sk-pseudo sk-pseudo-circle" data-id="15276" data-index="3"></text>
+          </view>
+        </view>
+      </view>
+      <view class="cell" data-url="https://mp.weixin.qq.com/s/6LzS9aUg6QW0-laPC1RoaQ" style="border: none;">
+        <view class="tags">
+          <view class="tag sk-transparent sk-text-14-2857-674 sk-text">谷歌开发者</view>
+          <view class="tag date sk-transparent sk-text-14-2857-233 sk-text">2020-09-18 00:00</view>
+        </view>
+        <view class="title"></view>
+        <view class="tags">
+          <view class="tag sk-transparent sk-text-14-2857-968 sk-text">公众号 / 谷歌开发者</view>
+          <view class="state">
+            <text class="iconfont icon-uncollect sk-pseudo sk-pseudo-circle" data-id="15282" data-index="4"></text>
+          </view>
+        </view>
+      </view>
+      <view class="cell" data-url="https://mp.weixin.qq.com/s/rKMnT9ViPYnxFzzv849RHQ" style="border: none;">
+        <view class="tags">
+          <view class="tag sk-transparent sk-text-14-2857-137 sk-text">code小生</view>
+          <view class="tag date sk-transparent sk-text-14-2857-26 sk-text">2020-09-18 00:00</view>
+        </view>
+        <view class="title"></view>
+        <view class="tags">
+          <view class="tag sk-transparent sk-text-14-2857-485 sk-text">公众号 / code小生</view>
+          <view class="state">
+            <text class="iconfont icon-uncollect sk-pseudo sk-pseudo-circle" data-id="15283" data-index="5"></text>
+          </view>
+        </view>
+      </view>
+      <view class="cell" data-url="https://mp.weixin.qq.com/s/Qnser4SMoRtgEPd74oDJGQ" style="border: none;">
+        <view class="tags">
+          <view class="tag sk-transparent sk-text-14-2857-387 sk-text">鸿洋</view>
+          <view class="tag date sk-transparent sk-text-14-2857-640 sk-text">2020-09-18 00:00</view>
+        </view>
+        <view class="title"></view>
+        <view class="tags">
+          <view class="tag sk-transparent sk-text-14-2857-952 sk-text">公众号 / 鸿洋</view>
+          <view class="state">
+            <text class="iconfont icon-uncollect sk-pseudo sk-pseudo-circle" data-id="15284" data-index="6"></text>
+          </view>
+        </view>
+      </view>
+      <view class="cell" data-url="https://mp.weixin.qq.com/s/tHJgW4cE5mfWGh5yVrkXBQ" style="border: none;">
+        <view class="tags">
+          <view class="tag sk-transparent sk-text-14-2857-628 sk-text">郭霖</view>
+          <view class="tag date sk-transparent sk-text-14-2857-131 sk-text">2020-09-18 00:00</view>
+        </view>
+      </view>
+    </view>
+    <view class="sk-loading-spinner">
+      <view class="circular"></view>
+    </view>
+  </view>
+</template>
