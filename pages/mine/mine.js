@@ -21,7 +21,7 @@ Page({
     login: function() {
         if (this.data.isLogin) {
             wx.navigateTo({
-              url: '../personalinfosetting/personalinfosetting',
+              url: '../personal-info-setting/personal-info-setting',
             });
         } else {
             wx.navigateTo({
@@ -143,17 +143,17 @@ Page({
             switch (e.currentTarget.dataset.current) {
                 case 0:
                     wx.navigateTo({
-                      url: '../collectarticles/collectarticles'
+                      url: '../collect-articles/collect-articles'
                     });
                     break;
                 case 1:
                     wx.navigateTo({
-                      url: '../todolist/todolist'
+                      url: '../todo-list/todo-list'
                     });
                     break;
                 case 2:
                     wx.navigateTo({
-                      url: '../scorelevel/scorelevel'
+                      url: '../score-level/score-level'
                     });
                     break;
                 default:

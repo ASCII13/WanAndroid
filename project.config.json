@@ -19,7 +19,7 @@
         "checkSiteMap": true,
         "uploadWithSourceMap": true,
         "useMultiFrameRuntime": false,
-        "useApiHook": false,
+        "useApiHook": true,
         "babelSetting": {
             "ignore": [],
             "disablePlugins": [],
@@ -61,11 +61,9 @@
     },
     "condition": {
         "search": {
-            "current": -1,
             "list": []
         },
         "conversation": {
-            "current": -1,
             "list": []
         },
         "game": {
@@ -73,7 +71,6 @@
             "list": []
         },
         "miniprogram": {
-            "current": -1,
             "list": []
         }
     }

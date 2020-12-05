@@ -1,9 +1,9 @@
 
-<wxs src="./topinfo.wxs" module="topinfo_wxs"/>
+<wxs src="./top-info.wxs" module="top_info_wxs"/>
 
 <template name="topInfo">
     <view class="cell">
-        <view class="icon">{{topinfo_wxs.getSubstring(username, 0, 1)}}</view>
+        <view class="icon">{{top_info_wxs.getSubstring(username, 0, 1)}}</view>
         <view>
             <view class="child username">{{username}}</view>
             <view class="level">

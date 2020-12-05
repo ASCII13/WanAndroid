@@ -1,6 +1,6 @@
 <!--pages/scorelevel/scorelevel.wxml-->
 
-<import src="../../template/topinfo/topinfo.wxml"/>
+<import src="../../template/top-info/top-info.wxml"/>
 
 <view class="top-area">
     <template wx:if="{{myself !== undefined}}" 

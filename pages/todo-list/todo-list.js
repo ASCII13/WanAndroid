@@ -201,7 +201,7 @@ Page({
 
     createTodoList() {
         wx.navigateTo({
-          url: '../createtodolist/createtodolist',
+          url: '../create-todo-list/create-todo-list',
         });
     },
 
@@ -253,7 +253,7 @@ Page({
         let item = JSON.stringify(e.currentTarget.dataset.item);
 
         wx.navigateTo({
-          url: `../createtodolist/createtodolist?item=${item}`,
+          url: `../create-todo-list/create-todo-list?item=${item}`,
         });
     },
 

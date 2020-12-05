@@ -1,9 +1,9 @@
 <h1 align="center">WanAndroid</h1>
 <p align="center">
-    <a href="https://github.com/ASCII13/WanAndroid/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/ASCII13/WanAndroid"></a>
-    <a href="https://github.com/ASCII13/WanAndroid/network"><img alt="GitHub forks" src="https://img.shields.io/github/forks/ASCII13/WanAndroid"></a>
-    <a href="https://github.com/ASCII13/WanAndroid/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/ASCII13/WanAndroid"></a>
-    <a href="https://github.com/ASCII13/WanAndroid/blob/master/LICENSE"><img alt="GitHub license" src="https://img.shields.io/github/license/ASCII13/WanAndroid"></a>
+    <a href="https://github.com/ASCII13/WanAndroid/issues"><img alt="issues" src="https://img.shields.io/github/issues/ASCII13/WanAndroid"></a>
+    <a href="https://github.com/ASCII13/WanAndroid/network"><img alt="forks" src="https://img.shields.io/github/forks/ASCII13/WanAndroid"></a>
+    <a href="https://github.com/ASCII13/WanAndroid/stargazers"><img alt="stars" src="https://img.shields.io/github/stars/ASCII13/WanAndroid"></a>
+    <a href="https://github.com/ASCII13/WanAndroid/blob/master/LICENSE"><img alt="license" src="https://img.shields.io/github/license/ASCII13/WanAndroid"></a>
 </p>
 
 ## 描述
@@ -54,6 +54,7 @@
 - [x] 适配暗黑模式
 - [x] 引入字体图标
 - [x] 引入骨架屏
+- [ ] 重构续登录
 
 ## 使用说明
 1. 由于项目appid使用的是测试id，所以无法添加体验权限，请将项目clone到本地，安装<a href="https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html">微信开发者工具</a>后将工程导入即可查看，
@@ -61,6 +62,9 @@
 2. 微信小程序代码包大小限制为2M，由于项目中包含了预览图片，导入工程时可能会报错，这种情况下删除项目中screenshot文件夹即可
 
 ## 重大更新说明
+### 2020-12-05
+规范文件命名
+
 ### 2020-09-21
 首页引入骨架屏，骨架屏文件由开发者工具生成，具体配置可参考[官方文档](https://developers.weixin.qq.com/miniprogram/dev/devtools/skeleton.html)
 

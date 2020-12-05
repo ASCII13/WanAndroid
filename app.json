@@ -1,16 +1,16 @@
 {
     "pages": [
         "pages/home/home",
-        "pages/officialaccount/officialaccount",
+        "pages/official-account/official-account",
         "pages/mine/mine",
         "pages/detail/detail",
         "pages/login/login",
         "pages/register/register",
-        "pages/personalinfosetting/personalinfosetting",
-        "pages/collectarticles/collectarticles",
-        "pages/scorelevel/scorelevel",
-        "pages/todolist/todolist",
-        "pages/createtodolist/createtodolist",
+        "pages/personal-info-setting/personal-info-setting",
+        "pages/collect-articles/collect-articles",
+        "pages/score-level/score-level",
+        "pages/todo-list/todo-list",
+        "pages/create-todo-list/create-todo-list",
         "pages/search/search"
     ],
     "window": {
@@ -31,7 +31,7 @@
                 "selectedIconPath": "assets/images/home_selected.png"
             },
             {
-                "pagePath": "pages/officialaccount/officialaccount",
+                "pagePath": "pages/official-account/official-account",
                 "text": "公众号",
                 "iconPath": "assets/images/official_account.png",
                 "selectedIconPath": "assets/images/official_account_selected.png"

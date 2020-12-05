@@ -1,6 +1,6 @@
 /* pages/scorelevel/scorelevel.wxss */
 
-@import "../../template/topinfo/topinfo.wxss";
+@import "../../template/top-info/top-info.wxss";
 
 page {
     background-color: #F7F7F7;
