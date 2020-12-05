@@ -78,4 +78,4 @@
 	</swiper-item>
 </swiper>
 
-<text class="iconfont icon-add create-todo-list" bindtap="createTodoList"></text>
+<text class="iconfont icon-add create-todo" bindtap="createTodo"></text>

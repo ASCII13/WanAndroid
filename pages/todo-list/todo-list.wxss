@@ -104,7 +104,7 @@ swiper {
     font-size: 35rpx;
 }
 
-.create-todo-list {
+.create-todo {
     position: absolute;
     bottom: 200rpx;
     right: 40rpx;
@@ -131,7 +131,7 @@ swiper {
         border-bottom: 1rpx solid var(--divider-line-color-dark);
     }
 
-    .create-todo-list {
+    .create-todo {
         color: #264d99;
     }
 }

@@ -21,7 +21,7 @@ Page({
     login: function() {
         if (this.data.isLogin) {
             wx.navigateTo({
-              url: '../personal-info-setting/personal-info-setting',
+              url: '../setting/setting',
             });
         } else {
             wx.navigateTo({
@@ -143,7 +143,7 @@ Page({
             switch (e.currentTarget.dataset.current) {
                 case 0:
                     wx.navigateTo({
-                      url: '../collect-articles/collect-articles'
+                      url: '../favorite-list/favorite-list'
                     });
                     break;
                 case 1:

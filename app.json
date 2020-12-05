@@ -6,11 +6,11 @@
         "pages/detail/detail",
         "pages/login/login",
         "pages/register/register",
-        "pages/personal-info-setting/personal-info-setting",
-        "pages/collect-articles/collect-articles",
+        "pages/setting/setting",
+        "pages/favorite-list/favorite-list",
         "pages/score-level/score-level",
         "pages/todo-list/todo-list",
-        "pages/create-todo-list/create-todo-list",
+        "pages/create-todo/create-todo",
         "pages/search/search"
     ],
     "window": {
