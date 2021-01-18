@@ -54,7 +54,7 @@
 - [x] 适配暗黑模式
 - [x] 引入字体图标
 - [x] 引入骨架屏
-- [ ] 重构续登录
+- [ ] 重构项目
 
 ## 使用说明
 1. 由于项目appid使用的是测试id，所以无法添加体验权限，请将项目clone到本地，安装<a href="https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html">微信开发者工具</a>后将工程导入即可查看，
