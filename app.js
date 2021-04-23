@@ -1,5 +1,7 @@
 //app.js
 
+const { showToastWithoutIcon } = require("./utils/util");
+
 App({
     onLaunch: function() {
         wx.getSystemInfo({
@@ -107,6 +109,21 @@ App({
 
     httpPost: function(url, data, loading, loadingMsg) {
         return this.httpBase('POST', url, data, loading, loadingMsg);
+    },
+
+    relogin: function() {
+        const url = this.baseUrl+ 'user/login';
+        const username = wx.getStorageSync('account');
+        const password = wx.getStorageSync('password');
+        let data = {
+            username: username,
+            password: password
+        }
+        this.httpPost(url, data).then(res => {
+            if (res.errorCode === 0) {
+                
+            }
+        });
     },
 
     globalData: {

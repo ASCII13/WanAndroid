@@ -148,12 +148,12 @@ Page({
                     break;
                 case 1:
                     wx.navigateTo({
-                      url: '../todo-list/todo-list'
+                      url: '../todo/todo'
                     });
                     break;
                 case 2:
                     wx.navigateTo({
-                      url: '../score-level/score-level'
+                      url: '../ranking-list/ranking-list'
                     });
                     break;
                 default:

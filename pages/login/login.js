@@ -47,6 +47,7 @@ Page({
                         wx.setStorageSync('cookie', cookie);
                         wx.setStorageSync('account', _this.data.account);
                         wx.setStorageSync('password', _this.data.password);
+                        wx.setStorageSync('nickname', res.data.data.nickname || res.data.data.username);
 
                         console.log('登录成功');
 

@@ -8,8 +8,8 @@
         "pages/register/register",
         "pages/setting/setting",
         "pages/favorite-list/favorite-list",
-        "pages/score-level/score-level",
-        "pages/todo-list/todo-list",
+        "pages/ranking-list/ranking-list",
+        "pages/todo/todo",
         "pages/create-todo/create-todo",
         "pages/search/search"
     ],
