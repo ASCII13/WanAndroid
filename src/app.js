@@ -115,9 +115,9 @@ App({
         const url = this.baseUrl+ 'user/login';
         const username = wx.getStorageSync('account');
         const password = wx.getStorageSync('password');
-        let data = {
-            username: username,
-            password: password
+        const data = {
+            username,
+            password,
         }
         this.httpPost(url, data).then(res => {
             if (res.errorCode === 0) {

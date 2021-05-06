@@ -7,7 +7,7 @@
 </p>
 
 ## 描述
-根据鸿洋大神提供的接口，制作的微信小程序版本WanAndroid，使用原生技术开发
+根据鸿洋大神提供的接口，制作的微信小程序版本 WanAndroid，使用原生技术开发，集成 WebPack
 
 ## 项目预览
 <h3 align="center">正常模式</h3>
@@ -54,14 +54,24 @@
 - [x] 适配暗黑模式
 - [x] 引入字体图标
 - [x] 引入骨架屏
+- [x] 集成 WebPack
 - [ ] 重构项目
 
 ## 使用说明
-1. 由于项目appid使用的是测试id，所以无法添加体验权限，请将项目clone到本地，安装<a href="https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html">微信开发者工具</a>后将工程导入即可查看，
-如需在真机上预览，请在开发者工具生成预览码后，使用微信扫码即可（如页面无法展示，开启debug模式）
-2. 微信小程序代码包大小限制为2M，由于项目中包含了预览图片，导入工程时可能会报错，这种情况下删除项目中screenshot文件夹即可
+1. 由于项目appid使用的是测试id，所以无法添加体验权限，请将项目clone到本地，安装<a href="https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html">微信开发者工具</a>后将工程导入
+2. 打开控制台，注意路径定位在项目根目录
+3. 执行`npm install`安装项目依赖
+4. 执行`./node_modules/.bin/webpack`打包
+5. 编译项目，即可在模拟器预览
+
+注：
+
+- 如需在真机上预览，请在开发者工具生成预览码后，使用微信扫码即可（如页面无法展示，开启debug模式）
 
 ## 重大更新说明
+### 2021-05-06
+集成 WebPack，实现小程序工程化体系
+
 ### 2020-12-05
 规范文件命名
 
