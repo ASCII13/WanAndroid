@@ -9,11 +9,6 @@ const outputDir = path.resolve(__dirname, 'miniprogram');
 module.exports = {
 	entry: (new LoadPath).init({
 		src: path.resolve(srcDir, 'app.js'),
-		// src: [
-		// 	path.resolve(srcDir, 'app.js'),
-		// 	path.resolve(srcDir, 'components'),
-		// 	path.resolve(srcDir, 'utils'),
-		// ]
 	}),
 	output: {
 		filename: '[name].js',

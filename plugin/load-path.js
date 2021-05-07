@@ -2,6 +2,21 @@ const fs = require('fs');
 const path = require('path');
 const replaceExt = require('replace-ext');
 
+const components = [
+	'components/list/list',
+	'components/navigation/navigation',
+	'components/scroll/scroll',
+	'components/side-slip/side-slip',
+	'components/tab/tab'
+];
+
+const utils = [
+	'utils/api',
+	'utils/host',
+	'utils/request',
+	'utils/util'
+];
+
 let miniDir = null;
 
 function _inflateEntries(entries = [], entry) {
@@ -25,15 +40,6 @@ function inflateEntries(entries, entry) {
 	}
 }
 
-function getEntries() {
-	const componentsDir = path.resolve(__dirname, '../src/components');
-	const utilsDir = path.resolve(__dirname, '../src/utils');
-
-	
-
-
-}
-
 class LoadPath {
 	constructor() {
 		this.entries = [];
@@ -42,13 +48,17 @@ class LoadPath {
 		const output = {};
 		miniDir = path.resolve('./src');
 
-		// options.src.forEach(element => {
-		// 	inflateEntries(this.entries, element);
-		// })
 		inflateEntries(this.entries, options.src);
-		this.entries.map(item => {
+		this.entries.forEach(item => {
 			output[replaceExt(path.relative(miniDir, item), '')] = item;
-		})
+		});
+		components.forEach(item => {
+			output[item] = path.resolve(miniDir, item);
+		});
+		utils.forEach(item => {
+			output[item] = path.resolve(miniDir, item);
+		});
+		console.log(`output ======== ${JSON.stringify(output)}`);
 		return output;
 	}
 }
