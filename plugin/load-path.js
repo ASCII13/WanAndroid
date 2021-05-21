@@ -11,11 +11,14 @@ const components = [
 ];
 
 const utils = [
-	'utils/api',
 	'utils/host',
 	'utils/request',
 	'utils/util'
 ];
+
+const apis = [
+	'api/home',
+]
 
 let miniDir = null;
 
@@ -58,6 +61,9 @@ class LoadPath {
 		utils.forEach(item => {
 			output[item] = path.resolve(miniDir, item);
 		});
+		apis.forEach(item => {
+			output[item] = path.resolve(miniDir, item);
+		})
 		console.log(`output ======== ${JSON.stringify(output)}`);
 		return output;
 	}

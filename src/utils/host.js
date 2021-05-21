@@ -1,4 +1,3 @@
-
 const BASE_URL = "https://www.wanandroid.com/";
 
 module.exports = {

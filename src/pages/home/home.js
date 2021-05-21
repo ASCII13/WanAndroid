@@ -1,6 +1,7 @@
 // pages/home/home.js
 
 import { isLogin, showToastWithoutIcon } from '../../utils/util';
+import { getBanner, getArticles } from '../../api/home';
 
 const app = getApp();
 
@@ -17,9 +18,33 @@ Page({
     },
 
     getBanner() {
-        app.httpGet('/banner/json').then((res) => {
-            this.setData({bannerList: res.data});
-        });
+        getBanner().then(res => {
+            this.setData({ bannerList: res.data });
+        })
+    },
+
+    getArticleList(type, currPage) {
+        getArticles(currPage).then(res => {
+            const data = res.data;
+            let articles = this.data.articleList;
+
+            if (type === 'init') {
+                this.setData({
+                    articleList: data.datas,
+                    pageNum: currPage + 1,
+                    loading: false,
+                })
+            } else {
+                if ((data.total > articles.length) && data.datas) {
+                    this.setData({
+                        articleList: articles.concat(data.datas),
+                        pageNum: currPage + 1
+                    })
+                } else {
+                    showToastWithoutIcon('无更多数据');
+                }
+            }
+        })
     },
 
     getList(type, currentPage) {
@@ -44,10 +69,6 @@ Page({
                 });
             }
         });
-    },
-
-    more() {
-        this.getList('more', this.data.pageNum);
     },
 
     bannerDetail: function(e) {
@@ -96,7 +117,7 @@ Page({
      */
     onLoad: function (options) {
         this.getBanner();
-        this.getList('refresh', this.data.pageNum);
+        this.getArticleList('init', 0);
         this.setData({login: isLogin()});
     },
 
@@ -142,7 +163,7 @@ Page({
      * Called when page reach bottom
      */
     onReachBottom: function () {
-        this.more('more', this.data.pageNum);
+        this.getArticleList('more', this.data.pageNum);
     },
 
     /**
