@@ -14,11 +14,24 @@ module.exports = {
 		filename: '[name].js',
 		path: outputDir
 	},
+	resolve: {
+		alias: {
+			'@': path.resolve(__dirname, './src')
+		}
+	},
 	module: {
-		rules: [{
-			test: /\.js$/,
-			use: 'babel-loader'
-		}]
+		rules: [
+			{
+				test: /\.m?js$/,
+				exclude: /node_modules/,
+				use: {
+					loader: "babel-loader",
+					options: {
+						presets: ['@babel/preset-env']
+					}
+				}
+			}
+		]
 	},
 	plugins: [
 		new CleanWebpackPlugin({
