@@ -1,6 +1,8 @@
 // pages/officialaccount/officialaccount.js
 
-import { isLogin } from '../../utils/util.js';
+import { isLogin } from '@/utils/util';
+import { star, unstar } from '@/api/favorite';
+import { fetchTabs, fetchArticles } from '@/api/official-account';
 
 const app = getApp();
 
@@ -24,7 +26,7 @@ Page({
 		pageData.requesting = true;
 		this.setCurrentData(currentCur, pageData);
 
-		app.httpGet(`/wxarticle/list/${pageData.id}/${currentPage}/json`).then((res) => {
+		fetchArticles(pageData.id, currentPage).then(res => {
 			let data = res.data || {
 				datas: [],
 				over: false
@@ -109,26 +111,25 @@ Page({
 			pageData.listData.forEach((item) => {
 				if (item.id == id) {
 					if (item.collect === false) {
-						app.httpPost(`/lg/collect/${id}/json`).then(() => {
+						star(id).then(() => {
 							item.collect = true;
-
 							this.setCurrentData(this.data.currentCur, pageData);
 
 							wx.showToast({
-								title: '收藏成功',
-								icon: 'none'
-							  });
+							  	title: '收藏成功',
+							  	icon: 'none'
+							});
+
 						});
 					} else {
-						app.httpPost(`/lg/uncollect_originId/${id}/json`).then(() => {
+						unstar(id).then(() => {
 							item.collect = false;
-
 							this.setCurrentData(this.data.currentCur, pageData);
 
 							wx.showToast({
-								title: '取消收藏',
-								icon: 'none'
-							  });
+							  	title: '取消收藏',
+							  	icon: 'none'
+							});
 						});
 					}
 				}
@@ -146,16 +147,22 @@ Page({
 		});
 	},
 	getBottomHeight() {
-		let res = app.globalData.systemInfo;
-		let rpx = 750 / res.screenWidth;
-		let bottomHeightRpx = (res.screenHeight - res.windowHeight) * rpx - 129;
+		wx.getSystemInfoAsync({
+		  success: (result) => {
+			  const res = result;
+			  const rpx = 750 / res.screenWidth;
+			  const bottomHeight = (res.screenHeight - res.windowHeight + 30) * rpx;
 
-		this.setData({bottomHeight: bottomHeightRpx});	
+			  this.setData({
+				  bottomHeight,
+			  });
+		  },
+		})
 	},
 	onLoad() {
 		this.getBottomHeight();
 
-		app.httpGet("/wxarticle/chapters/json").then((res) => {
+		fetchTabs().then(res => {
 			let menus = res.data || [];
 
 			let categoryMenu = [];
@@ -184,6 +191,6 @@ Page({
 			setTimeout(() => {
 				this.refresh();
 			}, 350);
-		})
+		});
 	}
 });

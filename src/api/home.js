@@ -1,10 +1,9 @@
-import { httpGet, httpPost } from '../utils/request';
+import { httpGet } from '@/utils/request';
 
-
-export function getBanner() {
+export function fetchBanner() {
     return httpGet('/banner/json');
 }
 
-export function getArticles(currPage = 0) {
+export function fetchArticles(currPage = 0) {
     return httpGet(`/article/list/${currPage}/json`);
 }

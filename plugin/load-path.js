@@ -18,6 +18,8 @@ const utils = [
 
 const apis = [
 	'api/home',
+	'api/official-account',
+	'api/index',
 ]
 
 let miniDir = null;

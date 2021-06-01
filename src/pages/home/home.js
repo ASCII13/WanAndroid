@@ -1,7 +1,7 @@
 // pages/home/home.js
 
-import { isLogin, showToastWithoutIcon } from '../../utils/util';
-import { getBanner, getArticles } from '../../api/home';
+import { isLogin, showToastWithoutIcon } from '@/utils/util';
+import { fetchBanner, fetchArticles } from '@/api/home';
 
 const app = getApp();
 
@@ -18,13 +18,13 @@ Page({
     },
 
     getBanner() {
-        getBanner().then(res => {
+        fetchBanner().then(res => {
             this.setData({ bannerList: res.data });
         })
     },
 
     getArticleList(type, currPage) {
-        getArticles(currPage).then(res => {
+        fetchArticles(currPage).then(res => {
             const data = res.data;
             let articles = this.data.articleList;
 
@@ -45,30 +45,6 @@ Page({
                 }
             }
         })
-    },
-
-    getList(type, currentPage) {
-        app.httpGet(`/article/list/${currentPage}/json`).then((res) => {
-            let data = res.data;
-            let articles = this.data.articleList;
-
-            if (type === 'more') {
-                if (data.total > articles.length) {
-                    this.setData({
-                        articleList: articles.concat(data.datas),
-                        pageNum: currentPage + 1
-                    });
-                } else {
-                    showToastWithoutIcon('无更多数据');
-                }
-            } else {
-                this.setData({
-                    articleList: data.datas,
-                    pageNum: currentPage + 1,
-                    loading: false
-                });
-            }
-        });
     },
 
     bannerDetail: function(e) {
