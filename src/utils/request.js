@@ -40,8 +40,8 @@ function httpBase(method, requestUrl, data) {
     return new Promise(request);
 }
 
-export function httpGet(url, data) {
-    return httpBase('GET', url, data);
+export function httpGet(url) {
+    return httpBase('GET', url);
 }
 
 export function httpPost(url, data) {

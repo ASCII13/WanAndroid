@@ -20,7 +20,10 @@ const apis = [
 	'api/home',
 	'api/official-account',
 	'api/index',
-]
+	'api/auth',
+	'api/favorite-list',
+	'api/favorite',
+];
 
 let miniDir = null;
 

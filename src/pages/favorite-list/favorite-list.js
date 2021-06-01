@@ -1,8 +1,10 @@
 // pages/collectarticles/collectarticles.js
 
-import { showToastWithoutIcon } from '../../utils/util.js';
+import { showToastWithoutIcon } from '@/utils/util';
+import { fetchFavorites } from '@/api/favorite-list';
+import { unfavorite } from '@/api/favorite';
 
-const app = getApp();
+// const app = getApp();
 
 Page({
 
@@ -43,10 +45,7 @@ Page({
         let id = currentData.id;
         let originId = currentData.originId === undefined ? -1 : currentData.originId;
 
-        let data = {
-            originId: originId
-        }
-        app.httpPost(`/lg/uncollect/${id}/json`, data).then(() => {
+        unfavorite(id, originId).then(() => {
             let dataList = this.data.dataList;
             dataList.splice(index, 1);
 
@@ -62,9 +61,9 @@ Page({
     getList(type, currentPage) {
         this.setData({requesting: true});
 
-        app.httpGet(`/lg/collect/list/${currentPage}/json`).then((res) => {
+        fetchFavorites(currentPage).then(res => {
             this.setData({requesting: false});
-            
+
             if (type === 'refresh') {
                 this.setData({
                     dataList: res.data.datas,
