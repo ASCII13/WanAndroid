@@ -23,6 +23,7 @@ const apis = [
 	'api/auth',
 	'api/favorite-list',
 	'api/favorite',
+	'api/ranking-list',
 ];
 
 let miniDir = null;

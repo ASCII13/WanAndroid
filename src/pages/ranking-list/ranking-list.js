@@ -1,5 +1,7 @@
 // pages/scorelevel/scorelevel.js
 
+import { fetchRankingList, fetchSelfInfo } from '@/api/ranking-list';
+
 const app = getApp();
 
 Page({
@@ -18,9 +20,9 @@ Page({
     getList(type, currentPage) {
         this.setData({requesting: true});
 
-        app.httpGet(`/coin/rank/${currentPage}/json`).then((res) => {
+        fetchRankingList(currentPage).then(res => {
             this.setData({requesting: false});
-            
+
             if (type === 'refresh') {
                 this.setData({
                     rankInfoList: res.data.datas,
@@ -48,7 +50,7 @@ Page({
     },
 
     getSelfInfo() {
-        app.httpGet('/lg/coin/userinfo/json').then((res) => {
+        fetchSelfInfo().then(res => {
             this.setData({
                 myself: res.data
             });
