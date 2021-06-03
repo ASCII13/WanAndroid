@@ -1,7 +1,9 @@
 // pages/todolist/todolist.js
 
 const app = getApp();
-const utils = require('../../utils/util.js');
+const utils = require('@/utils/util');
+
+import { fetchTodoList, removeTodo, finishTodo } from '@/api/todo';
 
 let pageStart = 1;
 
@@ -67,19 +69,12 @@ Page({
         pageData.requesting = true;
         this.setCurrentData(currentCur, pageData);
 
-        let status = {
-            status: pageData.id,
-            orderby: 4
-        }
+        // let status = {
+        //     status: pageData.id,
+        //     orderby: 4
+        // }
 
-        app.httpGet(`/lg/todo/v2/list/${currentPage}/json`, status).then((res) => {
-            console.log(res.data);
-
-            // let data = res.data || {
-            //     datas: [],
-            //     // over: false
-            // };
-
+        fetchTodoList(currentPage, pageData.id).then(res => {
             let tmp = res.data.datas.map((item) => {
                 return item.dateStr;
             });
@@ -94,8 +89,7 @@ Page({
                     list: list
                 });
             }
-            
-            // let listData = data.datas || [];
+
             let listData = timeCatgoryData || [];
             pageData.requesting = false;
 
@@ -111,6 +105,46 @@ Page({
             console.log(pageData)
             this.setCurrentData(currentCur, pageData);
         });
+
+        // app.httpGet(`/lg/todo/v2/list/${currentPage}/json`, status).then((res) => {
+        //     console.log(res.data);
+
+        //     // let data = res.data || {
+        //     //     datas: [],
+        //     //     // over: false
+        //     // };
+
+        //     let tmp = res.data.datas.map((item) => {
+        //         return item.dateStr;
+        //     });
+        //     let time = new Set(tmp);
+        //     let timeCatgoryData = [];
+
+        //     for (let ele of time) {
+        //         let list = res.data.datas.filter((i) => i.dateStr == ele);
+        //         timeCatgoryData.push({
+        //             showDetail: false,
+        //             date: ele,
+        //             list: list
+        //         });
+        //     }
+            
+        //     // let listData = data.datas || [];
+        //     let listData = timeCatgoryData || [];
+        //     pageData.requesting = false;
+
+        //     if (type === 'refresh') {
+        //         pageData.listData = listData;
+        //         // pageData.end = data.over;
+        //         pageData.page = currentPage + 1;
+        //     } else {
+        //         pageData.listData = pageData.listData.concat(listData);
+        //         // pageData.end = data.over;
+        //         pageData.page = currentPage + 1;
+        //     }
+        //     console.log(pageData)
+        //     this.setCurrentData(currentCur, pageData);
+        // });
     },
 
     getCurrentData() {
@@ -189,11 +223,15 @@ Page({
           success: (result) => {
               if (result.confirm) {
                   console.log(`确认删除`);
-                  app.httpPost(`/lg/todo/delete/${id}/json`).then((res) => {
-                      console.log(res);
+                  removeTodo(id).then(res => {
                       this.deleteTodo(categoryIndex, detailIndex, 1);
                       utils.showToastWithoutIcon('删除成功');
                   });
+                //   app.httpPost(`/lg/todo/delete/${id}/json`).then((res) => {
+                //       console.log(res);
+                //       this.deleteTodo(categoryIndex, detailIndex, 1);
+                //       utils.showToastWithoutIcon('删除成功');
+                //   });
               }
           },
         });
@@ -224,11 +262,15 @@ Page({
           content: content,
           success: (result) => {
               if (result.confirm) {
-                  app.httpPost(`/lg/todo/done/${id}/json`, data).then((res) => {
-                      console.log(res);
+                  finishTodo(id, status).then(res => {
                       this.deleteTodo(categoryIndex, detailIndex, 1);
                       utils.showToastWithoutIcon(msg);
                   });
+                //   app.httpPost(`/lg/todo/done/${id}/json`, data).then((res) => {
+                //       console.log(res);
+                //       this.deleteTodo(categoryIndex, detailIndex, 1);
+                //       utils.showToastWithoutIcon(msg);
+                //   });
               }
           },
         })

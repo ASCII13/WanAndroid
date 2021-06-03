@@ -1,7 +1,9 @@
 // pages/createtodolist/createtodolist.js
 
-const app = getApp();
-const utils = require('../../utils/util.js');
+// const app = getApp();
+const utils = require('@/utils/util.js');
+
+import { addTodo, upgradeTodo } from '@/api/todo';
 
 Page({
 
@@ -35,24 +37,27 @@ Page({
         let id = this.data.id;
         let status = this.data.status;
 
-        let data = {
-            title: title,
-            content: content,
-            date: date,
-            type: type,
-            priority: priority
-        };
-
         switch (this.data.dataSrc) {
             case 0:
-                app.httpPost('/lg/todo/add/json', data).then((res) => {
+                addTodo({
+                    title,
+                    content,
+                    date,
+                    type,
+                    priority
+                }).then(res => {
                     this.backLastPage(this.data.dataSrc);
                 });
                 break;
             case 1:
-                data.status = status;
-                console.log(data);
-                app.httpPost(`/lg/todo/update/${id}/json`, data).then((res) => {
+                upgradeTodo(id, {
+                    title,
+                    content,
+                    date,
+                    status,
+                    type,
+                    priority
+                }).then(res => {
                     this.backLastPage(this.data.dataSrc);
                 });
                 break;

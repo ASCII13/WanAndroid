@@ -18,9 +18,9 @@ function httpBase(method, requestUrl, data) {
                 if (res.errorCode !== 0) {
                     reject(res);
                     if (res.errorMsg) {
-                        exportwx.showToast({
-                          title: res.errMsg,
-                          icon: 'none'
+                        wx.showToast({
+                            title: res.errMsg,
+                            icon: 'none'
                         });
                     }
                 } else {
@@ -30,8 +30,8 @@ function httpBase(method, requestUrl, data) {
             fail: function(error) {
                 reject(error);
                 wx.showToast({
-                  title: '网络异常，请稍后再试',
-                  icon: 'none'
+                    title: '网络异常，请稍后再试',
+                    icon: 'none'
                 });
             }
 
@@ -40,8 +40,8 @@ function httpBase(method, requestUrl, data) {
     return new Promise(request);
 }
 
-export function httpGet(url) {
-    return httpBase('GET', url);
+export function httpGet(url, data) {
+    return httpBase('GET', url, data);
 }
 
 export function httpPost(url, data) {
