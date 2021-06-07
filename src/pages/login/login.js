@@ -1,7 +1,6 @@
 // pages/login/login.js
 
-let host = require('../../utils/host.js');
-let utils = require('../../utils/util.js');
+import { signIn } from '@/api/auth';
 
 Page({
 
@@ -23,54 +22,14 @@ Page({
         })
     },
 
-    login: function() {
-        let _this = this;
-        wx.request({
-            url: host.BASE_URL + 'user/login',
-            method: 'POST',
-            header: {
-                "Content-Type": "application/x-www-form-urlencoded"
-            },
-            data: {
-                username: _this.data.account,
-                password: _this.data.password
-            },
-            success: function(res) {
-                if (res.data.errorCode != 0) {
-                    wx.showToast({
-                        title: res.data.errorMsg,
-                        icon: 'none'
-                    });
-                } else {
-                    let cookie = res.header['Set-Cookie'];
-                    if (!utils.isEmpty(cookie)) {
-                        wx.setStorageSync('cookie', cookie);
-                        wx.setStorageSync('account', _this.data.account);
-                        wx.setStorageSync('password', _this.data.password);
-                        wx.setStorageSync('nickname', res.data.data.nickname || res.data.data.username);
-
-                        console.log('登录成功');
-
-                        wx.navigateBack({
-                          complete: (res) => {},
-                          delta: 1,
-                          fail: (res) => {},
-                          success: (res) => {},
-                        });
-                    } else {
-                        wx.showToast({
-                          title: 'cookie异常，请稍后重试',
-                          icon: 'none'
-                        });
-                    }
-                }
-            },
-            fail: function() {
-                wx.showToast({
-                    title: '网络异常，请稍后重试',
-                    icon: 'none'
-                });
-            }
+    login() {
+        const { account, password } = this.data;
+        signIn(account, password).then(res => {
+            wx.setStorageSync('account', account);
+            wx.setStorageSync('password', password);
+            wx.navigateBack({
+              delta: 1,
+            });
         });
     },
 

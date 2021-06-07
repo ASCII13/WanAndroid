@@ -1,20 +1,24 @@
 const baseUrl = 'https://www.wanandroid.com';
 
 function httpBase(method, requestUrl, data) {
+    let header = {};
+    header['Content-Type'] = 'application/x-www-form-urlencoded';
+
     const url = baseUrl + requestUrl;
     const cookie = wx.getStorageSync('cookie');
 
+    if (cookie) {
+        header['Cookie'] = cookie
+    }
+
     function request(resolve, reject) {
         wx.request({
-            header: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Cookie': cookie
-            },
+            header,
             method,
             url,
             data,
             success: function(response) {
-                let res = response.data || {};
+                const res = response.data || {};
                 if (res.errorCode !== 0) {
                     reject(res);
                     if (res.errorMsg) {
@@ -24,7 +28,8 @@ function httpBase(method, requestUrl, data) {
                         });
                     }
                 } else {
-                    resolve(res)
+                    if (!cookie) wx.setStorageSync('cookie', response.header['Set-Cookie']);
+                    resolve(res);
                 }
             },
             fail: function(error) {
