@@ -1,5 +1,7 @@
 // pages/personalinfosetting/personalinfosetting.js
 
+import { signOut } from '@/api/auth';
+
 let host = require('../../utils/host.js');
 let utils = require('../../utils/util.js');
 
@@ -39,31 +41,45 @@ Page({
         });
     },
 
-    logout: function() {
-        wx.request({
-            url: host.BASE_URL + 'user/logout/json',
-            method: 'GET',
-            success: function(res) {
-                if (res.data.errorCode != 0) {
-                    wx.showToast({
-                        title: res.data.errorMsg,
-                        icon: 'none'
-                    });
-                } else {
-                    utils.clearLoginInfo();
-                    wx.navigateBack({
-                       delta: 1 
-                    });
-                }
-            },
-            fail: function() {
-                wx.showToast({
-                    title: '网络异常，请稍后再试',
-                    icon: 'none'
-                });
-            }
+    logout() {
+        signOut().then(() => {
+            getApp().globalData.loggedIn = false;
+
+            wx.removeStorageSync('cookie');
+            // wx.removeStorageSync('account');
+            // wx.removeStorageSync('password');
+            wx.removeStorageSync('nickname');
+            wx.navigateBack({
+                delta: 1,
+            });
         });
     },
+
+    // logout: function() {
+    //     wx.request({
+    //         url: host.BASE_URL + 'user/logout/json',
+    //         method: 'GET',
+    //         success: function(res) {
+    //             if (res.data.errorCode != 0) {
+    //                 wx.showToast({
+    //                     title: res.data.errorMsg,
+    //                     icon: 'none'
+    //                 });
+    //             } else {
+    //                 utils.clearLoginInfo();
+    //                 wx.navigateBack({
+    //                    delta: 1 
+    //                 });
+    //             }
+    //         },
+    //         fail: function() {
+    //             wx.showToast({
+    //                 title: '网络异常，请稍后再试',
+    //                 icon: 'none'
+    //             });
+    //         }
+    //     });
+    // },
 
     /**
      * Lifecycle function--Called when page load

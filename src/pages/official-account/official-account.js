@@ -1,10 +1,7 @@
 // pages/officialaccount/officialaccount.js
 
-import { isLogin } from '@/utils/util';
 import { star, unstar } from '@/api/favorite';
 import { fetchTabs, fetchArticles } from '@/api/official-account';
-
-const app = getApp();
 
 let pageStart = 1;
 
@@ -14,8 +11,9 @@ Page({
 		categoryCur: 0, // 当前数据列索引
 		categoryMenu: [], // 分类菜单数据, 字符串数组格式
 		categoryData: [], // 所有数据列
-		navigationHeight: app.globalData.navigationHeight, // 自定义navigationBar高度
-		bottomHeight: 0
+		navigationHeight: getApp().globalData.navigationHeight, // 自定义navigationBar高度
+		bottomHeight: 0,
+		loggedIn: getApp().globalData.loggedIn,
 	},
 	getList(type, currentPage) {
 		let currentCur = this.data.categoryCur;
@@ -104,7 +102,7 @@ Page({
 		})
 	},
 	collect(e) {
-		if (isLogin()) {
+		if (this.data.loggedIn) {
 			let id = e.currentTarget.dataset.id;
 			let pageData = this.getCurrentData(this.data.categoryCur);
 			
@@ -192,5 +190,14 @@ Page({
 				this.refresh();
 			}, 350);
 		});
-	}
+	},
+	onShow() {
+		const { loggedIn } = this.data;
+		const loginState = getApp().globalData.loggedIn;
+		if (loggedIn !== loginState) {
+			this.setData({
+				loggedIn: loginState,
+			});
+		}
+	},
 });

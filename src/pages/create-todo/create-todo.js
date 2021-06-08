@@ -1,6 +1,5 @@
 // pages/createtodolist/createtodolist.js
 
-// const app = getApp();
 const utils = require('@/utils/util.js');
 
 import { addTodo, upgradeTodo } from '@/api/todo';

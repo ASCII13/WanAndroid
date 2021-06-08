@@ -1,6 +1,6 @@
 // pages/home/home.js
 
-import { isLogin, showToastWithoutIcon } from '@/utils/util';
+import { showToastWithoutIcon } from '@/utils/util';
 import { fetchBanner, fetchArticles } from '@/api/home';
 
 const app = getApp();
@@ -14,7 +14,8 @@ Page({
         bannerList: [],
         articleList: [],
         pageNum: 0,
-        loading: true //调试用
+        loading: true, //调试用
+        loggedIn: getApp().globalData.loggedIn,
     },
 
     getBanner() {
@@ -67,7 +68,9 @@ Page({
         let index = e.currentTarget.dataset.index;
         let datas = this.data.articleList;
 
-        if (isLogin()) {
+        const { loggedIn } = this.data;
+
+        if (loggedIn) {
             if (datas[index].collect) {
                 app.httpPost(`/lg/uncollect_originId/${id}/json`).then((res) => {
                     datas[index].collect = false;
@@ -94,7 +97,6 @@ Page({
     onLoad: function (options) {
         this.getBanner();
         this.getArticleList('init', 0);
-        this.setData({login: isLogin()});
     },
 
     /**
@@ -108,10 +110,17 @@ Page({
      * Lifecycle function--Called when page show
      */
     onShow: function () {
-        if (isLogin() !== this.data.login) {
-            this.getList('refresh', 0);
-            this.setData({login: isLogin()});
+        const { loggedIn } = this.data;
+        const loginState = getApp().globalData.loggedIn;
+        if (loggedIn !== loginState) {
+            this.setData({
+                loggedIn: loginState,
+            });
         }
+        // if (isLogin() !== this.data.login) {
+        //     this.getList('refresh', 0);
+        //     this.setData({login: isLogin()});
+        // }
     },
 
     /**

@@ -1,6 +1,6 @@
 // pages/register/register.js
 
-let host = require('../../utils/host.js');
+import { register, signIn } from "@/api/auth";
 
 Page({
 
@@ -57,48 +57,20 @@ Page({
         });
     },
 
-    register: function() {
-        let _this = this;
-        wx.request({
-            url: host.BASE_URL + 'user/register',
-            method: "POST",
-            header: {
-                "Content-Type": "application/x-www-form-urlencoded"
-            },
-            data: {
-                username: _this.data.account,
-                password: _this.data.password,
-                repassword: _this.data.confirmPassword
-            },
-            success: function(res) {
-                if (res.data.errorCode != 0) {
-                    wx.showToast({
-                        title: res.data.errorMsg,
-                        icon: 'none'
-                    })
-                } else {
-                    console.log("注册成功");
-                    if (res.statusCode == 200) {
-                        if (res.header['Set-Cookie'] != '') {
-                            wx.setStorageSync('Set-Cookie', res.header['Set-Cookie']);
-                            console.log(`Set-Cookie值为: ${res.header['Set-Cookie']}`);
-                        } else {
-                            console.log('Set-Cookie为空');
-                        }
-                    } else {
-                        wx.showToast({
-                            title: '网络异常，请稍后再试',
-                            icon: 'none'
-                        });
-                    }
-                }
-            },
-            fail: function() {
-                wx.showToast({
-                    title: '网络异常，请稍后再试',
-                    icon: 'none'
+    register() {
+        const {
+            account,
+            password,
+            confirmPassword
+        } = this.data;
+        register(account, password, confirmPassword).then(() => {
+            return signIn(account, password).then(() => {
+                wx.setStorageSync('account', account);
+                wx.setStorageSync('password', password);
+                wx.navigateBack({
+                    delta: 2,
                 });
-            }
+            });
         });
     },
 

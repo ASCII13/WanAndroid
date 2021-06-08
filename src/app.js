@@ -1,7 +1,5 @@
 //app.js
 
-const { showToastWithoutIcon } = require("./utils/util");
-
 App({
     onLaunch: function() {
         wx.getSystemInfo({
@@ -19,6 +17,12 @@ App({
                 this.globalData.navigationHeight = capsuleBound.top - res.statusBarHeight + capsuleBound.bottom;
             }
         });
+        this.setLoginState();
+    },
+
+    setLoginState() {
+        const cookie = wx.getStorageSync('cookie');
+        if (cookie) this.globalData.loggedIn = true;
     },
 
     baseUrl: 'https://www.wanandroid.com',
@@ -111,25 +115,11 @@ App({
         return this.httpBase('POST', url, data, loading, loadingMsg);
     },
 
-    relogin: function() {
-        const url = this.baseUrl+ 'user/login';
-        const username = wx.getStorageSync('account');
-        const password = wx.getStorageSync('password');
-        const data = {
-            username,
-            password,
-        }
-        this.httpPost(url, data).then(res => {
-            if (res.errorCode === 0) {
-                
-            }
-        });
-    },
-
     globalData: {
         systemInfo: null,
         userInfo: null,
         isIpohoneX: false,
+        loggedIn: false,
         // isFullScreen: false,
         statusBarHeight: 0,
         navigationHeight: 0

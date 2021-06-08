@@ -3,10 +3,10 @@
 <view class="mine-container">
     <view class="header-background"></view>
 
-    <view class="personal-msg" bindtap="login">
-        <image class="head-icon" src="../../assets/images/{{isLogin ? 'head_icon_login' : 'head_icon_normal'}}.png"></image>
+    <view class="personal-msg" bindtap="toLoginPage">
+        <image class="head-icon" src="../../assets/images/{{loggedIn ? 'head_icon_login' : 'head_icon_normal'}}.png"></image>
 
-        <view wx:if="{{isLogin == false}}" class="account-info">
+        <view wx:if="{{loggedIn == false}}" class="account-info">
             <view class="not-logged-in">未登录</view>
         </view>
         <view wx:else class="account-info">

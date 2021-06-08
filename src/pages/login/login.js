@@ -25,10 +25,11 @@ Page({
     login() {
         const { account, password } = this.data;
         signIn(account, password).then(res => {
-            wx.setStorageSync('account', account);
-            wx.setStorageSync('password', password);
+            getApp().globalData.loggedIn = true;
+
+            wx.setStorageSync('nickname', res.data.nickname);
             wx.navigateBack({
-              delta: 1,
+                delta: 1,
             });
         });
     },

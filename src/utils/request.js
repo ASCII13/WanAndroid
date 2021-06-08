@@ -1,12 +1,15 @@
 const baseUrl = 'https://www.wanandroid.com';
 
 function httpBase(method, requestUrl, data) {
-    let header = {};
-    header['Content-Type'] = 'application/x-www-form-urlencoded';
-
     const url = baseUrl + requestUrl;
     const cookie = wx.getStorageSync('cookie');
 
+    let header = {};
+
+    if (method === 'POST') {
+        header['Content-Type'] = 'application/x-www-form-urlencoded';
+    }
+    
     if (cookie) {
         header['Cookie'] = cookie
     }
@@ -28,7 +31,10 @@ function httpBase(method, requestUrl, data) {
                         });
                     }
                 } else {
-                    if (!cookie) wx.setStorageSync('cookie', response.header['Set-Cookie']);
+                    const searchResult = url.indexOf('login');
+                    if (searchResult !== -1) {
+                        wx.setStorageSync('cookie', response.header['Set-Cookie']);
+                    }
                     resolve(res);
                 }
             },
