@@ -2,43 +2,13 @@
 
 import { signOut } from '@/api/auth';
 
-let host = require('../../utils/host.js');
-let utils = require('../../utils/util.js');
-
 Page({
 
     /**
      * Page initial data
      */
     data: {
-        methodList: []
 
-    },
-
-    getMethodList: function() {
-        this.setData({
-            methodList: [
-                {   
-                    name: "修改密码",
-                    src: "../../assets/images/password.png"
-                },
-                {
-                    name: "修改昵称",
-                    src: "../../assets/images/nickname.png"
-                },
-                {
-                    name: "绑定邮箱",
-                    src: "../../assets/images/email.png"
-                }
-            ]
-        });
-    },
-
-    clickFeature: function() {
-        wx.showToast({
-            title: '功能开发中，敬请期待',
-            icon: 'none'
-        });
     },
 
     logout() {
@@ -46,8 +16,6 @@ Page({
             getApp().globalData.loggedIn = false;
 
             wx.removeStorageSync('cookie');
-            // wx.removeStorageSync('account');
-            // wx.removeStorageSync('password');
             wx.removeStorageSync('nickname');
             wx.navigateBack({
                 delta: 1,
@@ -55,37 +23,11 @@ Page({
         });
     },
 
-    // logout: function() {
-    //     wx.request({
-    //         url: host.BASE_URL + 'user/logout/json',
-    //         method: 'GET',
-    //         success: function(res) {
-    //             if (res.data.errorCode != 0) {
-    //                 wx.showToast({
-    //                     title: res.data.errorMsg,
-    //                     icon: 'none'
-    //                 });
-    //             } else {
-    //                 utils.clearLoginInfo();
-    //                 wx.navigateBack({
-    //                    delta: 1 
-    //                 });
-    //             }
-    //         },
-    //         fail: function() {
-    //             wx.showToast({
-    //                 title: '网络异常，请稍后再试',
-    //                 icon: 'none'
-    //             });
-    //         }
-    //     });
-    // },
-
     /**
      * Lifecycle function--Called when page load
      */
     onLoad: function (options) {
-        this.getMethodList();
+        
     },
 
     /**
