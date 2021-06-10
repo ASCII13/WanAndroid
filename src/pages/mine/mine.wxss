@@ -49,7 +49,6 @@ page {
 
 .personal-feature {
     background-color: white;
-    height: 400rpx;
     margin: 90rpx 40rpx 0rpx 40rpx;
     border-radius: 11rpx;
 
@@ -62,6 +61,7 @@ page {
 .feature-item {
     height: 150rpx;
     width: 170rpx;
+    padding: 20rpx;
     display: flex;
     flex-direction: column;
     justify-content: center;

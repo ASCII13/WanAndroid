@@ -1,6 +1,7 @@
 // pages/mine/mine.js
 
 import { fetchSelfInfo } from '@/api/mine';
+import { navigateTo } from '@/utils/router';
 
 Page({
 
@@ -14,16 +15,8 @@ Page({
         loggedIn: getApp().globalData.loggedIn,
     },
 
-    toLoginPage: function() {
-        if (this.data.loggedIn) {
-            wx.navigateTo({
-              url: '../setting/setting',
-            });
-        } else {
-            wx.navigateTo({
-              url: '../login/login',
-            });
-        }
+    onTapCard() {
+        navigateTo('../setting/setting');
     },
 
     getSelfInfo() {
@@ -49,51 +42,22 @@ Page({
                     icon: "../../assets/images/score_level.png",
                     name: "积分排行"
                 },
-                {
-                    icon: "../../assets/images/share_article.png",
-                    name: "分享文章"
-                },
-                {
-                    icon: "../../assets/images/share_project.png",
-                    name: "分享项目"
-                },
-                {
-                    icon: "../../assets/images/personal_info.png",
-                    name: "个人信息"
-                },
             ]               
         });
     },
 
-    clickFeature: function(e) {
-        if (this.data.loggedIn) {
-            switch (e.currentTarget.dataset.current) {
-                case 0:
-                    wx.navigateTo({
-                      url: '../favorite-list/favorite-list'
-                    });
-                    break;
-                case 1:
-                    wx.navigateTo({
-                      url: '../todo/todo'
-                    });
-                    break;
-                case 2:
-                    wx.navigateTo({
-                      url: '../ranking-list/ranking-list'
-                    });
-                    break;
-                default:
-                    let title = `点击了第${e.currentTarget.dataset.current}个item`;
-                    wx.showToast({
-                      title: title,
-                      icon: 'none'
-                    });
-            }
-        } else {
-            wx.navigateTo({
-              url: '../login/login',
-            });
+    onTapFeature: function(e) {
+        switch (e.currentTarget.dataset.current) {
+            case 0:
+                navigateTo('../favorite-list/favorite-list');
+                break;
+            case 1:
+                navigateTo('../todo/todo');
+                break;
+            case 2:
+                navigateTo('../ranking-list/ranking-list');
+                break;
+            default:    
         }
     },
 

@@ -3,7 +3,7 @@
 <view class="mine-container">
     <view class="header-background"></view>
 
-    <view class="personal-msg" bindtap="toLoginPage">
+    <view class="personal-msg" bindtap="onTapCard">
         <image class="head-icon" src="../../assets/images/{{loggedIn ? 'head_icon_login' : 'head_icon_normal'}}.png"></image>
 
         <view wx:if="{{loggedIn == false}}" class="account-info">
@@ -18,7 +18,7 @@
     <view class="personal-feature">
         <view class="feature-item" 
             wx:for="{{featureList}}" 
-            bindtap="clickFeature" 
+            bindtap="onTapFeature" 
             data-current="{{index}}"
             wx:key="index">
             <image class="feature-icon" src="{{item.icon}}"></image>
