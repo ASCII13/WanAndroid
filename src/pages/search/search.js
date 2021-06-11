@@ -1,8 +1,9 @@
 // pages/search/search.js
 
-const app = getApp();
-
-import { isLogin, showToastWithoutIcon } from '../../utils/util.js';
+import { showText } from '@/utils/toast';
+import { toWebView, toLoginPage } from '@/utils/router';
+import { search } from '@/api/official-account';
+import { star, unstar } from '@/api/favorite';
 
 Page({
 
@@ -10,7 +11,8 @@ Page({
      * Page initial data
      */
     data: {
-        height: app.globalData.statusBarHeight,
+        height: getApp().globalData.statusBarHeight,
+        loggedIn: getApp().globalData.loggedIn,
         hideCancel: true,
         requesting: false,
         end: false,
@@ -40,31 +42,30 @@ Page({
     },
 
     getList(type, currentPage = 1) {
-        let id = this.data.id;
-        let searchStr = this.data.searchStr;
+        const { id, searchStr } = this.data;
 
-        app.httpGet(`/wxarticle/list/${id}/${currentPage}/json?k=${searchStr}`).then((res) => {
-            let data = res.data;
+        search(id, currentPage, searchStr).then(res => {
+            const data = res.data;
             let articles = this.data.listData;
 
             if (type === 'more') {
-                if (data.total > articles.length) {
+                if (data.total > articles.length && data.datas) {
                     this.setData({
                         listData: articles.concat(data.datas),
                         pageNum: currentPage + 1,
                         end: false
                     });
                 } else {
-                    this.setData({end: true});
+                    this.setData({ end: true });
                 }
             } else {
                 this.setData({
                     listData: data.datas,
                     pageNum: currentPage + 1,
                     end: false
-                })
+                });
             }
-        });   
+        }); 
     },
 
     test() {
@@ -76,35 +77,29 @@ Page({
     },
 
     showArticle(e) {
-        let url = encodeURIComponent(e.currentTarget.dataset.link);
-        wx.navigateTo({
-          url: `../detail/detail?url=${url}`,
-        });
+        toWebView(e.currentTarget.dataset.link);
     },
 
     collect(e) {
-        let index = e.currentTarget.dataset.index;
-        let id = e.currentTarget.dataset.id;
+        const { index, id } = e.currentTarget.dataset;
         let pageData = this.data.listData;
 
-        if (isLogin()) {
+        if (this.data.loggedIn) {
             if (!pageData[index].collect) {
-                app.httpPost(`/lg/collect/${id}/json`).then(() => {
+                star(id).then(() => {
                     pageData[index].collect = true;
                     this.setData({listData: pageData});
-                    showToastWithoutIcon('收藏成功');
+                    showText('收藏成功')
                 });
             } else {
-                app.httpPost(`/lg/uncollect_originId/${id}/json`).then(() => {
+                unstar(id).then(() => {
                     pageData[index].collect = false;
                     this.setData({listData: pageData});
-                    showToastWithoutIcon('取消收藏');
+                    showText('取消收藏');
                 });
             }
         } else {
-            wx.navigateTo({
-              url: '../login/login',
-            });
+            toLoginPage();
         }
     },
 

@@ -2,8 +2,6 @@
 
 import { fetchRankingList, fetchSelfInfo } from '@/api/ranking-list';
 
-const app = getApp();
-
 Page({
 
     /**

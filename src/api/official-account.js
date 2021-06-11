@@ -7,3 +7,7 @@ export function fetchTabs() {
 export function fetchArticles(id, currPage = 1) {
     return httpGet(`/wxarticle/list/${id}/${currPage}/json`)
 }
+
+export function search(id, currPage = 1, str) {
+    return httpGet(`/wxarticle/list/${id}/${currPage}/json?k=${str}`);
+}

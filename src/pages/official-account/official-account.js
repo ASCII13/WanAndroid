@@ -1,5 +1,7 @@
 // pages/officialaccount/officialaccount.js
 
+import { showText } from '@/utils/toast';
+import { toWebView, toLoginPage, navigateTo } from '@/utils/router';
 import { star, unstar } from '@/api/favorite';
 import { fetchTabs, fetchArticles } from '@/api/official-account';
 
@@ -95,11 +97,7 @@ Page({
 		this.getList('more', this.getCurrentData(this.data.categoryCur).page);
 	},
 	showArticle(e) {
-		let url = encodeURIComponent(e.currentTarget.dataset.link);
-		
-		wx.navigateTo({
-			url: `/pages/detail/detail?url=${url}`
-		})
+		toWebView(e.currentTarget.dataset.link);
 	},
 	collect(e) {
 		if (this.data.loggedIn) {
@@ -112,37 +110,28 @@ Page({
 						star(id).then(() => {
 							item.collect = true;
 							this.setCurrentData(this.data.currentCur, pageData);
-
-							wx.showToast({
-							  	title: '收藏成功',
-							  	icon: 'none'
-							});
-
+							
+							showText('收藏成功');
 						});
 					} else {
 						unstar(id).then(() => {
 							item.collect = false;
 							this.setCurrentData(this.data.currentCur, pageData);
 
-							wx.showToast({
-							  	title: '取消收藏',
-							  	icon: 'none'
-							});
+							showText('取消收藏');
 						});
 					}
 				}
 			});
 		} else {
-			wx.navigateTo({
-			  url: '../login/login',
-			});
+			toLoginPage();
 		}
 	},
 	search() {
-		let pageData = this.getCurrentData();
-		wx.navigateTo({
-		  url: `../search/search?id=${pageData.id}&name=${pageData.name}`,
-		});
+		const pageData = this.getCurrentData();
+		const url = `../search/search?id=${pageData.id}&name=${pageData.name}`;
+
+		navigateTo(url, false);
 	},
 	getBottomHeight() {
 		wx.getSystemInfoAsync({

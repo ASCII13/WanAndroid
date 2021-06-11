@@ -30,31 +30,6 @@ function isEmpty(string) {
   }
 }
 
-function isLogin() {
-  let cookie = wx.getStorageSync('cookie');
-  let account = wx.getStorageSync('account');
-  let password = wx.getStorageSync('password');
-
-  if (!isEmpty(cookie) && !isEmpty(account) && !isEmpty(password)) {
-    return true;
-  } else {
-    return false;
-  }
-}
-
-function clearLoginInfo() {
-  wx.removeStorageSync('cookie');
-  wx.removeStorageSync('account');
-  wx.removeStorageSync('password');
-}
-
-function showToastWithoutIcon(content) {
-  wx.showToast({
-    title: content,
-    icon: 'none'
-  });
-}
-
 function isEmptyObj(obj) {
   if (Object.keys(obj).length > 0) {
     return false;
@@ -67,8 +42,5 @@ module.exports = {
   formatTime: formatTime,
   formateDate: formateDate,
   isEmpty: isEmpty,
-  isLogin: isLogin,
-  clearLoginInfo: clearLoginInfo,
-  showToastWithoutIcon: showToastWithoutIcon,
   isEmptyObj: isEmptyObj
 }

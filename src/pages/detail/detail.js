@@ -5,18 +5,17 @@ Page({
      * Page initial data
      */
     data: {
-        url: ""
+        url: '',
     },
 
     /**
      * Lifecycle function--Called when page load
      */
     onLoad: function (options) {
-        let url = decodeURIComponent(options.url);
+        const url = JSON.parse(decodeURIComponent(options.url));
         this.setData({
-            url: url
+            url,
         });
-        console.log(`接收到的参数是：${url}`);
     },
 
     /**

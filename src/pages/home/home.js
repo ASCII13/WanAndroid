@@ -1,9 +1,9 @@
 // pages/home/home.js
 
-import { showToastWithoutIcon } from '@/utils/util';
+import { showText } from '@/utils/toast';
+import { star, unstar } from '@/api/favorite';
 import { fetchBanner, fetchArticles } from '@/api/home';
-
-const app = getApp();
+import { toLoginPage, toWebView } from '@/utils/router';
 
 Page({
 
@@ -14,7 +14,7 @@ Page({
         bannerList: [],
         articleList: [],
         pageNum: 0,
-        loading: true, //调试用
+        loading: true,
         loggedIn: getApp().globalData.loggedIn,
     },
 
@@ -42,52 +42,41 @@ Page({
                         pageNum: currPage + 1
                     })
                 } else {
-                    showToastWithoutIcon('无更多数据');
+                    showText('无更多数据');
                 }
             }
         })
     },
 
     bannerDetail: function(e) {
-        this.detail(e.currentTarget.dataset.current);
+        toWebView(e.currentTarget.dataset.current);
     },
 
     articleDetail(e) {
-        this.detail(e.currentTarget.dataset.url);
-    },
-
-    detail(urlStr) {
-        let url = encodeURIComponent(urlStr);
-        wx.navigateTo({
-          url: `../detail/detail?url=${url}`,
-        });
+        toWebView(e.currentTarget.dataset.url);
     },
 
     collect(e) {
-        let id = e.currentTarget.dataset.id;
-        let index = e.currentTarget.dataset.index;
-        let datas = this.data.articleList;
-
+        const { id, index } = e.currentTarget.dataset;
         const { loggedIn } = this.data;
+        let { articleList } = this.data;
 
         if (loggedIn) {
-            if (datas[index].collect) {
-                app.httpPost(`/lg/uncollect_originId/${id}/json`).then((res) => {
-                    datas[index].collect = false;
-                    this.setData({articleList: datas});
-                    showToastWithoutIcon('取消收藏');
+            if (articleList[index].collect) {
+                unstar(id).then(() => {
+                    articleList[index].collect = false;
+                    this.setData({ articleList, });
+                    showText('取消收藏');
                 });
             } else {
-                app.httpPost(`/lg/collect/${id}/json`).then((res) => {
-                    datas[index].collect = true;
-                    this.setData({articleList: datas});
-                    showToastWithoutIcon('收藏成功');
+                star(id).then(() => {
+                    articleList[index].collect = true;
+                    this.setData({ articleList, });
+                    showText('收藏成功');
                 });
             }
         } else {
-            wx.navigateTo({
-              url: '../login/login',
-            });
+            toLoginPage();
         }
     },
 
@@ -117,10 +106,6 @@ Page({
                 loggedIn: loginState,
             });
         }
-        // if (isLogin() !== this.data.login) {
-        //     this.getList('refresh', 0);
-        //     this.setData({login: isLogin()});
-        // }
     },
 
     /**

@@ -1,10 +1,9 @@
 // pages/collectarticles/collectarticles.js
 
-import { showToastWithoutIcon } from '@/utils/util';
 import { fetchFavorites } from '@/api/favorite-list';
 import { unfavorite } from '@/api/favorite';
-
-// const app = getApp();
+import { showText } from '@/utils/toast';
+import { toWebView } from '@/utils/router';
 
 Page({
 
@@ -31,13 +30,10 @@ Page({
     },
 
     showDetail(e) {
-        let index = e.currentTarget.dataset.index;
-        let currentData = this.getCurrentData(index);
-        let url = encodeURIComponent(currentData.link);
-
-        wx.navigateTo({
-          url: `../detail/detail?url=${url}`,
-        });
+        const index = e.currentTarget.dataset.index;
+        const currentData = this.getCurrentData(index);
+        
+        toWebView(currentData.link);
     },
 
     uncollect(index) {
@@ -47,10 +43,11 @@ Page({
 
         unfavorite(id, originId).then(() => {
             let dataList = this.data.dataList;
-            dataList.splice(index, 1);
 
+            dataList.splice(index, 1);
             this.setData({dataList: dataList});
-            showToastWithoutIcon('已取消收藏');
+
+            showText('已取消收藏');
         });
     },
 

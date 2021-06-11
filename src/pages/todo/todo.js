@@ -1,8 +1,7 @@
 // pages/todolist/todolist.js
 
-const app = getApp();
-const utils = require('@/utils/util');
-
+import { showText } from '@/utils/toast';
+import { navigateTo } from '@/utils/router';
 import { fetchTodoList, removeTodo, finishTodo } from '@/api/todo';
 
 let pageStart = 1;
@@ -69,11 +68,6 @@ Page({
         pageData.requesting = true;
         this.setCurrentData(currentCur, pageData);
 
-        // let status = {
-        //     status: pageData.id,
-        //     orderby: 4
-        // }
-
         fetchTodoList(currentPage, pageData.id).then(res => {
             let tmp = res.data.datas.map((item) => {
                 return item.dateStr;
@@ -105,46 +99,6 @@ Page({
             console.log(pageData)
             this.setCurrentData(currentCur, pageData);
         });
-
-        // app.httpGet(`/lg/todo/v2/list/${currentPage}/json`, status).then((res) => {
-        //     console.log(res.data);
-
-        //     // let data = res.data || {
-        //     //     datas: [],
-        //     //     // over: false
-        //     // };
-
-        //     let tmp = res.data.datas.map((item) => {
-        //         return item.dateStr;
-        //     });
-        //     let time = new Set(tmp);
-        //     let timeCatgoryData = [];
-
-        //     for (let ele of time) {
-        //         let list = res.data.datas.filter((i) => i.dateStr == ele);
-        //         timeCatgoryData.push({
-        //             showDetail: false,
-        //             date: ele,
-        //             list: list
-        //         });
-        //     }
-            
-        //     // let listData = data.datas || [];
-        //     let listData = timeCatgoryData || [];
-        //     pageData.requesting = false;
-
-        //     if (type === 'refresh') {
-        //         pageData.listData = listData;
-        //         // pageData.end = data.over;
-        //         pageData.page = currentPage + 1;
-        //     } else {
-        //         pageData.listData = pageData.listData.concat(listData);
-        //         // pageData.end = data.over;
-        //         pageData.page = currentPage + 1;
-        //     }
-        //     console.log(pageData)
-        //     this.setCurrentData(currentCur, pageData);
-        // });
     },
 
     getCurrentData() {
@@ -214,63 +168,50 @@ Page({
     },
 
     delete(e) {
-        let categoryIndex = e.currentTarget.dataset.category;
-        let detailIndex = e.currentTarget.dataset.detail;
-        let id = e.currentTarget.dataset.id;
+        const {
+            category: categoryIndex,
+            detail: detailIndex,
+            id
+        } = e.currentTarget.dataset;
 
         wx.showModal({
           content: '确定删除该事项？',
           success: (result) => {
               if (result.confirm) {
                   console.log(`确认删除`);
-                  removeTodo(id).then(res => {
+                  removeTodo(id).then(() => {
                       this.deleteTodo(categoryIndex, detailIndex, 1);
-                      utils.showToastWithoutIcon('删除成功');
+                      showText('删除成功');
                   });
-                //   app.httpPost(`/lg/todo/delete/${id}/json`).then((res) => {
-                //       console.log(res);
-                //       this.deleteTodo(categoryIndex, detailIndex, 1);
-                //       utils.showToastWithoutIcon('删除成功');
-                //   });
               }
           },
         });
     },
 
     createTodo() {
-        wx.navigateTo({
-          url: '../create-todo/create-todo',
-        });
+        navigateTo('../create-todo/create-todo');
     },
 
     changeStatus(e) {
         console.log(e.currentTarget.dataset);
 
-        let status = e.currentTarget.dataset.status == 0 ? 1 : 0;
-        let categoryIndex = e.currentTarget.dataset.category;
-        let detailIndex = e.currentTarget.dataset.detail;
-        let id = e.currentTarget.dataset.id;
-
-        let content = status == 1 ? '确定将该事项标记为已完成？' : '确定将该事项标记为待办理？';
-        let msg = status == 1 ? '该事项标记为已完成' : '该事项标记为待办理';
-
-        let data = {
-            status: status
-        };
+        const {
+            category: categoryIndex,
+            detail: detailIndex,
+            id
+        } = e.currentTarget.dataset;
+        const status = e.currentTarget.dataset.status === 0 ? 1 : 0;
+        const content = status === 1 ? '确定将该事项标记为已完成？' : '确定将该事项标记为待办理？';
+        const msg = status == 1 ? '该事项标记为已完成' : '该事项标记为待办理';
 
         wx.showModal({
           content: content,
           success: (result) => {
               if (result.confirm) {
-                  finishTodo(id, status).then(res => {
+                  finishTodo(id, status).then(() => {
                       this.deleteTodo(categoryIndex, detailIndex, 1);
-                      utils.showToastWithoutIcon(msg);
+                      showText(msg);
                   });
-                //   app.httpPost(`/lg/todo/done/${id}/json`, data).then((res) => {
-                //       console.log(res);
-                //       this.deleteTodo(categoryIndex, detailIndex, 1);
-                //       utils.showToastWithoutIcon(msg);
-                //   });
               }
           },
         })
@@ -291,12 +232,10 @@ Page({
     },
 
     editTodoItem(e) {
-        console.log(e.currentTarget.dataset.item);
-        let item = JSON.stringify(e.currentTarget.dataset.item);
+        const item = JSON.stringify(e.currentTarget.dataset.item);
+        const url = `../create-todo/create-todo?item=${item}`;
 
-        wx.navigateTo({
-          url: `../create-todo/create-todo?item=${item}`,
-        });
+        navigateTo(url);
     },
 
     /**

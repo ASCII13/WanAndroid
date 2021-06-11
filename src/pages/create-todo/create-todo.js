@@ -1,8 +1,10 @@
 // pages/createtodolist/createtodolist.js
 
-const utils = require('@/utils/util.js');
+// const utils = require('@/utils/util.js');
 
+import { isEmpty, formateDate } from '@/utils/util';
 import { addTodo, upgradeTodo } from '@/api/todo';
+import { showText } from '@/utils/toast';
 
 Page({
 
@@ -15,7 +17,6 @@ Page({
         allowCreate: false,
         title: '',
         content: '',
-        // isFullScreen: app.globalData.isFullScreen
     },
 
     changeDate(e) {
@@ -28,13 +29,15 @@ Page({
      * priority 可选大于0的整数，确认优先级
      */
     create() {
-        let title = this.data.title;
-        let content = this.data.content || '';
-        let date = this.data.currentDate;
-        let type = 1;
-        let priority = 1;
-        let id = this.data.id;
-        let status = this.data.status;
+        const {
+            title,
+            content = '',
+            currentDate: date,
+            type = 1,
+            priority = 1,
+            id,
+            status
+        } = this.data;
 
         switch (this.data.dataSrc) {
             case 0:
@@ -44,7 +47,7 @@ Page({
                     date,
                     type,
                     priority
-                }).then(res => {
+                }).then(() => {
                     this.backLastPage(this.data.dataSrc);
                 });
                 break;
@@ -56,7 +59,7 @@ Page({
                     status,
                     type,
                     priority
-                }).then(res => {
+                }).then(() => {
                     this.backLastPage(this.data.dataSrc);
                 });
                 break;
@@ -78,22 +81,18 @@ Page({
     },
 
     backLastPage(dataSrc) {
-        let msg = dataSrc == 0 ? '创建成功' : '修改成功';
+        const msg = dataSrc == 0 ? '创建成功' : '修改成功';
         wx.navigateBack({
-          complete: (res) => {},
-          delta: 1,
-          fail: (res) => {},
-          success: (res) => {
-              utils.showToastWithoutIcon(msg);
-          },
-        })
+            delta: 1,
+            success: () => showText(msg)
+        });
     },
 
     /**
      * Lifecycle function--Called when page load
      */
     onLoad: function (options) {
-        let dateStr = utils.formateDate(new Date());
+        let dateStr = formateDate(new Date());
 
         if (options.item === undefined) {
             console.log('创建待办');
@@ -128,7 +127,7 @@ Page({
         let title = this.data.title;
         let time = this.data.currentDate;
 
-        if (utils.isEmpty(title) || utils.isEmpty(time)) {
+        if (isEmpty(title) || isEmpty(time)) {
             this.setData({allowCreate: false});
         } else {
             this.setData({allowCreate: true});

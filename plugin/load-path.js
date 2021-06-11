@@ -11,20 +11,21 @@ const components = [
 ];
 
 const utils = [
-	'utils/host',
 	'utils/request',
-	'utils/util'
+	'utils/util',
+	'utils/router',
+	'utils/toast',
 ];
 
 const apis = [
 	'api/home',
 	'api/official-account',
-	'api/index',
 	'api/auth',
 	'api/favorite-list',
 	'api/favorite',
 	'api/ranking-list',
 	'api/todo',
+	'api/mine',
 ];
 
 let miniDir = null;
