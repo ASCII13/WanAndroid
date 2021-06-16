@@ -22,7 +22,7 @@
 
 | 收藏文章 | 搜索 | 待办事项 |
 |-----|------|------|
-| ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/collection.png) | ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/search.png) | ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/todo.png) |
+| ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/collection.png) | ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/search.jpg) | ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/todo.png) |
 
 <h3 align="center">暗黑模式</h3>
 
@@ -36,7 +36,7 @@
 
 | 收藏文章 | 搜索 | 待办事项 |
 |-----|------|------|
-| ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/collection_dark.png) | ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/search_dark.png) | ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/todo_dark.png) |
+| ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/collection_dark.png) | ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/search_dark.jpg) | ![](https://github.com/ASCII13/WanAndroid/blob/master/screenshot/todo_dark.png) |
 
 
 ## 已实现功能
@@ -65,6 +65,9 @@
 5. 编译项目，即可在模拟器预览，如需在真机上预览，请在开发者工具生成预览码后，使用微信扫码即可（如页面无法展示，开启debug模式）
 
 ## 重大更新说明
+### 2021-06-16
+公众号搜索页面增加历史搜索记录展示（最近10条）
+
 ### 2021-06-11
 重构登录体系
 

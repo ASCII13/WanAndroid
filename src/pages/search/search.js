@@ -16,11 +16,12 @@ Page({
         hideCancel: true,
         requesting: false,
         end: false,
-        emptyShow: true,
+        emptyShow: false,
         listData: [],
         hasTop: false,
         enableBackToTop: false,
-        pageNum: 1
+        pageNum: 1,
+        showResult: false
     },
 
     loseFocus(e) {
@@ -36,9 +37,18 @@ Page({
     },
 
     search() {
-        console.log('点击了搜索按钮');
-        this.getList('refresh');
-
+        const newRecord = this.data.searchStr;
+        if (newRecord) {
+            let records = this.getSearchRecords() || [];
+            if (records.length >= 10) {
+                records.splice(0, (records.length - 10 + 1));
+            }
+            records.push({
+                name: newRecord
+            });
+            wx.setStorageSync('searchRecords', records);
+        }
+        this.getList('init');
     },
 
     getList(type, currentPage = 1) {
@@ -46,12 +56,13 @@ Page({
 
         search(id, currentPage, searchStr).then(res => {
             const data = res.data;
+            const { total, datas } = data;
             let articles = this.data.listData;
 
             if (type === 'more') {
-                if (data.total > articles.length && data.datas) {
+                if (total > articles.length && datas && datas.length > 0) {
                     this.setData({
-                        listData: articles.concat(data.datas),
+                        listData: articles.concat(datas),
                         pageNum: currentPage + 1,
                         end: false
                     });
@@ -59,17 +70,21 @@ Page({
                     this.setData({ end: true });
                 }
             } else {
-                this.setData({
-                    listData: data.datas,
-                    pageNum: currentPage + 1,
-                    end: false
-                });
+                if (datas && datas.length > 0) {
+                    this.setData({
+                        listData: datas,
+                        pageNum: currentPage + 1,
+                        end: false,
+                        showResult: true,
+                    });
+                } else {
+                    this.setData({
+                        emptyShow: true,
+                        showResult: true
+                    });
+                }
             }
         }); 
-    },
-
-    test() {
-        console.log('触发点击事件');
     },
 
     more() {
@@ -103,13 +118,42 @@ Page({
         }
     },
 
+    getSearchRecords() {
+        return wx.getStorageSync('searchRecords');
+    },
+
+    onTapRecord(e) {
+        const record = e.currentTarget.dataset.content;
+        this.setData({ searchStr: record });
+        this.getList('init');
+    },
+
+    onTapClearRecord() {
+        wx.showModal({
+            cancelText: '取消',
+            confirmText: '确定',
+            content: '确定清空所有历史搜索记录吗？',
+            success: (result) => {
+                if (result.confirm) {
+                    this.setData({
+                        searchRecords: [],
+                    }, () => {
+                        wx.removeStorageSync('searchRecords');
+                    });
+                }
+            },
+        });
+    },
+
     /**
      * Lifecycle function--Called when page load
      */
     onLoad: function (options) {
+        const searchRecords = this.getSearchRecords();
         this.setData({
             id: options.id,
-            searchCategory: options.name
+            searchCategory: options.name,
+            searchRecords,
         });
     },
 

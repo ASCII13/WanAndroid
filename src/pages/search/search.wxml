@@ -14,10 +14,18 @@
             placeholder="当前搜索{{searchCategory}}公众号, 请输入搜索词">
         </input>
     </view>
-    <view class="cancel" hidden="{{hideCancel}}" bindtap="test">取消</view>
+    <view class="cancel" hidden="{{hideCancel}}">取消</view>
 </view>
 
-<list show-empty="{{emptyShow}}"
+<view wx:if="{{!showResult && searchRecords.length > 0}}">
+	<view class="search-history">
+		<view class="search-item" wx:for="{{searchRecords}}" wx:key="index" data-content="{{item.name}}" catchtap="onTapRecord">{{item.name}}</view>
+	</view>
+	<view class="btn-clear-record" catchtap="onTapClearRecord">清除所有历史记录</view>
+</view>
+
+<list wx:if="{{showResult}}" 
+	show-empty="{{emptyShow}}"
     empty-text="暂无结果"
     end="{{end}}"
     list-count="{{listData.length}}"
