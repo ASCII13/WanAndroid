@@ -1,0 +1,7 @@
+{
+    "usingComponents": {
+      "tab": "../../components/tab/tab",
+      "scroll": "../../components/scroll/scroll"
+    },
+    "navigationBarTitleText": "通知消息"
+  }

@@ -1,0 +1,35 @@
+<view class="tab">
+    <tab size="80" tab-data="{{tabList}}" bindchange="switchTab" tab-cur="{{currTab}}"></tab>
+</view>
+<swiper current="{{currTab}}" duration="{{duration}}" bindanimationfinish="animationfinish">
+    <swiper-item wx:for="{{tabData}}" wx:key="index">
+        <scroll
+            requesting="{{item.requesting}}"
+			end="{{item.end}}"
+			empty-show="{{item.showEmpty}}"
+			list-count="{{item.data.length}}"
+			top-size="80"
+			refresh-size="{{80}}"
+			bind:refresh="refresh"
+			bind:more="more">
+            <view class="msg-list">
+                <view class="item"
+                    wx:for="{{item.data}}"
+                    wx:for-item="msgItem"
+                    wx:for-index="msgIndex"
+                    wx:key="msgIndex"
+                    data-link="{{msgItem.fullLink}}"
+                    catchtap="detail">
+                    <view class="tag">
+                        <span>{{msgItem.tag}}</span>
+                        <span>{{' ' + msgItem.niceDate}}</span>
+                    </view>
+                    <view class="title">
+                        <span class="user">@{{msgItem.fromUser}}</span>
+                        <span>{{' ' + msgItem.title}}</span>
+                    </view>
+                </view>
+            </view>
+        </scroll>
+    </swiper-item>
+</swiper>

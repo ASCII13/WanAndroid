@@ -11,7 +11,8 @@
         "pages/ranking-list/ranking-list",
         "pages/todo/todo",
         "pages/create-todo/create-todo",
-        "pages/search/search"
+        "pages/search/search",
+        "pages/notifications/notifications"
     ],
     "window": {
         "backgroundTextStyle": "light",

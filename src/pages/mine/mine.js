@@ -2,6 +2,7 @@
 
 import { fetchSelfInfo } from '@/api/mine';
 import { navigateTo } from '@/utils/router';
+import { setRedDotState } from '@/utils/set-red-dot-state';
 
 Page({
 
@@ -42,6 +43,10 @@ Page({
                     icon: "../../assets/images/score_level.png",
                     name: "积分排行"
                 },
+                {
+                    icon: "../../assets/images/notifications.svg",
+                    name: "通知消息"
+                }
             ]               
         });
     },
@@ -56,6 +61,9 @@ Page({
                 break;
             case 2:
                 navigateTo('../ranking-list/ranking-list');
+                break;
+            case 3:
+                navigateTo('../notifications/notifications');
                 break;
             default:    
         }
@@ -93,6 +101,7 @@ Page({
                 nickname: wx.getStorageSync('nickname'),
             });
         }
+        setRedDotState();
     },
 
     /**

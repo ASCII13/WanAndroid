@@ -1,0 +1,41 @@
+.tab {
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 9;
+    background-color: var(--cell-background-color);
+}
+swiper {
+    height: 100vh;
+}
+page {
+    background: var(--page-backgroung-color);
+}
+.msg-list {
+    margin-top: 20rpx;
+    background-color: var(--cell-background-color);
+}
+.item {
+    padding: 20rpx;
+    border-bottom: 1rpx solid var(--divider-line-color);
+}
+.tag {
+    font-size: 25rpx;
+    color: var(--tags-color);
+}
+.title {
+    margin-top: 12rpx;
+}
+.user {
+    font-style: italic;
+    color: teal;
+}
+@media(prefers-color-scheme: dark) {
+    page {
+        background-color: var(--page-backgroung-color-dark);
+    }
+    .tab,
+    .msg-list {
+        background-color: var(--cell-background-color-dark);
+    }
+}

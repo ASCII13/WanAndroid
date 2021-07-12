@@ -54,7 +54,7 @@ page {
 
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-content: space-evenly;
 }
 
@@ -79,6 +79,14 @@ page {
     justify-content: center;
     margin-top: 10rpx;
     font-size: 28rpx;
+}
+
+.red-dot {
+    position: relative;
+    border: 8rpx solid red;
+    border-radius: 8rpx;
+    top: -80%;
+    right: -30%;
 }
 
 @media(prefers-color-scheme: dark) {

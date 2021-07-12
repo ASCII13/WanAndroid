@@ -7,6 +7,7 @@ const srcDir = path.resolve(__dirname, 'src');
 const outputDir = path.resolve(__dirname, 'miniprogram');
 
 module.exports = {
+	mode: 'production',
 	entry: (new LoadPath).init({
 		src: path.resolve(srcDir, 'app.js'),
 	}),

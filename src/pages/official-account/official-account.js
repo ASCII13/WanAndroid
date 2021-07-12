@@ -4,6 +4,7 @@ import { showText } from '@/utils/toast';
 import { toWebView, toLoginPage, navigateTo } from '@/utils/router';
 import { star, unstar } from '@/api/favorite';
 import { fetchTabs, fetchArticles } from '@/api/official-account';
+import { setRedDotState } from '@/utils/set-red-dot-state';
 
 let pageStart = 1;
 
@@ -188,5 +189,6 @@ Page({
 				loggedIn: loginState,
 			});
 		}
+		setRedDotState();
 	},
 });

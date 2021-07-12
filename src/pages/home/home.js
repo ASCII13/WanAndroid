@@ -4,6 +4,7 @@ import { showText } from '@/utils/toast';
 import { star, unstar } from '@/api/favorite';
 import { fetchBanner, fetchArticles } from '@/api/home';
 import { toLoginPage, toWebView } from '@/utils/router';
+import { setRedDotState } from '@/utils/set-red-dot-state';
 
 Page({
 
@@ -106,6 +107,7 @@ Page({
                 loggedIn: loginState,
             });
         }
+        setRedDotState();
     },
 
     /**

@@ -23,6 +23,7 @@
             wx:key="index">
             <image class="feature-icon" src="{{item.icon}}"></image>
             <view class="feature-description">{{item.name}}</view>
+            <!-- <span class="red-dot" wx:if="{{item.name === '通知消息' && showRedDot}}"></span> -->
         </view>
     </view>
 </view>
