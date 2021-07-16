@@ -1,6 +1,6 @@
 {
     "description": "Project configuration file",
-    "miniprogramRoot": "miniprogram",
+    "miniprogramRoot": "miniprogram/",
     "packOptions": {
         "ignore": []
     },
@@ -21,24 +21,22 @@
         "uploadWithSourceMap": true,
         "useMultiFrameRuntime": true,
         "useApiHook": true,
-        "useApiHostProcess": true,
+        "useApiHostProcess": false,
         "babelSetting": {
             "ignore": [],
             "disablePlugins": [],
             "outputPath": ""
         },
-        "bundle": false,
         "useIsolateContext": true,
-        "useCompilerModule": true,
-        "userConfirmedUseCompilerModuleSwitch": false,
         "userConfirmedBundleSwitch": false,
         "packNpmManually": false,
         "packNpmRelationList": [],
-        "minifyWXSS": false
+        "minifyWXSS": false,
+        "showES6CompileOption": false
     },
     "compileType": "miniprogram",
     "libVersion": "2.16.1",
-    "appid": "wx005f4f0c1d059cce",
+    "appid": "wx394c9c5613158ec4",
     "projectname": "WanAndroid",
     "debugOptions": {
         "hidedInDevtools": []
