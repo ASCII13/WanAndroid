@@ -35,7 +35,7 @@
         "showES6CompileOption": false
     },
     "compileType": "miniprogram",
-    "libVersion": "2.16.1",
+    "libVersion": "2.19.2",
     "appid": "wx394c9c5613158ec4",
     "projectname": "WanAndroid",
     "debugOptions": {
@@ -60,6 +60,9 @@
                 ]
             }
         }
+    },
+    "scripts": {
+        "beforeCompile": ""
     },
     "condition": {
         "search": {
