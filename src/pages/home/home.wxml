@@ -4,10 +4,10 @@
 <template is="skeleton-home" wx-if="{{loading}}" />
 
 <swiper autoplay="true" circular="true">
-	<swiper-item wx:for="{{bannerList}}" wx:key="index">
-		<image class="banner-image" 
-			src="{{item.imagePath}}" 
-			bindtap="bannerDetail" 
+	<swiper-item wx:for="{{banners}}" wx:key="index">
+		<image class="banner-image"
+			src="{{item.imagePath}}"
+			bindtap="bannerDetail"
 			data-current="{{item.url}}">
 		</image>
 		<view class="banner-title-container">
@@ -17,7 +17,7 @@
 </swiper>
 
 <view class="list">
-	<block wx:for="{{articleList}}" wx:key="index">
+	<block wx:for="{{articles}}" wx:key="index">
 		<view class="cell"
 			data-url="{{item.link}}"
 			bindtap="articleDetail">
@@ -32,10 +32,10 @@
 			
 			<view class="tags">
 				<!-- <view class="top">置顶</view> -->
-				<view class="tag">{{item.superChapterName}} / {{item.chapterName}}</view>
+				<view class="tag">#{{item.superChapterName}} #{{item.chapterName}}</view>
 				<view class="state">
 					<text class="iconfont {{item.collect ? 'icon-collected' : 'icon-uncollect'}}"
-						catchtap="collect"
+						catchtap="toggleCollect"
 						data-index="{{index}}"
 						data-id="{{item.id}}">
 					</text>

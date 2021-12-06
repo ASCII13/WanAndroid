@@ -1,5 +1,5 @@
 {
-    "description": "Project configuration file",
+    "description": "A WeChat mini program for WanAndroid",
     "miniprogramRoot": "miniprogram/",
     "packOptions": {
         "ignore": []
@@ -21,18 +21,19 @@
         "uploadWithSourceMap": true,
         "useMultiFrameRuntime": true,
         "useApiHook": true,
-        "useApiHostProcess": false,
+        "useApiHostProcess": true,
         "babelSetting": {
             "ignore": [],
             "disablePlugins": [],
             "outputPath": ""
         },
-        "useIsolateContext": true,
+        "useIsolateContext": false,
         "userConfirmedBundleSwitch": false,
         "packNpmManually": false,
         "packNpmRelationList": [],
         "minifyWXSS": false,
-        "showES6CompileOption": false
+        "showES6CompileOption": false,
+        "minifyWXML": true
     },
     "compileType": "miniprogram",
     "libVersion": "2.19.2",

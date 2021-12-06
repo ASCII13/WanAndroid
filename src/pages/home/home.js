@@ -12,41 +12,11 @@ Page({
      * Page initial data
      */
     data: {
-        bannerList: [],
-        articleList: [],
+        banners: [],
+        articles: [],
         pageNum: 0,
         loading: true,
         loggedIn: getApp().globalData.loggedIn,
-    },
-
-    getBanner() {
-        fetchBanner().then(res => {
-            this.setData({ bannerList: res.data });
-        })
-    },
-
-    getArticleList(type, currPage) {
-        fetchArticles(currPage).then(res => {
-            const data = res.data;
-            let articles = this.data.articleList;
-
-            if (type === 'init') {
-                this.setData({
-                    articleList: data.datas,
-                    pageNum: currPage + 1,
-                    loading: false,
-                })
-            } else {
-                if ((data.total > articles.length) && data.datas) {
-                    this.setData({
-                        articleList: articles.concat(data.datas),
-                        pageNum: currPage + 1
-                    })
-                } else {
-                    showText('无更多数据');
-                }
-            }
-        })
     },
 
     bannerDetail: function(e) {
@@ -57,27 +27,19 @@ Page({
         toWebView(e.currentTarget.dataset.url);
     },
 
-    collect(e) {
+    toggleCollect(e) {
+        const { loggedIn, articles } = this.data;
         const { id, index } = e.currentTarget.dataset;
-        const { loggedIn } = this.data;
-        let { articleList } = this.data;
 
-        if (loggedIn) {
-            if (articleList[index].collect) {
-                unstar(id).then(() => {
-                    articleList[index].collect = false;
-                    this.setData({ articleList, });
-                    showText('取消收藏');
-                });
-            } else {
-                star(id).then(() => {
-                    articleList[index].collect = true;
-                    this.setData({ articleList, });
-                    showText('收藏成功');
-                });
-            }
+        if (!loggedIn) return toLoginPage();
+        if (articles[index].collect) {
+            unstar(id).then(() => {
+                this.setData({['articles['+index+'].collect']: false}, showText('取消收藏'));
+            });
         } else {
-            toLoginPage();
+            star(id).then(() => {
+                this.setData({['articles['+index+'].collect']: true}, showText('收藏成功'));
+            });
         }
     },
 
@@ -85,8 +47,23 @@ Page({
      * Lifecycle function--Called when page load
      */
     onLoad: function (options) {
-        this.getBanner();
-        this.getArticleList('init', 0);
+        Promise.all([fetchBanner(), fetchArticles()]).then(res => {
+            this.setData({loading: false});
+
+            const banners = res[0].data;
+            const articleData = res[1].data;
+            const articles = articleData.datas;
+
+            if (banners && banners.length > 0) {
+                this.setData({banners});
+            }
+            if (articleData && articles && articles.length > 0) {
+                this.setData({
+                    articles,
+                    pageNum: 1
+                });
+            }
+        });
     },
 
     /**
@@ -135,7 +112,21 @@ Page({
      * Called when page reach bottom
      */
     onReachBottom: function () {
-        this.getArticleList('more', this.data.pageNum);
+        fetchArticles(this.data.pageNum).then(res => {
+            const articleData = res.data;
+            const datas = articleData.datas;
+            const {articles, pageNum} = this.data;
+
+            if (!articleData || !datas || datas.length === 0) {
+                showText('暂无更多数据');
+            } else {
+                articles.push(...datas);
+                this.setData({
+                    articles,
+                    pageNum: pageNum + 1
+                });
+            }
+        });
     },
 
     /**
