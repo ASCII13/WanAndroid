@@ -2,9 +2,9 @@
 
 import { showText } from '@/utils/toast';
 import { star, unstar } from '@/api/favorite';
-import { fetchBanner, fetchArticles } from '@/api/home';
 import { toLoginPage, toWebView } from '@/utils/router';
 import { setRedDotState } from '@/utils/set-red-dot-state';
+import { fetchBanner, fetchArticles, fetchTopArticles } from '@/api/home';
 
 Page({
 
@@ -47,19 +47,28 @@ Page({
      * Lifecycle function--Called when page load
      */
     onLoad: function (options) {
-        Promise.all([fetchBanner(), fetchArticles()]).then(res => {
+        Promise.all([fetchBanner(), fetchTopArticles(), fetchArticles()]).then(res => {
             this.setData({loading: false});
 
             const banners = res[0].data;
-            const articleData = res[1].data;
+            const tops = res[1].data;
+            const articleData = res[2].data;
             const articles = articleData.datas;
 
             if (banners && banners.length > 0) {
                 this.setData({banners});
             }
+            if (tops && tops.length > 0) {
+                const tmp = tops.map(t => {
+                    t.top = true;
+                    return t;
+                });
+                this.setData({articles: tmp});
+            }
             if (articleData && articles && articles.length > 0) {
+                const tmp = this.data.articles.concat(articles);
                 this.setData({
-                    articles,
+                    articles: tmp,
                     pageNum: 1
                 });
             }

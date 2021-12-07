@@ -7,3 +7,7 @@ export function fetchBanner() {
 export function fetchArticles(currPage = 0) {
     return httpGet(`/article/list/${currPage}/json`);
 }
+
+export function fetchTopArticles() {
+    return httpGet('/article/top/json');
+}

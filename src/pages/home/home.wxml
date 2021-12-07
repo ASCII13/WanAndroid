@@ -1,7 +1,7 @@
 <!--pages/home/home.wxml-->
 
 <import src="home.skeleton.wxml"/>
-<template is="skeleton-home" wx-if="{{loading}}" />
+<template is="skeleton-home" wx-if="{{loading}}"/>
 
 <swiper autoplay="true" circular="true">
 	<swiper-item wx:for="{{banners}}" wx:key="index">
@@ -31,7 +31,7 @@
 			</view>
 			
 			<view class="tags">
-				<!-- <view class="top">置顶</view> -->
+				<view class="top" hidden="{{!item.top}}">置顶</view>
 				<view class="tag">#{{item.superChapterName}} #{{item.chapterName}}</view>
 				<view class="state">
 					<text class="iconfont {{item.collect ? 'icon-collected' : 'icon-uncollect'}}"

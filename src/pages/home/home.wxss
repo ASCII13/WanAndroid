@@ -71,8 +71,11 @@ swiper {
 }
 
 .top {
-    color: #eb8242;
+    color: red;
     margin-right: 15rpx;
+    border: 1px solid red;
+    border-radius: 4px;
+    padding: 1px;
 }
 
 .state {
