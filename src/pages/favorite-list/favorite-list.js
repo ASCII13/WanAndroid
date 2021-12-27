@@ -11,14 +11,14 @@ Page({
      * Page initial data
      */
     data: {
-        dataList: [],
+        favorites: [],
         pageNum: 0,
-        requesting: false,
+        requesting: true,
         end: false
     },
 
     delete(e) {
-        let index = e.currentTarget.dataset.index;
+        const index = e.currentTarget.dataset.index;
         wx.showModal({
             content: '确定取消收藏此文章？',
             success: (res) => {
@@ -37,61 +37,75 @@ Page({
     },
 
     uncollect(index) {
-        let currentData = this.getCurrentData(index);
-        let id = currentData.id;
-        let originId = currentData.originId === undefined ? -1 : currentData.originId;
+        const currentData = this.getCurrentData(index);
+        const id = currentData.id;
+        const originId = currentData.originId || -1;
 
         unfavorite(id, originId).then(() => {
-            let dataList = this.data.dataList;
+            const favorites = this.data.favorites;
+            favorites.splice(index, 1);
 
-            dataList.splice(index, 1);
-            this.setData({dataList: dataList});
-
-            showText('已取消收藏');
+            this.setData({favorites}, showText('已取消收藏'));
         });
     },
 
     getCurrentData(index) {
-        return this.data.dataList[index];
+        return this.data.favorites[index];
     },
 
-    getList(type, currentPage) {
-        this.setData({requesting: true});
-
-        fetchFavorites(currentPage).then(res => {
-            this.setData({requesting: false});
-
-            if (type === 'refresh') {
-                this.setData({
-                    dataList: res.data.datas,
-                    pageNum: currentPage + 1
-                });
-            } else {
-                if (res.data.total > this.data.dataList.length) {
-                    this.setData({
-                        dataList: this.data.dataList.concat(res.data.datas),
-                        pageNum: currentPage + 1
-                    });
+    getList({type, pageNum}) {
+        if (type === 'refresh') {
+            this.setData({requesting: true});
+        }
+        fetchFavorites(pageNum).then(res => {
+            const data = res.data;
+            const favorites = data.datas;
+            
+            if (!data || !favorites || !favorites.length) {
+                if (type === 'refresh') {
+                    this.setData({requesting: false});
                 } else {
                     this.setData({end: true});
+                }
+            } else {
+                if (type === 'refresh') {
+                    this.setData({
+                        favorites,
+                        requesting: false,
+                        pageNum: pageNum + 1
+                    });
+                } else {
+                    this.setData({
+                        favorites: this.data.favorites.concat(favorites),
+                        pageNum: pageNum + 1
+                    });
                 }
             }
         });
     },
 
     refresh() {
-        this.getList('refresh', 0);
+        this.getList({
+            type: 'refresh',
+            pageNum: 0
+        });
     },
 
     more() {
-        this.getList('more', this.data.pageNum);
+        this.getList({
+            type: 'more',
+            pageNum: this.data.pageNum
+        });
     },
 
     /**
      * Lifecycle function--Called when page load
      */
     onLoad: function (options) {
-        this.getList('refresh', this.data.pageNum);
+        this.getList({
+            type: 'refresh',
+            pageNum: 0
+        });
     },
 
     /**

@@ -36,7 +36,7 @@
         "minifyWXML": true
     },
     "compileType": "miniprogram",
-    "libVersion": "2.19.2",
+    "libVersion": "2.19.6",
     "appid": "wx394c9c5613158ec4",
     "projectname": "WanAndroid",
     "debugOptions": {
