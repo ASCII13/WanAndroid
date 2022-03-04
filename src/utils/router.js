@@ -10,14 +10,14 @@ module.exports = {
  */
 function toLoginPage() {
     wx.navigateTo({
-        url: '../login/login',
+        url: '/pages/login/login',
     });
 }
 
 function toWebView(urlStr) {
     const url = encodeURIComponent(JSON.stringify(urlStr));
     wx.navigateTo({
-        url: `../detail/detail?url=${url}`,
+        url: `/pages/detail/detail?url=${url}`,
     })
 }
 

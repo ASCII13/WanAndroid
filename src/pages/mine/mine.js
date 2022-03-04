@@ -17,7 +17,7 @@ Page({
     },
 
     onTapCard() {
-        navigateTo('../setting/setting');
+        navigateTo('/pages/setting/setting');
     },
 
     getSelfInfo() {
@@ -32,19 +32,19 @@ Page({
         this.setData({
             featureList: [
                 { 
-                    icon: "../../assets/images/collect_article.png",
+                    icon: "/assets/images/collect_article.png",
                     name: "收藏文章"
                 },
                 {
-                    icon: "../../assets/images/todo_list.png",
+                    icon: "/assets/images/todo_list.png",
                     name: "待办清单"
                 },
                 {
-                    icon: "../../assets/images/score_level.png",
+                    icon: "/assets/images/score_level.png",
                     name: "积分排行"
                 },
                 {
-                    icon: "../../assets/images/notifications.svg",
+                    icon: "/assets/images/notifications.svg",
                     name: "通知消息"
                 }
             ]               
@@ -54,16 +54,16 @@ Page({
     onTapFeature: function(e) {
         switch (e.currentTarget.dataset.current) {
             case 0:
-                navigateTo('../favorite-list/favorite-list');
+                navigateTo('/pages/favorite-list/favorite-list');
                 break;
             case 1:
-                navigateTo('../todo/todo');
+                navigateTo('/pages/todo/todo');
                 break;
             case 2:
-                navigateTo('../ranking-list/ranking-list');
+                navigateTo('/pages/ranking-list/ranking-list');
                 break;
             case 3:
-                navigateTo('../notifications/notifications');
+                navigateTo('/pages/notifications/notifications');
                 break;
             default:    
         }
